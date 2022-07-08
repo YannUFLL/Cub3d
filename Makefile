@@ -6,13 +6,15 @@
 #    By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/17 05:26:46 by jrasser           #+#    #+#              #
-#    Updated: 2022/07/05 13:45:27 by ydumaine         ###   ########.fr        #
+#    Updated: 2022/07/06 15:58:53 by ydumaine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS		= srcs/main.c\
 			srcs/parsing.c\
 			srcs/parsing_utils.c\
+			srcs/parsing_map.c\
+			srcs/ray_casting.c\
 
 OBJS 		= ${SRCS:.c=.o}
 RM			= @rm -f

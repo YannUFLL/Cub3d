@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 12:31:03 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/05 17:12:12 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/06 13:20:17 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,35 +20,33 @@ int	ft_extract_color(char *line, int *i)
 		(*i)++;
 	color =	ft_atoi(&line[*i]);
 	if (color < 0 || color > 255)
+	{
+		printf("Error\ncolor not standard");
 		return (-1);
+	}
 	while (line[*i] && line[*i] != ',')
 		(*i)++;
-	return (0);
+	(*i)++;
+	return (color);
 }
 
 int	ft_parse_color(char *line, t_data *data, int rc)
 {
 	int	i;
-	int reset; 
 	int red; 
 	int green; 
 	int blue; 
 	
-	reset = 1;
-	if ((rc == 5 && data->floor != -1) || (rc == 6 && data->ceiling != -1))
-		reset = 0;
 	i = 0;
 	red = ft_extract_color(line, &i);
 	green = ft_extract_color(line, &i);
 	blue = ft_extract_color(line, &i);
-	if (rc == 5 && (red > 0 && green > 0 && blue > 0))
+	if (red == -1 || green == -1 || blue == -1)
+		return (1);
+	if (rc == 5)
 		(data->floor) = red << 16 | green << 8 | blue; 
-	if (rc == 6 && (red > 0 && green > 0 && blue > 0))
+	if (rc == 6)
 		(data->ceiling) = red << 16 | green << 8 | blue; 
-	if (rc == 5 && reset == 1 && (red < 0 || green < 0 || blue < 0))
-		(data->floor) = -1; 
-	if (rc == 6 && reset == 1 && (red < 0 || green < 0 || blue < 0))
-		(data->ceiling) = -1; 
 	return (0);
 }
 
@@ -67,13 +65,15 @@ int	ft_copy_texture(char *line, t_data *data, int rc)
 		while ((line[j] < 9 || line[j] > 13) && line[j] != 32 && line[j])
 			j++;
 	}
-	if (ft_rm_if_already_exist(rc, data) == 1)
+	ft_rm_if_already_exist(rc, data);
+	if (rc == 1)
 		data->no = ft_substr(line, i, j);
-	if (ft_rm_if_already_exist(rc, data) == 2)
+	printf("data->no ; %s\n", data->no);
+	if (rc == 2)
 		data->so = ft_substr(line, i, j);
-	if (ft_rm_if_already_exist(rc, data) == 3)
+	if (rc == 3)
 		data->we = ft_substr(line, i, j);
-	if (ft_rm_if_already_exist(rc, data) == 4)
+	if (rc == 4)
 		data->ea = ft_substr(line, i, j);
 	return (0);
 }
