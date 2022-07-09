@@ -41,15 +41,16 @@ typedef struct data
 	int		ceiling;
 	char	**map;
 	void	*display;
-	char	*display_add; 
-	int		bits_per_pixel; 
+	char	*display_add;
+	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
 	char	player_spawn_dir;
 	int		player_spawn_pos[2];
-	int		edge_size; 
-	int		fov; 
-			
+	int		edge_size;
+	int		fov;
+	int		resolution_x;
+	int		resolution_y;
 }		t_data;
 
 int		ft_copy_texture(char *line, t_data *data, int rc);
