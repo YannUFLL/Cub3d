@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/07 14:57:17 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/10 17:58:40 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,38 @@ typedef struct r_caster
 	int	pos[2];
 }
 */
+
+typedef struct ray_data
+{
+	double	resolution_x; 
+	double	resolution_y; 
+	double	camera_x;
+	double	plane_x; // vecteur plan camera
+	double	plane_y;
+	double	dir_x; // vecteur du regard du joueur
+	double	dir_y; 
+	double	raydir_x; // vecteur rayon lanceé pour detecter un mur
+	double	raydir_y; 
+	double	pos_x;	// position du joueur 
+	double	pos_y;
+	int		map_x; // position du carre dans lequel est le joueur sur la carte
+	int		map_y; 
+	double	side_x; //distance a parcourir avant la premiere intersection de la position du joueur 
+	double	side_y;
+	double	delta_x;// distance a parcourir avant une intersection 
+	double	delta_y;
+	int		step_x; // sens du rayon ( positif ou negatif ) x
+	int		step_y; // sens du rayon ( positif ou negatif ) y
+	int		hit;	// indique si un mur a ete touche 
+	int		side;
+	int		walldistance; // distance du rayon jusqu au mur
+	int		lineheight; // hauteur de la ligne de pixel 
+	int		drawstart; // debut de la ligne de pixel 
+	int		drawend;  // fin de la ligne de pixel 
+	int		color; 
+	char	 **map;
+}
+		t_ray;
 
 typedef struct data
 {
@@ -51,6 +83,7 @@ typedef struct data
 	int		fov;
 	int		resolution_x;
 	int		resolution_y;
+	t_ray	ray_data; 
 }		t_data;
 
 int		ft_copy_texture(char *line, t_data *data, int rc);
@@ -59,5 +92,6 @@ int		ft_extract_color(char *line, int *i);
 int		ft_parsing(t_data *data, char *file_name);
 void	ft_rm_if_already_exist(int rc, t_data *data);
 int		ft_parse_map(t_data *data, char *line, int fd);
+int		ft_render_next_frame(t_data *data);
 
 #endif
