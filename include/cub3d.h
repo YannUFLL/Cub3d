@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/10 17:58:40 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/11 17:58:39 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ typedef struct ray_data
 	double	pos_y;
 	int		map_x; // position du carre dans lequel est le joueur sur la carte
 	int		map_y; 
-	double	side_x; //distance a parcourir avant la premiere intersection de la position du joueur 
-	double	side_y;
-	double	delta_x;// distance a parcourir avant une intersection 
-	double	delta_y;
+	double	ray_side_x; //distance a parcourir avant la premiere intersection de la position du joueur 
+	double	ray_side_y;
+	double	ray_delta_x;// distance a parcourir avant une intersection 
+	double	ray_delta_y;
 	int		step_x; // sens du rayon ( positif ou negatif ) x
 	int		step_y; // sens du rayon ( positif ou negatif ) y
 	int		hit;	// indique si un mur a ete touche 
 	int		side;
-	int		walldistance; // distance du rayon jusqu au mur
+	double	walldistance; // distance du rayon jusqu au mur
 	int		lineheight; // hauteur de la ligne de pixel 
 	int		drawstart; // debut de la ligne de pixel 
 	int		drawend;  // fin de la ligne de pixel 
@@ -83,6 +83,8 @@ typedef struct data
 	int		fov;
 	int		resolution_x;
 	int		resolution_y;
+	int		move_speed;
+	int		rotate_speed; 
 	t_ray	ray_data; 
 }		t_data;
 
@@ -93,5 +95,6 @@ int		ft_parsing(t_data *data, char *file_name);
 void	ft_rm_if_already_exist(int rc, t_data *data);
 int		ft_parse_map(t_data *data, char *line, int fd);
 int		ft_render_next_frame(t_data *data);
+int		ft_key_hook(int keycode, t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 17:29:59 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/07 14:20:06 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/11 18:14:16 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void ft_take_player_pos(t_data *data, char **map)
 				data->player_spawn_dir = 'S';
 			if (map[y][x] == 'E')
 				data->player_spawn_dir = 'E';
-			if (map[y][x] == 'O')
+			if (map[y][x] == 'W')
 				data->player_spawn_dir = 'W';
 			if (map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'E' || map[y][x] == 'W')
 			{
