@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:38:35 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/13 13:55:34 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/13 15:21:32 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ int	main(int argc, char **argv)
 	if (ft_parsing(&data, argv[1]) == 1)
 		return (ft_free(&data));
 	ft_init_ray_data(&data, &data.ray_data);
-	//printf("data.ray_data.color : %d", data.ray_data.color);
+	printf("data.ray_data.color : %d", data.ray_data.color);
 	ft_render_next_frame(&data);
 	mlx_hook(data.mlx_win, 2, 1L << 0, ft_key_hook, &data);
 	//mlx_loop_hook(data.mlx_win, ft_render_next_frame, &data);
