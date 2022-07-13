@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/13 13:07:56 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:03:22 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ typedef struct ray_data
 	int		drawstart; // debut de la ligne de pixel 
 	int		drawend;  // fin de la ligne de pixel 
 	int		color; 
+	double	rotate_left; 
+	double	rotate_right; 
 	char	 **map;
 }
 		t_ray;
