@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:31:47 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/12 19:40:26 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/13 02:35:12 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,12 +182,12 @@ void ft_calc_rayside(t_ray *ray)
 	}
 	if (ray->raydir_y < 0)
 	{
-		ray->step_y = 1;
+		ray->step_y = -1;
 		ray->ray_side_y = (ray->pos_y - ray->map_y) * ray->ray_delta_y; 
 	}
 	else
 	{
-		ray->step_y = -1;
+		ray->step_y = 1;
 		ray->ray_side_y = (ray->map_y + 1 - ray->pos_y) * ray->ray_delta_y; 
 	}
 }
@@ -200,7 +200,7 @@ void ft_launch_ray(t_ray *ray)
 		{
 			ray->ray_side_x += ray->ray_delta_x; 
 			ray->map_x += ray->step_x; 
-			ray->side = 0;               
+			ray->side = 0;
 		}
 		else 
 		{
@@ -216,9 +216,9 @@ void ft_launch_ray(t_ray *ray)
 void	ft_calc_wall_distance(t_ray *ray)
 {
 	if (ray->side == 0)
-		ray->walldistance = (ray->ray_side_x + ray->ray_delta_x); // on prend la distance dx car c'est le rayon x qui a connecte au mur en premier
-	else 
-		ray->walldistance = (ray->ray_side_y + ray->ray_delta_y); // come on est un carre trop loin il faut enlever la distance de 1 carrere
+		ray->walldistance = (ray->ray_side_x - ray->ray_delta_x); // on prend la distance dx car c'est le rayon x qui a connecte au mur en premier
+	else if (ray->side == 1) 
+		ray->walldistance = (ray->ray_side_y - ray->ray_delta_y); // come on est un carre trop loin il faut enlever la distance de 1 carrere
 
 }
 
@@ -249,6 +249,29 @@ void ft_calc_ray_delta(t_ray *ray)
 		ray->ray_delta_x = sqrt(1 + ((ray->raydir_y * ray->raydir_y ) / ( ray->raydir_x * ray->raydir_x)));
 }
 
+
+void	ft_put_ceiling_and_roof(t_data *data)
+{
+	int x; 
+	int y;
+
+	x = 0;
+	while(x <= data->resolution_x)
+	{
+		y = 0;
+		while (y <= data->resolution_y / 2)
+		{
+			my_mlx_pixel_put(data, x, y, data->floor);
+			y++;
+		}
+		while (y <= data->resolution_y)
+		{
+			my_mlx_pixel_put(data, x, y, data->ceiling);
+			y++;
+		}
+	x++;
+	}
+}
 int	ft_render_next_frame(t_data *data)
 {
 	int	x;
@@ -256,12 +279,14 @@ int	ft_render_next_frame(t_data *data)
 	ray = &data->ray_data;
 
 	x = 0;
-	ray->map_x = (int)ray->pos_x;
-	ray->map_y = (int)ray->pos_y;
 	ft_print_raydata(data, ray);
+	ft_put_ceiling_and_roof(data);
 	while (x < ray->resolution_x)
 	{
-		ray->camera_x = 2 * x / ray->resolution_x - 1;
+		ray->hit = 0; 
+		ray->map_x = (int)ray->pos_x;
+		ray->map_y = (int)ray->pos_y;
+		ray->camera_x =  2 * x / ray->resolution_x - 1;
 		ft_calc_ray_dir(ray);
 		ft_calc_ray_delta(ray);
 		ft_calc_rayside(ray);
@@ -300,17 +325,21 @@ int	ft_key_hook(int keycode, t_data *data)
 		}
 	if (keycode == 0)
 	{
-		ray->dir_x = ray->dir_x * cos(data->rotate_speed);
-		ray->dir_y = ray->dir_y * sin(data->rotate_speed);
-		ray->plane_x = ray->plane_x * cos(data->rotate_speed);
-		ray->plane_y = ray->plane_y * sin(data->rotate_speed);
+		old_dir_x = ray->dir_x;
+		ray->dir_x = ray->dir_x * cos(data->rotate_speed) - ray->dir_y * sin(data->rotate_speed);
+		ray->dir_y = old_dir_x * sin(data->rotate_speed) - ray->dir_y * sin(data->rotate_speed);
+		old_plane_x = ray->plane_x;
+		ray->plane_x = ray->plane_x * cos(data->rotate_speed) - ray->plane_y * sin(data->rotate_speed);
+		ray->plane_y = old_plane_x  * cos(data->rotate_speed) - ray->plane_y * sin(data->rotate_speed);
 	}
 	if (keycode == 2)
 	{
-		ray->dir_x = ray->dir_x * cos(-data->rotate_speed);
-		ray->dir_y = ray->dir_y * sin(-data->rotate_speed);
-		ray->plane_x = ray->plane_x * cos(-data->rotate_speed);
-		ray->plane_y = ray->plane_y * sin(-data->rotate_speed);
+		old_dir_x = ray->dir_x;
+		ray->dir_x = ray->dir_x * cos(data->rotate_speed) - ray->dir_y * sin(-data->rotate_speed);
+		ray->dir_y = old_dir_x * sin(data->rotate_speed) - ray->dir_y * sin(-data->rotate_speed);
+		old_plane_x = ray->plane_x;
+		ray->plane_x = ray->plane_x * cos(data->rotate_speed) - ray->plane_y * sin(-data->rotate_speed);
+		ray->plane_y = old_plane_x  * cos(data->rotate_speed) - ray->plane_y * sin(-data->rotate_speed);
 	}
 	if (keycode == 1)
 		{
