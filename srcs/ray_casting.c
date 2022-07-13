@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:31:47 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/13 02:35:12 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/13 14:03:03 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,8 +245,10 @@ void	ft_calc_ray_dir(t_ray *ray)
 
 void ft_calc_ray_delta(t_ray *ray)
 {
-		ray->ray_delta_y = sqrt(1 + ((ray->raydir_x * ray->raydir_x ) / ( ray->raydir_y * ray->raydir_y))); // distance a parcourir pour aller a l'intersection suivante
-		ray->ray_delta_x = sqrt(1 + ((ray->raydir_y * ray->raydir_y ) / ( ray->raydir_x * ray->raydir_x)));
+		//ray->ray_delta_y = sqrt(1 + ((ray->raydir_x * ray->raydir_x ) / ( ray->raydir_y * ray->raydir_y))); // distance a parcourir pour aller a l'intersection suivante
+		//ray->ray_delta_x = sqrt(1 + ((ray->raydir_y * ray->raydir_y ) / ( ray->raydir_x * ray->raydir_x)));  // attention si cette formule fisheyes 
+		ray->ray_delta_y = fabs(1 / ray->raydir_y);
+		ray->ray_delta_x = fabs(1 / ray->raydir_x);
 }
 
 
@@ -310,40 +312,42 @@ int	ft_key_hook(int keycode, t_data *data)
 	t_ray *ray;
 	
 	ray = &data->ray_data; 
-	int old_dir_x;
-	int	old_plane_x; 
+	double old_dir_x;
+	double	old_plane_x; 
 
 	old_dir_x = ray->dir_x; 
 	old_plane_x = ray->plane_x; 
 	ft_printf_ray(ray);
+	printf("keycode : %d \n ", keycode);
+	printf("map y : %c\n",ray->map[(int)(ray->pos_y + ray->dir_y * data->move_speed)][(int)(ray->pos_x)]);
 	if (keycode == 13)
 		{
-			if (ray->map[(int)(ray->pos_y + ray->dir_y * data->move_speed)][(int)(ray->pos_x)] != '1') // en c l'arrondi ce fait a l'inferieur
-				ray->pos_y += ray->dir_y * data->move_speed; 
 			if (ray->map[(int)(ray->pos_y)][(int)(ray->pos_x + ray->dir_x * data->move_speed)] != '1') // en c l'arrondi ce fait a l'inferieur
 				ray->pos_x += ray->dir_x * data->move_speed; 
+			if (ray->map[(int)(ray->pos_y + ray->dir_y * data->move_speed)][(int)(ray->pos_x)] != '1') // en c l'arrondi ce fait a l'inferieur
+				ray->pos_y += ray->dir_y * data->move_speed; 
 		}
-	if (keycode == 0)
-	{
-		old_dir_x = ray->dir_x;
-		ray->dir_x = ray->dir_x * cos(data->rotate_speed) - ray->dir_y * sin(data->rotate_speed);
-		ray->dir_y = old_dir_x * sin(data->rotate_speed) - ray->dir_y * sin(data->rotate_speed);
-		old_plane_x = ray->plane_x;
-		ray->plane_x = ray->plane_x * cos(data->rotate_speed) - ray->plane_y * sin(data->rotate_speed);
-		ray->plane_y = old_plane_x  * cos(data->rotate_speed) - ray->plane_y * sin(data->rotate_speed);
-	}
 	if (keycode == 2)
 	{
 		old_dir_x = ray->dir_x;
-		ray->dir_x = ray->dir_x * cos(data->rotate_speed) - ray->dir_y * sin(-data->rotate_speed);
-		ray->dir_y = old_dir_x * sin(data->rotate_speed) - ray->dir_y * sin(-data->rotate_speed);
+		ray->dir_x = ray->dir_x * cos(data->rotate_speed) - ray->dir_y * sin(data->rotate_speed);
+		ray->dir_y = old_dir_x * sin(data->rotate_speed) + ray->dir_y * cos(data->rotate_speed);
 		old_plane_x = ray->plane_x;
-		ray->plane_x = ray->plane_x * cos(data->rotate_speed) - ray->plane_y * sin(-data->rotate_speed);
-		ray->plane_y = old_plane_x  * cos(data->rotate_speed) - ray->plane_y * sin(-data->rotate_speed);
+		ray->plane_x = ray->plane_x * cos(data->rotate_speed) - ray->plane_y * sin(data->rotate_speed);
+		ray->plane_y = old_plane_x  * sin(data->rotate_speed) + ray->plane_y * cos(data->rotate_speed);
+	}
+	if (keycode == 0)
+	{
+		old_dir_x = ray->dir_x;
+		ray->dir_x = ray->dir_x * cos(-data->rotate_speed) - ray->dir_y * sin(-data->rotate_speed);
+		ray->dir_y = old_dir_x * sin(-data->rotate_speed) + ray->dir_y * cos(-data->rotate_speed);
+		old_plane_x = ray->plane_x;
+		ray->plane_x = ray->plane_x * cos(-data->rotate_speed) - ray->plane_y * sin(-data->rotate_speed);
+		ray->plane_y = old_plane_x  * sin(-data->rotate_speed) + ray->plane_y * cos(-data->rotate_speed);
 	}
 	if (keycode == 1)
 		{
-			if (ray->map[(int)(ray->pos_y - ray->dir_y * data->move_speed)][(int)(ray->pos_y)] != '1') 
+			if (ray->map[(int)(ray->pos_y - ray->dir_y * data->move_speed)][(int)(ray->pos_x)] != '1') 
 				ray->pos_y -= ray->dir_y * data->move_speed;
 			if (ray->map[(int)(ray->pos_y)][(int)(ray->pos_x - ray->dir_x * data->move_speed)] != '1')  
 				ray->pos_x -= ray->dir_x * data->move_speed;
