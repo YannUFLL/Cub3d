@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/12 16:15:21 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/13 13:07:56 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ typedef struct data
 	int		fov;
 	int		resolution_x;
 	int		resolution_y;
-	int		move_speed;
-	int		rotate_speed; 
+	double		move_speed;
+	double		rotate_speed; 
 	t_ray	ray_data; 
 }		t_data;
 

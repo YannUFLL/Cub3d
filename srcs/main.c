@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:38:35 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/12 15:29:41 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/13 13:55:34 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int	ft_init_data(t_data *data)
 	data->fov = 80; 
 	data->resolution_x = 1920;
 	data->resolution_y = 1080;
-	data->move_speed = 1; 
-	data->rotate_speed = 5; 
+	data->move_speed = 0.1; 
+	data->rotate_speed = 0.1; 
 	return (0);
 }
 
