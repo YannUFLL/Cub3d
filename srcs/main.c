@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:38:35 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/13 15:21:32 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/14 02:16:34 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,12 @@ int	ft_init_data(t_data *data)
 	data->player_spawn_pos[0] = 0; 
 	data->player_spawn_pos[1] = 0; 
 	data->edge_size = 16;
-	data->fov = 80; 
+	data->fov = 70; 
 	data->resolution_x = 1920;
 	data->resolution_y = 1080;
 	data->move_speed = 0.1; 
 	data->rotate_speed = 0.1; 
+	data->keycode = -1;
 	return (0);
 }
 
@@ -116,7 +117,7 @@ void	ft_init_ray_data(t_data *data, t_ray *ray)
 	ray->map = data->map; 
 	ray->hit = 0; 
 	ray->side = 0; 
-	ray->color = 16711680;
+	ray->color = 0x9B9B9B;
 	ray->resolution_x = data->resolution_x; 
 	ray->resolution_y = data->resolution_y; 
 	ft_init_direction(data, ray);
@@ -155,9 +156,8 @@ int	main(int argc, char **argv)
 	if (ft_parsing(&data, argv[1]) == 1)
 		return (ft_free(&data));
 	ft_init_ray_data(&data, &data.ray_data);
-	printf("data.ray_data.color : %d", data.ray_data.color);
-	ft_render_next_frame(&data);
-	mlx_hook(data.mlx_win, 2, 1L << 0, ft_key_hook, &data);
-	//mlx_loop_hook(data.mlx_win, ft_render_next_frame, &data);
+	mlx_hook(data.mlx_win, 2, 1L << 0, ft_key_press, &data);
+	mlx_hook(data.mlx_win, 3, 1L << 1, ft_key_release, &data);
+	mlx_loop_hook(data.mlx, ft_render_next_frame, &data);
 	mlx_loop(data.mlx);
 	}

@@ -6,12 +6,13 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:31:47 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/13 19:24:41 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/14 02:08:39 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <unistd.h>
+#include <sys/time.h>
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -19,6 +20,11 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 	dst = data->display_add + (y * data->line_length + x * (data->bits_per_pixel / 8)); 
 	*(unsigned int*)dst = color; 
+}
+int	time_diff(struct timeval *start, struct timeval *end)
+{
+	return ((end->tv_sec - start->tv_sec)
+		* 1000 + ((end->tv_usec - start->tv_usec) / 1000));
 }
 
 void	ft_printf_ray(t_ray *ray)
@@ -43,6 +49,7 @@ void	ft_printf_ray(t_ray *ray)
 	printf("step y : %d \n", ray->step_y);
 	printf("ray_wall_distance : %f \n", ray->walldistance);
 }
+
 
 
 void	ft_print_grind(t_data *data, t_ray *ray)
@@ -274,6 +281,114 @@ void	ft_put_ceiling_and_roof(t_data *data)
 	x++;
 	}
 }
+
+void	ft_fps(void)
+{
+	static struct timeval time;
+	struct timeval actual_time;
+	static int	fps; 
+	if (fps == 0)
+	{
+		gettimeofday(&time, NULL);
+	}
+	fps++;
+	gettimeofday(&actual_time, NULL); 
+	if (time_diff(&time, &actual_time) > 1000)
+	{
+		ft_printf("fps : %d\n", fps);
+		fps = 0; 
+	}
+	return ;
+}
+
+void	ft_move(t_ray *ray, t_data *data, t_key *key)
+{
+	double alpha; 
+	if (key->move_back == 1)
+		{
+			if (ray->map[(int)(ray->pos_y - ray->dir_y * data->move_speed)][(int)(ray->pos_x)] != '1') 
+				ray->pos_y -= ray->dir_y * data->move_speed;
+			if (ray->map[(int)(ray->pos_y)][(int)(ray->pos_x - ray->dir_x * data->move_speed)] != '1')  
+				ray->pos_x -= ray->dir_x * data->move_speed;
+		}
+	if (key->move_forward == 1)
+	{
+		if (ray->map[(int)(ray->pos_y)][(int)(ray->pos_x + ray->dir_x * data->move_speed)] != '1') // en c l'arrondi ce fait a l'inferieur
+			ray->pos_x += ray->dir_x * data->move_speed; 
+		if (ray->map[(int)(ray->pos_y + ray->dir_y * data->move_speed)][(int)(ray->pos_x)] != '1') // en c l'arrondi ce fait a l'inferieur
+			ray->pos_y += ray->dir_y * data->move_speed; 
+	}
+	if (key->move_right == 1)
+		{
+			if (ray->dir_y > 0)
+				alpha = acos(ray->dir_x);
+			else
+				alpha = -acos(ray->dir_x);
+			if (ray->map[(int)((sin(alpha + M_PI / 2) * data->move_speed) + ray->pos_y)][(int)(ray->pos_x)] != '1') 
+				ray->pos_y = (sin(alpha + M_PI / 2) * data->move_speed) + ray->pos_y;
+			if (ray->map[(int)(ray->pos_y)][(int)((cos(alpha + M_PI / 2) * data->move_speed) + ray->pos_x)] != '1')  
+				ray->pos_x = (cos(alpha + M_PI / 2) * data->move_speed) + ray->pos_x;
+		}
+	if (key->move_left == 1)
+	{
+			if (ray->dir_y > 0)
+			alpha = acos(ray->dir_x);
+			else 
+			alpha = -acos(ray->dir_x);
+			if (ray->map[(int)((-sin(alpha + M_PI / 2) * data->move_speed) + ray->pos_y)][(int)(ray->pos_x)] != '1') 
+				ray->pos_y = (-sin(alpha + M_PI / 2) * data->move_speed) + ray->pos_y;
+			if (ray->map[(int)(ray->pos_y)][(int)((cos(alpha + M_PI / 2) * data->move_speed) + ray->pos_x)] != '1')  
+				ray->pos_x = (-cos(alpha + M_PI / 2) * data->move_speed) + ray->pos_x;
+	}
+}
+
+void	ft_rotate_right(t_ray *ray, t_data *data, t_key *key)
+{
+	double	old_dir_x;
+	double	old_plane_x;
+
+
+	old_dir_x = ray->dir_x;
+	old_plane_x = ray->plane_x;
+	if (key->rotate_right == 1)
+	{
+		old_dir_x = ray->dir_x;
+		ray->dir_x = ray->dir_x * cos(data->rotate_speed) - ray->dir_y * sin(data->rotate_speed);
+		ray->dir_y = old_dir_x * sin(data->rotate_speed) + ray->dir_y * cos(data->rotate_speed);
+		old_plane_x = ray->plane_x;
+		ray->plane_x = ray->plane_x * cos(data->rotate_speed) - ray->plane_y * sin(data->rotate_speed);
+		ray->plane_y = old_plane_x  * sin(data->rotate_speed) + ray->plane_y * cos(data->rotate_speed);
+	}
+}
+void	ft_rotate_left(t_ray *ray, t_data *data, t_key *key)
+{
+	double old_dir_x;
+	double	old_plane_x;
+
+	old_dir_x = ray->dir_x;
+	old_plane_x = ray->plane_x;
+	if (key->rotate_left == 1)
+	{
+		old_dir_x = ray->dir_x;
+		ray->dir_x = ray->dir_x * cos(-data->rotate_speed) - ray->dir_y * sin(-data->rotate_speed);
+		ray->dir_y = old_dir_x * sin(-data->rotate_speed) + ray->dir_y * cos(-data->rotate_speed);
+		old_plane_x = ray->plane_x;
+		ray->plane_x = ray->plane_x * cos(-data->rotate_speed) - ray->plane_y * sin(-data->rotate_speed);
+		ray->plane_y = old_plane_x  * sin(-data->rotate_speed) + ray->plane_y * cos(-data->rotate_speed);
+	}
+
+}
+int	ft_action(t_data *data)
+{
+	
+	t_key *key;
+	key = &data->key; 
+	//ft_printf_ray(&data->ray_data);
+	ft_rotate_left(&data->ray_data, data, key);
+	ft_rotate_right(&data->ray_data, data, key);
+	ft_move(&data->ray_data, data,key );
+	return (0);
+}
 int	ft_render_next_frame(t_data *data)
 {
 	int	x;
@@ -283,6 +398,8 @@ int	ft_render_next_frame(t_data *data)
 	x = 0;
 	ft_print_raydata(data, ray);
 	ft_put_ceiling_and_roof(data);
+	ft_fps();
+	ft_action(data);
 	while (x < ray->resolution_x)
 	{
 		ray->hit = 0; 
@@ -307,100 +424,50 @@ int	ft_render_next_frame(t_data *data)
 	return (0);
 }
 
-void	ft_move(int keycode, t_ray *ray, double smoothing)
+int	ft_key_press(int	keycode, t_data *data)
 {
-	double alpha; 
-	if (keycode == 1)
-		{
-			if (ray->map[(int)(ray->pos_y - ray->dir_y * smoothing)][(int)(ray->pos_x)] != '1') 
-				ray->pos_y -= ray->dir_y * smoothing;
-			if (ray->map[(int)(ray->pos_y)][(int)(ray->pos_x - ray->dir_x * smoothing)] != '1')  
-				ray->pos_x -= ray->dir_x * smoothing;
-		}
-	if (keycode == 13)
-	{
-		if (ray->map[(int)(ray->pos_y)][(int)(ray->pos_x + ray->dir_x * smoothing)] != '1') // en c l'arrondi ce fait a l'inferieur
-			ray->pos_x += ray->dir_x * smoothing; 
-		if (ray->map[(int)(ray->pos_y + ray->dir_y * smoothing)][(int)(ray->pos_x)] != '1') // en c l'arrondi ce fait a l'inferieur
-			ray->pos_y += ray->dir_y * smoothing; 
-	}
-	if (keycode == 2)
-		{
-			if (ray->dir_y > 0)
-				alpha = acos(ray->dir_x);
-			else
-				alpha = -acos(ray->dir_x);
-			printf("valeur de alpha : %f\n", alpha);
-			if (ray->map[(int)((sin(alpha + M_PI / 2) * smoothing) + ray->pos_y)][(int)(ray->pos_x)] != '1') 
-				ray->pos_y = (sin(alpha + M_PI / 2) * smoothing) + ray->pos_y;
-			if (ray->map[(int)(ray->pos_y)][(int)((cos(alpha + M_PI / 2) * smoothing) + ray->pos_x)] != '1')  
-				ray->pos_x = (cos(alpha + M_PI / 2) * smoothing) + ray->pos_x;
-		}
+	t_key *key;
+
+	key = &data->key; 
+	(void)keycode;
 	if (keycode == 0)
-	{
-			if (ray->dir_y > 0)
-			alpha = acos(ray->dir_x);
-			else 
-			alpha = -acos(ray->dir_x);
-			if (ray->map[(int)((-sin(alpha + M_PI / 2) * smoothing) + ray->pos_y)][(int)(ray->pos_x)] != '1') 
-				ray->pos_y = (-sin(alpha + M_PI / 2) * smoothing) + ray->pos_y;
-			if (ray->map[(int)(ray->pos_y)][(int)((cos(alpha + M_PI / 2) * smoothing) + ray->pos_x)] != '1')  
-				ray->pos_x = (-cos(alpha + M_PI / 2) * smoothing) + ray->pos_x;
-	}
-}
-
-void	ft_rotate_right(int keycode, t_ray *ray, double smoothing)
-{
-	double	old_dir_x;
-	double	old_plane_x;
-
-	old_dir_x = ray->dir_x;
-	old_plane_x = ray->plane_x;
-	if (keycode == 124)
-	{
-		old_dir_x = ray->dir_x;
-		ray->dir_x = ray->dir_x * cos(smoothing) - ray->dir_y * sin(smoothing);
-		ray->dir_y = old_dir_x * sin(smoothing) + ray->dir_y * cos(smoothing);
-		old_plane_x = ray->plane_x;
-		ray->plane_x = ray->plane_x * cos(smoothing) - ray->plane_y * sin(smoothing);
-		ray->plane_y = old_plane_x  * sin(smoothing) + ray->plane_y * cos(smoothing);
-	}
-}
-void	ft_rotate_left(int keycode, t_ray *ray, double smoothing)
-{
-	double old_dir_x;
-	double	old_plane_x;
-
-	old_dir_x = ray->dir_x;
-	old_plane_x = ray->plane_x;
+	key->move_left = 1;
+	if (keycode == 2)
+	key->move_right = 1;
+	if (keycode == 13)
+	key->move_forward = 1;
+	if (keycode == 1)
+	key->move_back = 1;
 	if (keycode == 123)
-	{
-		old_dir_x = ray->dir_x;
-		ray->dir_x = ray->dir_x * cos(-smoothing) - ray->dir_y * sin(-smoothing);
-		ray->dir_y = old_dir_x * sin(-smoothing) + ray->dir_y * cos(-smoothing);
-		old_plane_x = ray->plane_x;
-		ray->plane_x = ray->plane_x * cos(-smoothing) - ray->plane_y * sin(-smoothing);
-		ray->plane_y = old_plane_x  * sin(-smoothing) + ray->plane_y * cos(-smoothing);
-	}
+	key->rotate_left = 1;
+	if (keycode == 124)
+	key->rotate_right = 1;
+	data->keycode = keycode;
+	return(0);
+}
 
-}
-int	ft_key_hook(int keycode, t_data *data)
+int	ft_key_release(int	keycode, t_data *data)
 {
-	double smoothing;
-	double done;
-	
-	if (keycode == 1 || keycode == 13 || keycode == 0 || keycode == 2)
-		smoothing = data->move_speed ; 
-	if (keycode == 123 || keycode == 124)
-		smoothing = data->move_speed; 
-	done = smoothing;
-	//ft_printf_ray(&data->ray_data);
-	ft_rotate_left(keycode, &data->ray_data, smoothing);
-	ft_rotate_right(keycode, &data->ray_data, smoothing);
-	ft_move(keycode, &data->ray_data,smoothing);
-	ft_render_next_frame(data);
-	return (0);
+	t_key *key;
+
+	key = &data->key;
+	(void)keycode;
+	if (keycode == 0)
+		key->move_left = 0;
+	if (keycode == 2)
+		key->move_right = 0;
+	if (keycode == 13)
+		key->move_forward = 0;
+	if (keycode == 1)
+		key->move_back = 0;
+	if (keycode == 123)
+		key->rotate_left = 0;
+	if (keycode == 124)
+		key->rotate_right = 0;
+	return(0);
 }
+
+
 
 	
 	/*if (keycode == 53)
