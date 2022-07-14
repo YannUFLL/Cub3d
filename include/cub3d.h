@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/14 01:53:21 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/14 17:12:34 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,19 @@ typedef struct r_caster
 	int	pos[2];
 }
 */
+
+
+typedef struct texture 
+{
+	char	*path;
+	void	*mlx_img; 
+	int		*addr; 
+	int	img_width;	
+	int	img_height; 
+	int	lenght; 
+	int	bit_per_pixel; 
+	int	endian; 
+}		t_texture;
 
 typedef struct ray_data
 {
@@ -78,10 +91,7 @@ typedef struct data
 {
 	void	*mlx_win;
 	void	*mlx;
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
+	t_texture	texture[4];
 	int		floor;
 	int		ceiling;
 	char	**map;
@@ -112,5 +122,6 @@ int		ft_parse_map(t_data *data, char *line, int fd);
 int		ft_render_next_frame(t_data *data);
 int		ft_key_press(int keycode, t_data *data);
 int		ft_key_release(int keycode, t_data *data);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 #endif
