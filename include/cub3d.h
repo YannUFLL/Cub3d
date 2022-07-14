@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/14 17:12:34 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/14 22:47:42 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ typedef struct ray_data
 	int		color; 
 	double	rotate_left; 
 	double	rotate_right; 
+	int		texx;
+	int		texy;
 	char	 **map;
 }
 		t_ray;

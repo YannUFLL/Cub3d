@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:38:35 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/14 17:26:45 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/14 20:51:28 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,27 +149,19 @@ void	ft_init_ray_data(t_data *data, t_ray *ray)
 
 int	ft_init_text(t_data *data)
 {
-	int	x = 0;
-	int	y = 0;
+	int	x;
 	t_texture *text;
-	text = data->texture; 
-	printf("path : %s\n ", text[0].path);
-	text[0].mlx_img = mlx_xpm_file_to_image(data->mlx, text[0].path, &text[0].img_width, &text[0].img_height);
-	text[0].addr = (int *)mlx_get_data_addr(text[0].mlx_img, &text[0].bit_per_pixel, &text[0].lenght, &text[0].endian);
-	while (y < 256)
-	{
+
 	x = 0;
-	while (x < 256)
+
+	text = data->texture; 
+	while (x < 4)
 	{
-		//printf("valeur de int : %d\n", (int)(*(text[0].addr + y * text[0].lenght  + x * (text[0].bit_per_pixel / 8))));
-		//my_mlx_pixel_put(data, x, y, (int)(*(text[0].addr + y * text[0].lenght  + x * (text[0].bit_per_pixel / 8))));
-		printf("valeur de int : %d\n", ((text[0].addr)[x]));
-		my_mlx_pixel_put(data, x, y, ((text[0].addr)[y * text[0].img_width + x]));
-		x++;
+		text[x].mlx_img = mlx_xpm_file_to_image(data->mlx, text[0].path, &text[0].img_width, &text[0].img_height);
+		text[x].addr = (int *)mlx_get_data_addr(text[0].mlx_img, &text[0].bit_per_pixel, &text[0].lenght, &text[0].endian);
+		x++; 
+		//my_mlx_pixel_put(data, x, y, ((text[0].addr)[y * text[0].img_width + x]));
 	}
-	y++;
-	}
-	mlx_put_image_to_window(data->mlx, data->mlx_win, data->display, 0, 0);
 	return (0);
 }
 
@@ -197,8 +189,8 @@ int	main(int argc, char **argv)
 		return (ft_free(&data));
 	ft_init_ray_data(&data, &data.ray_data);
 	ft_init_text(&data);
-//	lx_hook(data.mlx_win, 2, 1L << 0, ft_key_press, &data);
-//	mlx_hook(data.mlx_win, 3, 1L << 1, ft_key_release, &data);
-//	mlx_loop_hook(data.mlx, ft_render_next_frame, &data);
+	mlx_hook(data.mlx_win, 2, 1L << 0, ft_key_press, &data);
+	mlx_hook(data.mlx_win, 3, 1L << 1, ft_key_release, &data);
+	mlx_loop_hook(data.mlx, ft_render_next_frame, &data);
 	mlx_loop(data.mlx);
 	}

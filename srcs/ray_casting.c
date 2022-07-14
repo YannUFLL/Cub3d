@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:31:47 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/14 16:08:37 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/14 22:56:36 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,10 +252,12 @@ void	ft_calc_ray_dir(t_ray *ray)
 
 void ft_calc_ray_delta(t_ray *ray)
 {
-		//ray->ray_delta_y = sqrt(1 + ((ray->raydir_x * ray->raydir_x ) / ( ray->raydir_y * ray->raydir_y))); // distance a parcourir pour aller a l'intersection suivante
+		//ay->ray_delta_y = sqrt(1 + ((ray->raydir_x * ray->raydir_x ) / ( ray->raydir_y * ray->raydir_y))); // distance a parcourir pour aller a l'intersection suivante
 		//ray->ray_delta_x = sqrt(1 + ((ray->raydir_y * ray->raydir_y ) / ( ray->raydir_x * ray->raydir_x)));  // attention si cette formule fisheyes 
 		ray->ray_delta_y = fabs(1 / ray->raydir_y);
 		ray->ray_delta_x = fabs(1 / ray->raydir_x);
+		//printf("ray->delta_y : %f\n", ray->ray_delta_y);
+		//printf("ray->delta_x : %f\n", ray->ray_delta_x);
 }
 
 
@@ -389,6 +391,54 @@ int	ft_action(t_data *data)
 	ft_move(&data->ray_data, data,key );
 	return (0);
 }
+
+void	ft_calc_x_texture(t_data *data)
+{
+	double wall_x;
+	t_ray *ray;
+
+	ray = &data->ray_data;
+
+		if (ray->side == 0)
+			wall_x = ray->pos_y + ray->walldistance * ray->raydir_y;
+		else
+			wall_x = ray->pos_x + ray->walldistance * ray->raydir_x;	
+		wall_x = -floor(wall_x);
+	ray->texx = (int)(wall_x * data->texture[0].img_width);
+	if (ray->side == 0 && ray->raydir_x > 0)
+	ray->texx = data->texture[0].img_width - ray->texx - 1;
+	if (ray->side == 1 && ray->raydir_x < 0)
+	ray->texx = data->texture[0].img_width - ray->texx - 1;
+
+}
+
+void	ft_calc_y_texture(t_data *data, int x)
+{
+	double step; 
+	double texpos;
+	t_ray *ray;
+
+	
+	ray = &data->ray_data; 
+	step = 1 * data->texture[0].img_height / ray->lineheight;
+	texpos = (ray->drawstart - ray->resolution_y + ray->lineheight / 2) * step; 
+	while(ray->drawstart < ray->drawend)
+	{
+		ray->texy = (int)texpos & (data->texture[0].img_height - 1);
+		texpos += step; 
+		my_mlx_pixel_put(data, x, ray->drawstart, data->texture[0].addr[256 * ray->texy + ray->texx]);
+		ray->drawstart++;
+	}
+}
+
+void	ft_put_without_texture(t_data *data, t_ray *ray, int x)
+{
+	while(ray->drawstart < ray->drawend)
+	{
+		my_mlx_pixel_put(data, x, ray->drawstart, ray->color);
+		ray->drawstart++;
+	}
+}
 int	ft_render_next_frame(t_data *data)
 {
 	int	x;
@@ -413,11 +463,12 @@ int	ft_render_next_frame(t_data *data)
 		ft_calc_wall_distance(ray);
 		//ft_print_ray(data, ray, ray->raydir_x, ray->raydir_y,ray->walldistance);
 		ft_draw_wall_line(ray);
-		while(ray->drawstart < ray->drawend)
-		{
-			my_mlx_pixel_put(data, x, ray->drawstart, ray->color);
-			ray->drawstart++;
-		}
+		ft_calc_x_texture(data);
+		ft_calc_y_texture(data, x);
+		//ft_put_without_texture(data, ray, x); 
+
+		if (x == 0)
+			ft_printf_ray(ray);
 		x++;
 	}
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->display, 0, 0);
