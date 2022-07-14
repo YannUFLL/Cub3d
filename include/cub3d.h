@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/13 17:03:22 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/14 01:53:21 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,17 @@ typedef struct ray_data
 }
 		t_ray;
 
+typedef	struct key
+{
+	int	move_forward;
+	int	move_back;
+	int	move_left;
+	int	move_right;
+	int	rotate_left;
+	int	rotate_right;
+}
+	t_key;
+
 typedef struct data
 {
 	void	*mlx_win;
@@ -88,6 +99,8 @@ typedef struct data
 	double		move_speed;
 	double		rotate_speed; 
 	t_ray	ray_data; 
+	t_key	key;
+	int		keycode;
 }		t_data;
 
 int		ft_copy_texture(char *line, t_data *data, int rc);
@@ -97,6 +110,7 @@ int		ft_parsing(t_data *data, char *file_name);
 void	ft_rm_if_already_exist(int rc, t_data *data);
 int		ft_parse_map(t_data *data, char *line, int fd);
 int		ft_render_next_frame(t_data *data);
-int		ft_key_hook(int keycode, t_data *data);
+int		ft_key_press(int keycode, t_data *data);
+int		ft_key_release(int keycode, t_data *data);
 
 #endif
