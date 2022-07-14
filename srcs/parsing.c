@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:21:13 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/12 16:32:11 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/14 16:13:59 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,23 @@ void	ft_rm_if_already_exist(int rc, t_data *data)
 {
 	if (rc == 1)
 	{
-		if(data->no != NULL)
-			free(data->no);
+		if(data->texture[0].path != NULL)
+			free(data->texture[0].path);
 	}
 	if (rc == 2)
 	{
-		if(data->so != NULL)
-			free(data->so);
+		if(data->texture[1].path != NULL)
+			free(data->texture[1].path);
 	}
 	if (rc == 3)
 	{
-		if(data->we != NULL)
-			free(data->we);
+		if(data->texture[2].path != NULL)
+			free(data->texture[2].path);
 	}
 	if (rc == 4)
 	{
-		if(data->ea != NULL)
-			free(data->ea);
+		if(data->texture[3].path != NULL)
+			free(data->texture[3].path);
 	}
 }
 
@@ -100,42 +100,22 @@ int ft_parse_data(char *line, t_data *data, int *end)
 
 int	ft_last_check(t_data *data)
 {
-	if (data->no == NULL || data->so == NULL || data->we == NULL || data->ea == NULL)
+	int	x;
+	x = 0;
+
+	while (x < 4)
+	{
+	if (data->texture[0].path == NULL)
 		printf("Error \n missing texture");
-	if (data->no == NULL || data->so == NULL || data->we == NULL || data->ea == NULL)
+	if (data->texture[0].path == NULL)
 		return (1);
+		x++;
+	}
 	if (data->ceiling == -1 || data->floor == -1)
 		printf("Error \n missing color");
 	if (data->ceiling == -1 || data->floor == -1)
 		return (1);
 	return (0);
-}
-
-void	ft_printdata(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	printf("           DATA             \n\n");
-	if (data->no != NULL)
-	printf("no : %s \n", data->no);
-	if (data->no != NULL)
-	printf("so : %s \n", data->so);
-	if (data->we != NULL)
-	printf("we : %s \n", data->we);
-	if (data->ea != NULL)
-	printf("ea : %s \n", data->ea);
-	printf("floor : %d \n", data->floor);
-	printf("ceiling : %d \n", data->ceiling);
-	printf("direction spawn player : %d \n", data->player_spawn_dir);
-	printf("pos x player : %d \n", data->player_spawn_pos[0]); 
-	printf("pos y player : %d \n", data->player_spawn_pos[1]); 
-	printf("\n\n          MAP           \n");
-	while (data->map && data->map[i])
-	{
-		printf("%s\n", (data->map[i]));
-		i++;
-	}
 }
 
 int ft_parsing(t_data *data, char *file_name)
@@ -165,7 +145,6 @@ int ft_parsing(t_data *data, char *file_name)
 		line = get_next_line(fd);
 	}
 	ft_parse_map(data, line, fd);
-	ft_printdata(data);
 	if (ft_last_check(data) == 1)
 		return (1);
 	return (0);

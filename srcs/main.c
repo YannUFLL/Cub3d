@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:38:35 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/14 02:16:34 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/14 17:26:45 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,28 @@ int	ft_test_color(int color, t_data *data)
 	return (0);
 }
 */
+void	ft_init_texture(t_texture *tex)
+{
+	int	x;
+	x = 0;
+	while(x < 4)
+	{
+		tex[x].path = NULL;
+		tex[x].mlx_img = NULL;
+		tex[x].addr = NULL;
+		tex[x].img_width = 0;
+		tex[x].img_height = 0;
+		tex[x].lenght = 0;
+		tex[x].bit_per_pixel = 0;
+		tex[x].endian = 0;
+		x++;
+	}
+}
 
 int	ft_init_data(t_data *data)
 {
 	data->mlx_win = NULL;
 	data->mlx = NULL;
-	data->no = NULL;
-	data->so = NULL;
-	data->we = NULL;
-	data->ea = NULL;
 	data->floor = -1;
 	data->ceiling = -1;
 	data->player_spawn_dir = 0;
@@ -53,6 +66,7 @@ int	ft_init_data(t_data *data)
 	data->move_speed = 0.1; 
 	data->rotate_speed = 0.1; 
 	data->keycode = -1;
+	ft_init_texture(data->texture);
 	return (0);
 }
 
@@ -66,14 +80,14 @@ int	ft_init_display(t_data *data)
 
 int ft_free(t_data *data)
 {
-	if (data->no != NULL)
-		free(data->no);
-	if (data->so != NULL)
-		free(data->so);
-	if (data->we != NULL)
-		free(data->we);
-	if (data->ea != NULL)
-		free(data->ea);
+	if (data->texture[0].path != NULL)
+		free(data->texture[0].path);
+	if (data->texture[1].path != NULL)
+		free(data->texture[1].path);
+	if (data->texture[2].path != NULL)
+		free(data->texture[2].path);
+	if (data->texture[3].path != NULL)
+		free(data->texture[3].path);
 	return (0);
 
 }
@@ -133,6 +147,32 @@ void	ft_init_ray_data(t_data *data, t_ray *ray)
 	
 }
 
+int	ft_init_text(t_data *data)
+{
+	int	x = 0;
+	int	y = 0;
+	t_texture *text;
+	text = data->texture; 
+	printf("path : %s\n ", text[0].path);
+	text[0].mlx_img = mlx_xpm_file_to_image(data->mlx, text[0].path, &text[0].img_width, &text[0].img_height);
+	text[0].addr = (int *)mlx_get_data_addr(text[0].mlx_img, &text[0].bit_per_pixel, &text[0].lenght, &text[0].endian);
+	while (y < 256)
+	{
+	x = 0;
+	while (x < 256)
+	{
+		//printf("valeur de int : %d\n", (int)(*(text[0].addr + y * text[0].lenght  + x * (text[0].bit_per_pixel / 8))));
+		//my_mlx_pixel_put(data, x, y, (int)(*(text[0].addr + y * text[0].lenght  + x * (text[0].bit_per_pixel / 8))));
+		printf("valeur de int : %d\n", ((text[0].addr)[x]));
+		my_mlx_pixel_put(data, x, y, ((text[0].addr)[y * text[0].img_width + x]));
+		x++;
+	}
+	y++;
+	}
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->display, 0, 0);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 	{
 	(void)argc; 
@@ -156,8 +196,9 @@ int	main(int argc, char **argv)
 	if (ft_parsing(&data, argv[1]) == 1)
 		return (ft_free(&data));
 	ft_init_ray_data(&data, &data.ray_data);
-	mlx_hook(data.mlx_win, 2, 1L << 0, ft_key_press, &data);
-	mlx_hook(data.mlx_win, 3, 1L << 1, ft_key_release, &data);
-	mlx_loop_hook(data.mlx, ft_render_next_frame, &data);
+	ft_init_text(&data);
+//	lx_hook(data.mlx_win, 2, 1L << 0, ft_key_press, &data);
+//	mlx_hook(data.mlx_win, 3, 1L << 1, ft_key_release, &data);
+//	mlx_loop_hook(data.mlx, ft_render_next_frame, &data);
 	mlx_loop(data.mlx);
 	}

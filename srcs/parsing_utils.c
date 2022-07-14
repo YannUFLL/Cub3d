@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 12:31:03 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/06 13:20:17 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/14 16:06:14 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,12 @@ int	ft_copy_texture(char *line, t_data *data, int rc)
 	}
 	ft_rm_if_already_exist(rc, data);
 	if (rc == 1)
-		data->no = ft_substr(line, i, j);
-	printf("data->no ; %s\n", data->no);
+		data->texture[0].path = ft_substr(line, i, j);
 	if (rc == 2)
-		data->so = ft_substr(line, i, j);
+		data->texture[1].path = ft_substr(line, i, j);
 	if (rc == 3)
-		data->we = ft_substr(line, i, j);
+		data->texture[2].path = ft_substr(line, i, j);
 	if (rc == 4)
-		data->ea = ft_substr(line, i, j);
+		data->texture[3].path = ft_substr(line, i, j);
 	return (0);
 }
