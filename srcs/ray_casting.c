@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:31:47 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/14 22:56:36 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/15 16:05:41 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ void	ft_print_grind(t_data *data, t_ray *ray)
 		{
 			if (ray->map[y][x] == '1')
 			{
-				old_y = y * 30; 
-				while(old_y <= ((y * 30) + 30))
+				old_y = y * 10; 
+				while(old_y <= ((y * 10) + 10))
 				{
-					old_x = x * 30;
-					while(old_x <= ((x * 30) + 30))
+					old_x = x * 10;
+					while(old_x <= ((x * 10) + 10))
 					{
 							my_mlx_pixel_put(data, old_x, old_y, 16711680);
 						old_x++;
@@ -83,22 +83,22 @@ void	ft_print_grind(t_data *data, t_ray *ray)
 			}
 			if (ray->map[y][x] == '0' || ray->map[y][x] == 'N' || ray->map[y][x] == 'S' || ray->map[y][x] == 'W'|| ray->map[y][x] == 'E')
 			{
-				old_y = y * 30; 
-				while(old_y <= ((y * 30) + 30))
+				old_y = y * 10; 
+				while(old_y <= ((y * 10) + 10))
 				{
-					old_x = x * 30;
-					while(((old_y == (y * 30)) || (old_y == (y * 30 + 30))) && (old_x <= ((x * 30) + 30)))
+					old_x = x * 10;
+					while(((old_y == (y * 10)) || (old_y == (y * 10 + 10))) && (old_x <= ((x * 10) + 10)))
 					{
 						my_mlx_pixel_put(data, old_x, old_y, 16777215);
 						old_x++;
 					}
-					while(((old_y != (y * 30)) || (old_y != (y * 30 + 30))) && (old_x <= ((x * 30) + 30)))
+					while(((old_y != (y * 10)) || (old_y != (y * 10 + 10))) && (old_x <= ((x * 10) + 10)))
 					{
 						my_mlx_pixel_put(data, old_x, old_y, 16777215);
 						old_x++;
 					}
 					my_mlx_pixel_put(data, old_x, old_y, 16777215);
-					my_mlx_pixel_put(data, old_x + 30, old_y, 16777215);
+					my_mlx_pixel_put(data, old_x + 10, old_y, 16777215);
 					old_y++;
 				}
 			}
@@ -113,13 +113,13 @@ void	ft_print_pos(t_data *data, t_ray *ray)
 	int x; 
 	int y; 
 
-	x = (ray->pos_x * 30) - 5;
-	y = (ray->pos_y * 30) - 5;
+	x = (ray->pos_x * 10) - 3;
+	y = (ray->pos_y * 10) - 3;
 
-	while (y <= (ray->pos_y * 30) + 5)
+	while (y <= (ray->pos_y * 10) + 3)
 	{
-		x = (ray->pos_x * 30) - 5;
-		while (x <= ((ray->pos_x * 30) + 5))
+		x = (ray->pos_x * 10) - 3;
+		while (x <= ((ray->pos_x * 10) + 3))
 		{
 				my_mlx_pixel_put(data, x, y, 65280);
 			x++; 
@@ -392,18 +392,20 @@ int	ft_action(t_data *data)
 	return (0);
 }
 
-void	ft_calc_x_texture(t_data *data)
+void	ft_calc_x_texture(t_data *data, int x)
 {
 	double wall_x;
 	t_ray *ray;
 
 	ray = &data->ray_data;
-
 		if (ray->side == 0)
 			wall_x = ray->pos_y + ray->walldistance * ray->raydir_y;
 		else
 			wall_x = ray->pos_x + ray->walldistance * ray->raydir_x;	
-		wall_x = -floor(wall_x);
+		wall_x -= floor(wall_x);
+	if (x == 959 || x == 960 || x == 961)
+	(void)x;
+	printf("valeur de wall_x : %f\n", wall_x);
 	ray->texx = (int)(wall_x * data->texture[0].img_width);
 	if (ray->side == 0 && ray->raydir_x > 0)
 	ray->texx = data->texture[0].img_width - ray->texx - 1;
@@ -420,13 +422,13 @@ void	ft_calc_y_texture(t_data *data, int x)
 
 	
 	ray = &data->ray_data; 
-	step = 1 * data->texture[0].img_height / ray->lineheight;
-	texpos = (ray->drawstart - ray->resolution_y + ray->lineheight / 2) * step; 
+	step = 1 * (double)data->texture[0].img_height / ray->lineheight; // POURQUOI SI JE CASTE PAS EN DOUBLE J AI STEP = 0  au lieu de 0.83 pour le premier rayon lance???? 
+	texpos = (ray->drawstart - ray->resolution_y / 2 + ray->lineheight / 2) * step; 
 	while(ray->drawstart < ray->drawend)
 	{
-		ray->texy = (int)texpos & (data->texture[0].img_height - 1);
-		texpos += step; 
-		my_mlx_pixel_put(data, x, ray->drawstart, data->texture[0].addr[256 * ray->texy + ray->texx]);
+		ray->texy = (int)texpos;// &  (data->texture[0].img_height - 1);
+		texpos += step;
+		my_mlx_pixel_put(data, x, ray->drawstart, data->texture[0].addr[data->texture[0].img_height * ray->texy + ray->texx]);
 		ray->drawstart++;
 	}
 }
@@ -446,7 +448,7 @@ int	ft_render_next_frame(t_data *data)
 	ray = &data->ray_data;
 
 	x = 0;
-	ft_print_raydata(data, ray);
+	//ft_print_raydata(data, ray);
 	ft_put_ceiling_and_roof(data);
 	ft_fps();
 	ft_action(data);
@@ -463,14 +465,15 @@ int	ft_render_next_frame(t_data *data)
 		ft_calc_wall_distance(ray);
 		//ft_print_ray(data, ray, ray->raydir_x, ray->raydir_y,ray->walldistance);
 		ft_draw_wall_line(ray);
-		ft_calc_x_texture(data);
+		ft_calc_x_texture(data,x);
 		ft_calc_y_texture(data, x);
 		//ft_put_without_texture(data, ray, x); 
 
-		if (x == 0)
-			ft_printf_ray(ray);
+		/*if (x == 0)
+			ft_printf_ray(ray);*/
 		x++;
 	}
+	ft_print_raydata(data, ray);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->display, 0, 0);
 	return (0);
 }
