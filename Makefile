@@ -6,7 +6,7 @@
 #    By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/17 05:26:46 by jrasser           #+#    #+#              #
-#    Updated: 2022/07/06 15:58:53 by ydumaine         ###   ########.fr        #
+#    Updated: 2022/07/17 22:14:24 by ydumaine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,13 @@ SRCS		= srcs/main.c\
 			srcs/parsing.c\
 			srcs/parsing_utils.c\
 			srcs/parsing_map.c\
-			srcs/ray_casting.c\
+			srcs/rendering.c\
+			srcs/texture_wallcasting.c\
+			srcs/mini_map.c\
+			srcs/wallcasting.c\
+			srcs/wallcasting_part_2.c\
+			srcs/movements.c\
+			srcs/hook.c\
 
 OBJS 		= ${SRCS:.c=.o}
 RM			= @rm -f
