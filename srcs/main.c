@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:38:35 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/14 20:51:28 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/17 18:36:34 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_init_texture(t_texture *tex)
 {
 	int	x;
 	x = 0;
-	while(x < 4)
+	while(x < 5)
 	{
 		tex[x].path = NULL;
 		tex[x].mlx_img = NULL;
@@ -57,15 +57,16 @@ int	ft_init_data(t_data *data)
 	data->floor = -1;
 	data->ceiling = -1;
 	data->player_spawn_dir = 0;
-	data->player_spawn_pos[0] = 0; 
-	data->player_spawn_pos[1] = 0; 
+	data->player_spawn_pos[0] = 0;
+	data->player_spawn_pos[1] = 0;
 	data->edge_size = 16;
-	data->fov = 70; 
+	data->fov = 70;
 	data->resolution_x = 1920;
 	data->resolution_y = 1080;
-	data->move_speed = 0.1; 
-	data->rotate_speed = 0.1; 
+	data->move_speed = 0.1;
+	data->rotate_speed = 0.1;
 	data->keycode = -1;
+	data->textures_nb = 5;
 	ft_init_texture(data->texture);
 	return (0);
 }
@@ -80,14 +81,14 @@ int	ft_init_display(t_data *data)
 
 int ft_free(t_data *data)
 {
-	if (data->texture[0].path != NULL)
-		free(data->texture[0].path);
-	if (data->texture[1].path != NULL)
-		free(data->texture[1].path);
-	if (data->texture[2].path != NULL)
-		free(data->texture[2].path);
-	if (data->texture[3].path != NULL)
-		free(data->texture[3].path);
+	int	x; 
+
+	x = 0;
+	while (x < data->textures_nb)
+	{
+		if (data->texture[3].path != NULL)
+			free(data->texture[3].path);
+	}
 	return (0);
 
 }
@@ -144,6 +145,8 @@ void	ft_init_ray_data(t_data *data, t_ray *ray)
 	ray->ray_delta_y = 0;
 	ray->step_x = 0;
 	ray->step_y = 0;
+	ray->map_x = 0;
+	ray->map_y = 0;
 	
 }
 
@@ -155,10 +158,10 @@ int	ft_init_text(t_data *data)
 	x = 0;
 
 	text = data->texture; 
-	while (x < 4)
+	while (x < data->textures_nb)
 	{
-		text[x].mlx_img = mlx_xpm_file_to_image(data->mlx, text[0].path, &text[0].img_width, &text[0].img_height);
-		text[x].addr = (int *)mlx_get_data_addr(text[0].mlx_img, &text[0].bit_per_pixel, &text[0].lenght, &text[0].endian);
+		text[x].mlx_img = mlx_xpm_file_to_image(data->mlx, text[x].path, &text[x].img_width, &text[x].img_height);
+		text[x].addr = (int *)mlx_get_data_addr(text[x].mlx_img, &text[x].bit_per_pixel, &text[x].lenght, &text[x].endian);
 		x++; 
 		//my_mlx_pixel_put(data, x, y, ((text[0].addr)[y * text[0].img_width + x]));
 	}
@@ -183,7 +186,7 @@ int	main(int argc, char **argv)
 	}
 	ft_init_data(&data);
 	data.mlx = mlx_init(); 
-	data.mlx_win = mlx_new_window(data.mlx, 1920, 1080, "LE MEILLEUR JEU AU MONDE ");
+	data.mlx_win = mlx_new_window(data.mlx, data.resolution_x, data.resolution_y, "LE MEILLEUR JEU AU MONDE ");
 	ft_init_display(&data);
 	if (ft_parsing(&data, argv[1]) == 1)
 		return (ft_free(&data));

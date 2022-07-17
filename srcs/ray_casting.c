@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:31:47 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/15 16:05:41 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/17 19:42:13 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_print_grind(t_data *data, t_ray *ray)
 		x = 0;
 		while(ray->map[y][x])
 		{
-			if (ray->map[y][x] == '1')
+			if (ray->map[y][x] > '0')
 			{
 				old_y = y * 10; 
 				while(old_y <= ((y * 10) + 10))
@@ -81,7 +81,7 @@ void	ft_print_grind(t_data *data, t_ray *ray)
 					old_y++;
 				}
 			}
-			if (ray->map[y][x] == '0' || ray->map[y][x] == 'N' || ray->map[y][x] == 'S' || ray->map[y][x] == 'W'|| ray->map[y][x] == 'E')
+			if (ray->map[y][x] <= '0' || ray->map[y][x] == 'N' || ray->map[y][x] == 'S' || ray->map[y][x] == 'W'|| ray->map[y][x] == 'E')
 			{
 				old_y = y * 10; 
 				while(old_y <= ((y * 10) + 10))
@@ -215,8 +215,10 @@ void ft_launch_ray(t_ray *ray)
 			ray->map_y += ray->step_y; 
 			ray->side = 1;
 		}
-		if (ray->map[ray->map_y][ray->map_x] == '1')
+		if (ray->map[ray->map_y][ray->map_x] == '1' || ray->map[ray->map_y][ray->map_x] == '2')
 			ray->hit = 1; 
+		if (ray->map[ray->map_y][ray->map_x] == '2')
+			ray->text_select = 4;
 	}
 }
 
@@ -308,16 +310,16 @@ void	ft_move(t_ray *ray, t_data *data, t_key *key)
 	double alpha; 
 	if (key->move_back == 1)
 		{
-			if (ray->map[(int)(ray->pos_y - ray->dir_y * data->move_speed)][(int)(ray->pos_x)] != '1') 
+			if (ray->map[(int)(ray->pos_y - ray->dir_y * data->move_speed)][(int)(ray->pos_x)] <= '0') 
 				ray->pos_y -= ray->dir_y * data->move_speed;
-			if (ray->map[(int)(ray->pos_y)][(int)(ray->pos_x - ray->dir_x * data->move_speed)] != '1')  
+			if (ray->map[(int)(ray->pos_y)][(int)(ray->pos_x - ray->dir_x * data->move_speed)] <= '0')  
 				ray->pos_x -= ray->dir_x * data->move_speed;
 		}
 	if (key->move_forward == 1)
 	{
-		if (ray->map[(int)(ray->pos_y)][(int)(ray->pos_x + ray->dir_x * data->move_speed)] != '1') // en c l'arrondi ce fait a l'inferieur
+		if (ray->map[(int)(ray->pos_y)][(int)(ray->pos_x + ray->dir_x * data->move_speed)] <= '0') // en c l'arrondi ce fait a l'inferieur
 			ray->pos_x += ray->dir_x * data->move_speed; 
-		if (ray->map[(int)(ray->pos_y + ray->dir_y * data->move_speed)][(int)(ray->pos_x)] != '1') // en c l'arrondi ce fait a l'inferieur
+		if (ray->map[(int)(ray->pos_y + ray->dir_y * data->move_speed)][(int)(ray->pos_x)] <= '0') // en c l'arrondi ce fait a l'inferieur
 			ray->pos_y += ray->dir_y * data->move_speed; 
 	}
 	if (key->move_right == 1)
@@ -326,9 +328,9 @@ void	ft_move(t_ray *ray, t_data *data, t_key *key)
 				alpha = acos(ray->dir_x);
 			else
 				alpha = -acos(ray->dir_x);
-			if (ray->map[(int)((sin(alpha + M_PI / 2) * data->move_speed) + ray->pos_y)][(int)(ray->pos_x)] != '1') 
+			if (ray->map[(int)((sin(alpha + M_PI / 2) * data->move_speed) + ray->pos_y)][(int)(ray->pos_x)] <= '0') 
 				ray->pos_y = (sin(alpha + M_PI / 2) * data->move_speed) + ray->pos_y;
-			if (ray->map[(int)(ray->pos_y)][(int)((cos(alpha + M_PI / 2) * data->move_speed) + ray->pos_x)] != '1')  
+			if (ray->map[(int)(ray->pos_y)][(int)((cos(alpha + M_PI / 2) * data->move_speed) + ray->pos_x)] <= '0')  
 				ray->pos_x = (cos(alpha + M_PI / 2) * data->move_speed) + ray->pos_x;
 		}
 	if (key->move_left == 1)
@@ -337,9 +339,9 @@ void	ft_move(t_ray *ray, t_data *data, t_key *key)
 			alpha = acos(ray->dir_x);
 			else 
 			alpha = -acos(ray->dir_x);
-			if (ray->map[(int)((-sin(alpha + M_PI / 2) * data->move_speed) + ray->pos_y)][(int)(ray->pos_x)] != '1') 
+			if (ray->map[(int)((-sin(alpha + M_PI / 2) * data->move_speed) + ray->pos_y)][(int)(ray->pos_x)] <= '0') 
 				ray->pos_y = (-sin(alpha + M_PI / 2) * data->move_speed) + ray->pos_y;
-			if (ray->map[(int)(ray->pos_y)][(int)((cos(alpha + M_PI / 2) * data->move_speed) + ray->pos_x)] != '1')  
+			if (ray->map[(int)(ray->pos_y)][(int)((-cos(alpha + M_PI / 2) * data->move_speed) + ray->pos_x)] <= '0')  
 				ray->pos_x = (-cos(alpha + M_PI / 2) * data->move_speed) + ray->pos_x;
 	}
 }
@@ -392,43 +394,57 @@ int	ft_action(t_data *data)
 	return (0);
 }
 
-void	ft_calc_x_texture(t_data *data, int x)
+void	ft_calc_x_texture(t_data *data)
 {
-	double wall_x;
 	t_ray *ray;
 
 	ray = &data->ray_data;
 		if (ray->side == 0)
-			wall_x = ray->pos_y + ray->walldistance * ray->raydir_y;
+			ray->wall_x = ray->pos_y + ray->walldistance * ray->raydir_y;
 		else
-			wall_x = ray->pos_x + ray->walldistance * ray->raydir_x;	
-		wall_x -= floor(wall_x);
-	if (x == 959 || x == 960 || x == 961)
-	(void)x;
-	printf("valeur de wall_x : %f\n", wall_x);
-	ray->texx = (int)(wall_x * data->texture[0].img_width);
+			ray->wall_x = ray->pos_x + ray->walldistance * ray->raydir_x;	
+		ray->wall_x -= floor(ray->wall_x);
+	ray->texx = (int)(ray->wall_x * data->texture[ray->text_select].img_width);
 	if (ray->side == 0 && ray->raydir_x > 0)
 	ray->texx = data->texture[0].img_width - ray->texx - 1;
-	if (ray->side == 1 && ray->raydir_x < 0)
+	if (ray->side == 1 && ray->raydir_y < 0)
 	ray->texx = data->texture[0].img_width - ray->texx - 1;
+}
+
+void	ft_choose_texture(t_ray *ray)
+{
+	if (ray->text_select != 0)
+		return ;
+	if(ray->side == 1 && ray->raydir_y < 0)
+		ray->text_select = 0;
+	if(ray->side == 1 && ray->raydir_y > 0)
+		ray->text_select = 1;
+	if(ray->side == 0 && ray->raydir_x > 0)
+		ray->text_select = 3;
+	if(ray->side == 0 && ray->raydir_x < 0)
+		ray->text_select = 2; 
 
 }
 
-void	ft_calc_y_texture(t_data *data, int x)
+void	ft_calc_y_texture(t_data *data)
 {
-	double step; 
-	double texpos;
 	t_ray *ray;
 
 	
 	ray = &data->ray_data; 
-	step = 1 * (double)data->texture[0].img_height / ray->lineheight; // POURQUOI SI JE CASTE PAS EN DOUBLE J AI STEP = 0  au lieu de 0.83 pour le premier rayon lance???? 
-	texpos = (ray->drawstart - ray->resolution_y / 2 + ray->lineheight / 2) * step; 
+	ray->step = 1 * (double)data->texture[ray->text_select].img_height / ray->lineheight; // POURQUOI SI JE CASTE PAS EN DOUBLE J AI STEP = 0  au lieu de 0.83 pour le premier rayon lance???? 
+	ray->texpos = (ray->drawstart - ray->resolution_y / 2 + ray->lineheight / 2) * ray->step; 
+}
+void	ft_print_texture(t_data *data, t_ray *ray, int x)
+{
+	int	text_select;
+
+	text_select = ray->text_select; 
 	while(ray->drawstart < ray->drawend)
 	{
-		ray->texy = (int)texpos;// &  (data->texture[0].img_height - 1);
-		texpos += step;
-		my_mlx_pixel_put(data, x, ray->drawstart, data->texture[0].addr[data->texture[0].img_height * ray->texy + ray->texx]);
+		ray->texy = (int)ray->texpos;// &  (data->texture[0].img_height - 1);
+		ray->texpos += ray->step;
+		my_mlx_pixel_put(data, x, ray->drawstart, data->texture[text_select].addr[data->texture[text_select].img_height * ray->texy + ray->texx]);
 		ray->drawstart++;
 	}
 }
@@ -440,6 +456,21 @@ void	ft_put_without_texture(t_data *data, t_ray *ray, int x)
 		my_mlx_pixel_put(data, x, ray->drawstart, ray->color);
 		ray->drawstart++;
 	}
+}
+
+void	ft_use(t_data *data, t_ray *ray)
+{
+	if (data->key.use == 1 && ray->walldistance < 1 && ray->text_select == 4)
+		ray->map[ray->map_y][ray->map_x] = '/'; 
+}
+
+void	ft_init_ray(t_ray *ray, int x)
+{
+		ray->hit = 0; 
+		ray->text_select = 0;
+		ray->map_x = (int)ray->pos_x;
+		ray->map_y = (int)ray->pos_y;
+		ray->camera_x =  2 * x / ray->resolution_x - 1;
 }
 int	ft_render_next_frame(t_data *data)
 {
@@ -454,19 +485,20 @@ int	ft_render_next_frame(t_data *data)
 	ft_action(data);
 	while (x < ray->resolution_x)
 	{
-		ray->hit = 0; 
-		ray->map_x = (int)ray->pos_x;
-		ray->map_y = (int)ray->pos_y;
-		ray->camera_x =  2 * x / ray->resolution_x - 1;
+		ft_init_ray(ray, x);
+
 		ft_calc_ray_dir(ray);
 		ft_calc_ray_delta(ray);
 		ft_calc_rayside(ray);
 		ft_launch_ray(ray);
 		ft_calc_wall_distance(ray);
+		ft_use(data, ray);
 		//ft_print_ray(data, ray, ray->raydir_x, ray->raydir_y,ray->walldistance);
 		ft_draw_wall_line(ray);
-		ft_calc_x_texture(data,x);
-		ft_calc_y_texture(data, x);
+		ft_choose_texture(ray);
+		ft_calc_x_texture(data);
+		ft_calc_y_texture(data);
+		ft_print_texture(data, ray, x);
 		//ft_put_without_texture(data, ray, x); 
 
 		/*if (x == 0)
@@ -475,6 +507,17 @@ int	ft_render_next_frame(t_data *data)
 	}
 	ft_print_raydata(data, ray);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->display, 0, 0);
+	if (ray->map[(int)ray->pos_y][(int)ray->pos_x] == '/' && ray->door_open == 0)
+	{
+		ray->pos_door_y = (int)ray->pos_y;
+		ray->pos_door_x = (int)ray->pos_x;
+		ray->door_open = 1;
+	}
+	if (ray->map[(int)ray->pos_y][(int)ray->pos_x] != '/' && ray->door_open == 1)
+	{
+		ray->door_open = 0;
+		ray->map[(int)ray->pos_door_y][(int)ray->pos_door_x] = '2';
+	}
 	return (0);
 }
 
@@ -496,6 +539,8 @@ int	ft_key_press(int	keycode, t_data *data)
 	key->rotate_left = 1;
 	if (keycode == 124)
 	key->rotate_right = 1;
+	if (keycode == 3)
+		key->use = 1;
 	data->keycode = keycode;
 	return(0);
 }
@@ -518,6 +563,8 @@ int	ft_key_release(int	keycode, t_data *data)
 		key->rotate_left = 0;
 	if (keycode == 124)
 		key->rotate_right = 0;
+	if (keycode == 3)
+		key->use = 0;
 	return(0);
 }
 
