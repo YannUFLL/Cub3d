@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:38:35 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/17 18:36:34 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/17 23:16:16 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,7 @@ int	main(int argc, char **argv)
 	ft_init_text(&data);
 	mlx_hook(data.mlx_win, 2, 1L << 0, ft_key_press, &data);
 	mlx_hook(data.mlx_win, 3, 1L << 1, ft_key_release, &data);
+	mlx_hook(data.mlx_win, 6, 1L << 6, ft_mouse, &data);
 	mlx_loop_hook(data.mlx, ft_render_next_frame, &data);
 	mlx_loop(data.mlx);
 	}

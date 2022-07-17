@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/17 18:26:58 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/17 23:08:14 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ typedef	struct key
 	int	move_right;
 	int	rotate_left;
 	int	rotate_right;
+	int	mouse_rotate_left;
+	int	mouse_rotate_right;
 	int	use; 
 }
 	t_key;
@@ -135,4 +137,31 @@ int		ft_key_press(int keycode, t_data *data);
 int		ft_key_release(int keycode, t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
+// texture
+void	ft_calc_x_texture(t_data *data);
+void	ft_choose_texture(t_ray *ray);
+void	ft_calc_y_texture(t_data *data);
+void	ft_print_texture(t_data *data, t_ray *ray, int x);
+// wallcasting
+void	ft_calc_ray_dir(t_ray *ray);
+void	ft_calc_ray_delta(t_ray *ray);
+void	ft_calc_rayside(t_ray *ray);
+void	ft_launch_ray(t_ray *ray);
+void	ft_calc_wall_distance(t_ray *ray);
+void	ft_calc_wall_line(t_ray *ray);
+// mini_map
+void	ft_print_minimap(t_data *data, t_ray *ray);
+// movements 
+void	ft_move_straight(t_ray *ray, t_data *data, t_key *key);
+void	ft_move_right(t_ray *ray, t_data *data, t_key *key);
+void	ft_move_left(t_ray *ray, t_data *data, t_key *key);
+void	ft_rotate_right(t_ray *ray, t_data *data, t_key *key);
+void	ft_rotate_left(t_ray *ray, t_data *data, t_key *key);
+void	ft_movements(t_data *data);
+//hook
+int	ft_key_press(int	keycode, t_data *data);
+int	ft_key_release(int	keycode, t_data *data);
+int	ft_mouse(int x, int y, t_data *data);
+void	ft_mouse_rotate_left(t_ray *ray, t_key *key);
+void	ft_mouse_rotate_right(t_ray *ray, t_key *key);
 #endif
