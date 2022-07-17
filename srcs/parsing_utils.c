@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 12:31:03 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/14 16:06:14 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/16 17:08:56 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ int	ft_parse_color(char *line, t_data *data, int rc)
 	blue = ft_extract_color(line, &i);
 	if (red == -1 || green == -1 || blue == -1)
 		return (1);
-	if (rc == 5)
-		(data->floor) = red << 16 | green << 8 | blue; 
-	if (rc == 6)
-		(data->ceiling) = red << 16 | green << 8 | blue; 
+	if (rc == 2)
+		(data->floor) = red << 16 | green << 8 | blue;
+	if (rc == 3)
+		(data->ceiling) = red << 16 | green << 8 | blue;
 	return (0);
 }
 
@@ -66,13 +66,15 @@ int	ft_copy_texture(char *line, t_data *data, int rc)
 			j++;
 	}
 	ft_rm_if_already_exist(rc, data);
-	if (rc == 1)
-		data->texture[0].path = ft_substr(line, i, j);
-	if (rc == 2)
-		data->texture[1].path = ft_substr(line, i, j);
-	if (rc == 3)
-		data->texture[2].path = ft_substr(line, i, j);
 	if (rc == 4)
+		data->texture[0].path = ft_substr(line, i, j);
+	if (rc == 5)
+		data->texture[1].path = ft_substr(line, i, j);
+	if (rc == 6)
+		data->texture[2].path = ft_substr(line, i, j);
+	if (rc == 7)
 		data->texture[3].path = ft_substr(line, i, j);
+	if (rc == 8)
+		data->texture[4].path = ft_substr(line, i, j);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/14 22:47:42 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/17 18:26:58 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,14 @@ typedef struct ray_data
 	double	rotate_right; 
 	int		texx;
 	int		texy;
+	int		text_select;
+	int		door_open;
+	int		pos_door_x; 
+	int		pos_door_y;
 	char	 **map;
+	double	wall_x; 
+	double	step;
+	double	texpos; 
 }
 		t_ray;
 
@@ -86,6 +93,7 @@ typedef	struct key
 	int	move_right;
 	int	rotate_left;
 	int	rotate_right;
+	int	use; 
 }
 	t_key;
 
@@ -93,7 +101,7 @@ typedef struct data
 {
 	void	*mlx_win;
 	void	*mlx;
-	t_texture	texture[4];
+	t_texture	texture[5];
 	int		floor;
 	int		ceiling;
 	char	**map;
@@ -108,11 +116,12 @@ typedef struct data
 	int		fov;
 	int		resolution_x;
 	int		resolution_y;
-	double		move_speed;
-	double		rotate_speed; 
+	double	move_speed;
+	double	rotate_speed;
 	t_ray	ray_data; 
 	t_key	key;
 	int		keycode;
+	int		textures_nb;
 }		t_data;
 
 int		ft_copy_texture(char *line, t_data *data, int rc);

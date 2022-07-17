@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 17:29:59 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/11 18:14:16 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/16 17:36:21 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void ft_take_player_pos(t_data *data, char **map)
 			{
 				data->player_spawn_pos[0] = x;
 				data->player_spawn_pos[1] = y; 
+				map[y][x] = '0';
 			}
 			x++;
 		}
