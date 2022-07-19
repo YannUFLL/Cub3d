@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:31:47 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/17 20:15:43dumaine         ###   ########.fr       */
+/*   Updated: 2022/07/19 20:15:47 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-	char	*dst;
+	static int octet;
 
-	dst = data->display_add + (y * data->line_length + x * (data->bits_per_pixel / 8)); 
-	*(unsigned int*)dst = color;
+	if (octet == 0)
+		octet = data->bits_per_pixel / 8;
+
+	*(unsigned int *)(data->display_add + (y * data->line_length + x * 4)) = color;
 }
 int	time_diff(struct timeval *start, struct timeval *end)
 {
@@ -66,12 +68,12 @@ void	ft_put_ceiling_and_roof(t_data *data)
 			my_mlx_pixel_put(data, x, y, data->floor);
 			y++;
 		}
-		/*
+		
 		while (y <= data->resolution_y)
 		{
 			my_mlx_pixel_put(data, x, y,0x87CEEB );
 			y++;
-		}*/
+		}
 	x++;
 	}
 }
@@ -125,7 +127,6 @@ int	ft_render_next_frame(t_data *data)
 
 	ray = &data->ray_data;
 	x = 0;
-	ft_printf("1\n");
 	ft_put_ceiling_and_roof(data);
 	ft_fps();
 	ft_movements(data);
@@ -144,14 +145,12 @@ int	ft_render_next_frame(t_data *data)
 		ft_calc_y_texture(data);
 		ft_print_texture(data, ray, x);
 		//ft_printf_ray(ray);
-		ft_floor_casting(data, ray, x);
+		//ft_floor_casting(data, ray, x);
 		data->zbuffer[x] = ray->walldistance; 
 		x++;
 	}
 	ft_print_minimap(data, ray);
-	ft_printf("12\n");
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->display, 0, 0);
-	ft_printf("13\n");
 	ft_event(ray);
 	return (0);
 }

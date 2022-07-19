@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/19 16:22:32 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/19 17:37:14 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include "libft.h"
-/*
+
 typedef struct Sprite
 {
   double x;
   double y;
   int texture;
 }	t_sprite;
-*/
+
 
 
 typedef struct texture 
@@ -105,7 +105,7 @@ typedef struct s_data
 {
 	void		*mlx_win;
 	void		*mlx;
-	t_texture	texture[7];
+	t_texture	texture[8];
 	int			floor;
 	int			ceiling;
 	char		**map;
@@ -126,10 +126,11 @@ typedef struct s_data
 	t_key		key;
 	int			keycode;
 	int			textures_nb;
-	//t_sprite	sprite[20];
+	t_sprite	sprite[20];
 	int			sprite_order[20];
 	double		sprite_distance[20];
 	double		*zbuffer; 
+	int			numsprites; 
 }		t_data;
 
 int		ft_copy_texture(char *line, t_data *data, int rc);
