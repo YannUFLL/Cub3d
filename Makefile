@@ -6,7 +6,7 @@
 #    By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/17 05:26:46 by jrasser           #+#    #+#              #
-#    Updated: 2022/07/17 22:14:24 by ydumaine         ###   ########.fr        #
+#    Updated: 2022/07/18 19:23:20 by ydumaine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,11 @@ SRCS		= srcs/main.c\
 			srcs/wallcasting.c\
 			srcs/wallcasting_part_2.c\
 			srcs/movements.c\
+			srcs/event.c\
 			srcs/hook.c\
+			srcs/floorcasting.c\
+			srcs/init.c\
+			srcs/init_texture.c\
 
 OBJS 		= ${SRCS:.c=.o}
 RM			= @rm -f

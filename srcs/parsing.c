@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:21:13 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/17 17:29:12 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/18 17:59:18 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ typedef enum e_type
 	WE,
 	EA,
 	DOOR, 
+	FLOOR,
+	CEILING,
 }	t_type;
 
 int	ft_detect_element(char *line, int *i)
@@ -43,8 +45,12 @@ int	ft_detect_element(char *line, int *i)
 		rc = C;
 	if (ft_strncmp(&line[*i], "1", 1) == 0)
 		rc = MAP;
-	if (ft_strncmp(&line[*i], "DO", 1) == 0)
+	if (ft_strncmp(&line[*i], "DO", 2) == 0)
 		rc = DOOR;
+	if (ft_strncmp(&line[*i], "TFL", 3) == 0)
+		rc = FLOOR;
+	if (ft_strncmp(&line[*i], "TCE", 3) == 0)
+		rc = CEILING;
 	while (line[*i] && (line[*i] < 9 || line[*i] > 13) && line[*i] != 32)
 			(*i)++;
 	return (rc);

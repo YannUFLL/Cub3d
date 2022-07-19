@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/17 23:08:14 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/19 16:22:32 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@
 # include <fcntl.h>
 # include "libft.h"
 /*
-typedef struct r_caster
+typedef struct Sprite
 {
-	int	pos[2];
-}
+  double x;
+  double y;
+  int texture;
+}	t_sprite;
 */
 
 
@@ -42,7 +44,7 @@ typedef struct texture
 	int	endian; 
 }		t_texture;
 
-typedef struct ray_data
+typedef struct s_ray_data
 {
 	double	resolution_x; 
 	double	resolution_y; 
@@ -69,7 +71,7 @@ typedef struct ray_data
 	int		lineheight; // hauteur de la ligne de pixel 
 	int		drawstart; // debut de la ligne de pixel 
 	int		drawend;  // fin de la ligne de pixel 
-	int		color; 
+	int		color;  
 	double	rotate_left; 
 	double	rotate_right; 
 	int		texx;
@@ -85,7 +87,7 @@ typedef struct ray_data
 }
 		t_ray;
 
-typedef	struct key
+typedef	struct s_key
 {
 	int	move_forward;
 	int	move_back;
@@ -99,31 +101,35 @@ typedef	struct key
 }
 	t_key;
 
-typedef struct data
+typedef struct s_data
 {
-	void	*mlx_win;
-	void	*mlx;
-	t_texture	texture[5];
-	int		floor;
-	int		ceiling;
-	char	**map;
-	void	*display;
-	char	*display_add;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	char	player_spawn_dir;
-	int		player_spawn_pos[2];
-	int		edge_size;
-	int		fov;
-	int		resolution_x;
-	int		resolution_y;
-	double	move_speed;
-	double	rotate_speed;
-	t_ray	ray_data; 
-	t_key	key;
-	int		keycode;
-	int		textures_nb;
+	void		*mlx_win;
+	void		*mlx;
+	t_texture	texture[7];
+	int			floor;
+	int			ceiling;
+	char		**map;
+	void		*display;
+	char		*display_add;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	char		player_spawn_dir;
+	int			player_spawn_pos[2];
+	int			edge_size;
+	int			fov;
+	int			resolution_x;
+	int			resolution_y;
+	double		move_speed;
+	double		rotate_speed;
+	t_ray		ray_data; 
+	t_key		key;
+	int			keycode;
+	int			textures_nb;
+	//t_sprite	sprite[20];
+	int			sprite_order[20];
+	double		sprite_distance[20];
+	double		*zbuffer; 
 }		t_data;
 
 int		ft_copy_texture(char *line, t_data *data, int rc);
@@ -164,4 +170,16 @@ int	ft_key_release(int	keycode, t_data *data);
 int	ft_mouse(int x, int y, t_data *data);
 void	ft_mouse_rotate_left(t_ray *ray, t_key *key);
 void	ft_mouse_rotate_right(t_ray *ray, t_key *key);
+//event
+void	ft_event(t_ray *ray);
+void	ft_use(t_data *data, t_ray *ray);
+//floor
+void	ft_floor_casting(t_data *data, t_ray *ray, int x);
+// init
+int		ft_init_data(t_data *data);
+int		ft_init_display(t_data *data); 
+void	ft_init_direction(t_data *data, t_ray *ray);
+void	ft_init_ray_data(t_data *data, t_ray *ray);
+void	ft_init_texture(t_texture *tex);
+int		ft_init_text(t_data *data);
 #endif

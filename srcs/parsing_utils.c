@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 12:31:03 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/16 17:08:56 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/18 17:57:36 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,9 @@ int	ft_copy_texture(char *line, t_data *data, int rc)
 		data->texture[3].path = ft_substr(line, i, j);
 	if (rc == 8)
 		data->texture[4].path = ft_substr(line, i, j);
+	if (rc == 9)
+		data->texture[5].path = ft_substr(line, i, j);
+	if (rc == 10)
+		data->texture[6].path = ft_substr(line, i, j);
 	return (0);
 }
