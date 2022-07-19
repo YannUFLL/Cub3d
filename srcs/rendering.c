@@ -16,10 +16,10 @@
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-	char *dst; 
+	char	*dst;
 
 	dst = data->display_add + (y * data->line_length + x * (data->bits_per_pixel / 8)); 
-	*(unsigned int*)dst = color; 
+	*(unsigned int*)dst = color;
 }
 int	time_diff(struct timeval *start, struct timeval *end)
 {
@@ -51,73 +51,27 @@ void	ft_printf_ray(t_ray *ray)
 }
 
 
-
-
-
-
-
-void	ft_print_ray(t_data *data, t_ray *ray, double v_x, double v_y, double norme)
-{
-	double y1;
-	double y2;
-	double x1;
-	double x2; 
-	double a; 
-	double b; 
-	double x; 
-	double y; 
-	int	sens;
-	
-
-	sens = 0;
-	x1 = (ray->pos_x * 30);
-	y1 = (ray->pos_y * 30);	
-	x2 = x1 + (v_x * 30);
-	y2 = y1 + (v_y * 30);
-	if (x2 < x1)
-		sens = -1;
-	if ((x1 - x2) != 0)
-		a = (y1 - y2) / (x1 - x2);
-	else 
-		a = (y1 - y2) / (1000000);
-	b = y2 - a * x2; 
-	x = x1;
-	while ((sens == 0 && x <= (x1 + norme * 30)) || (sens == -1 && x >= (x1 + -norme * 30)))
-{
-		y = (a*x + b); 
-		if ((x < 1920 && y < 980) && ( x > 0 && y > 0))
-		my_mlx_pixel_put(data, (int)x, (int)y, 0xFF0CCB);
-		if (sens == 0)
-		x++;
-		else 
-		x--;
-	}
-}
-
-
-
-// calcul of ray vector 
-
-
 void	ft_put_ceiling_and_roof(t_data *data)
 {
-	int x; 
-	int y;
+	int	x;
+	int	y;
 
 	x = 0;
 	while(x <= data->resolution_x)
 	{
+		y = data->resolution_y / 2;
 		y = 0;
 		while (y <= data->resolution_y / 2)
 		{
 			my_mlx_pixel_put(data, x, y, data->floor);
 			y++;
 		}
+		/*
 		while (y <= data->resolution_y)
 		{
-			my_mlx_pixel_put(data, x, y, data->ceiling);
+			my_mlx_pixel_put(data, x, y,0x87CEEB );
 			y++;
-		}
+		}*/
 	x++;
 	}
 }
@@ -141,35 +95,15 @@ void	ft_fps(void)
 	return ;
 }
 
-void	ft_use(t_data *data, t_ray *ray)
-{
-	if (data->key.use == 1 && ray->walldistance < 1 && ray->text_select == 4)
-		ray->map[ray->map_y][ray->map_x] = '/'; 
-}
 
 void	ft_init_ray(t_ray *ray, int x)
 {
-		ray->hit = 0; 
-		ray->text_select = 0;
-		ray->map_x = (int)ray->pos_x;
-		ray->map_y = (int)ray->pos_y;
-		ray->camera_x =  2 * x / ray->resolution_x - 1;
+	ray->hit = 0; 
+	ray->text_select = 0;
+	ray->map_x = (int)ray->pos_x;
+	ray->map_y = (int)ray->pos_y;
+	ray->camera_x =  2 * x / ray->resolution_x - 1;
 }
-void	ft_event(t_ray *ray)
-{
-	if (ray->map[(int)ray->pos_y][(int)ray->pos_x] == '/' && ray->door_open == 0)
-	{
-		ray->pos_door_y = (int)ray->pos_y;
-		ray->pos_door_x = (int)ray->pos_x;
-		ray->door_open = 1;
-	}
-	if (ray->map[(int)ray->pos_y][(int)ray->pos_x] != '/' && ray->door_open == 1)
-	{
-		ray->door_open = 0;
-		ray->map[(int)ray->pos_door_y][(int)ray->pos_door_x] = '2';
-	}
-}
-
 void	ft_movements(t_data *data)
 {
 	
@@ -188,9 +122,10 @@ int	ft_render_next_frame(t_data *data)
 {
 	int	x;
 	t_ray *ray;
-	ray = &data->ray_data;
 
+	ray = &data->ray_data;
 	x = 0;
+	ft_printf("1\n");
 	ft_put_ceiling_and_roof(data);
 	ft_fps();
 	ft_movements(data);
@@ -208,10 +143,15 @@ int	ft_render_next_frame(t_data *data)
 		ft_calc_x_texture(data);
 		ft_calc_y_texture(data);
 		ft_print_texture(data, ray, x);
+		//ft_printf_ray(ray);
+		ft_floor_casting(data, ray, x);
+		data->zbuffer[x] = ray->walldistance; 
 		x++;
 	}
 	ft_print_minimap(data, ray);
+	ft_printf("12\n");
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->display, 0, 0);
+	ft_printf("13\n");
 	ft_event(ray);
 	return (0);
 }
