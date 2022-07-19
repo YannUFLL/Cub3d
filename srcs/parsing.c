@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:21:13 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/18 17:59:18 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/19 16:59:17 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef enum e_type
 	DOOR, 
 	FLOOR,
 	CEILING,
+	BAR,
 }	t_type;
 
 int	ft_detect_element(char *line, int *i)
@@ -51,6 +52,8 @@ int	ft_detect_element(char *line, int *i)
 		rc = FLOOR;
 	if (ft_strncmp(&line[*i], "TCE", 3) == 0)
 		rc = CEILING;
+	if (ft_strncmp(&line[*i], "BAR", 3) == 0)
+		rc = BAR;
 	while (line[*i] && (line[*i] < 9 || line[*i] > 13) && line[*i] != 32)
 			(*i)++;
 	return (rc);

@@ -5,6 +5,7 @@ EA ./texture/stone_title_256.xpm
 DO ./texture/door_256.xpm
 TFL ./texture/floor_grass_512.xpm
 TCE ./texture/ceiling_512.xpm
+BAR ./texture/barrel.xpm
 
 F 173,216,230
 C 176,242,182
