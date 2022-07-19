@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 20:12:02 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/19 17:22:44 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/19 21:58:32 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,15 +131,15 @@ void	ft_mouse_rotate_right(t_ray *ray, t_key *key)
 	while (key->mouse_rotate_right > 1)
 	{
 		old_dir_x = ray->dir_x;
-		ray->dir_x = ray->dir_x * cos(-0.005)
-			- ray->dir_y * sin(-0.005);
-		ray->dir_y = old_dir_x * sin(-0.005)
-			+ ray->dir_y * cos(-0.005);
+		ray->dir_x = ray->dir_x * cos(-0.003)
+			- ray->dir_y * sin(-0.003);
+		ray->dir_y = old_dir_x * sin(-0.003)
+			+ ray->dir_y * cos(-0.003);
 		old_plane_x = ray->plane_x;
-		ray->plane_x = ray->plane_x * cos(-0.005)
-			- ray->plane_y * sin(-0.005);
-		ray->plane_y = old_plane_x * sin(-0.005)
-			+ ray->plane_y * cos(-0.005);
+		ray->plane_x = ray->plane_x * cos(-0.003)
+			- ray->plane_y * sin(-0.003);
+		ray->plane_y = old_plane_x * sin(-0.003)
+			+ ray->plane_y * cos(-0.003);
 	key->mouse_rotate_right--; 
 	}
 }
@@ -156,15 +156,15 @@ void	ft_mouse_rotate_left(t_ray *ray, t_key *key)
 	while (key->mouse_rotate_left > 1)
 	{
 		old_dir_x = ray->dir_x;
-		ray->dir_x = ray->dir_x * cos(0.005)
-			- ray->dir_y * sin(0.005);
-		ray->dir_y = old_dir_x * sin(0.005)
-			+ ray->dir_y * cos(0.005);
+		ray->dir_x = ray->dir_x * cos(0.003)
+			- ray->dir_y * sin(0.003);
+		ray->dir_y = old_dir_x * sin(0.003)
+			+ ray->dir_y * cos(0.003);
 		old_plane_x = ray->plane_x;
-		ray->plane_x = ray->plane_x * cos(0.005)
-			- ray->plane_y * sin(0.005);
-		ray->plane_y = old_plane_x * sin(0.005)
-			+ ray->plane_y * cos(0.005);
+		ray->plane_x = ray->plane_x * cos(0.003)
+			- ray->plane_y * sin(0.003);
+		ray->plane_y = old_plane_x * sin(0.003)
+			+ ray->plane_y * cos(0.003);
 	key->mouse_rotate_left--; 
 	}
 }
