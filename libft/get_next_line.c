@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 15:29:10 by jrasser           #+#    #+#             */
-/*   Updated: 2022/04/12 02:09:03 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/19 19:41:56 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ char	*ft_check_buffer_line(char *buffer)
 {
 	if (ft_strlen(buffer) != BUFFER_SIZE)
 	{
-		free(buffer);
+		//if (ft_strlen(buffer))
+		//	free(buffer);
 		buffer = ft_calloc_line(buffer, BUFFER_SIZE);
 	}
 	return (buffer);
