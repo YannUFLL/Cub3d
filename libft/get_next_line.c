@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 15:29:10 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/19 19:41:56 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/20 02:51:12 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,7 @@ char	*ft_check_retour(int ret, char *buffer, char *line)
 	if (ret == 0 && line)
 		return (line);
 	else if (ret < 1)
-	{
-		free(buffer);
 		return (NULL);
-	}
 	else if (buffer && buffer[0] == '\0')
 	{
 		free(buffer);
@@ -65,8 +62,7 @@ char	*ft_check_buffer_line(char *buffer)
 {
 	if (ft_strlen(buffer) != BUFFER_SIZE)
 	{
-		//if (ft_strlen(buffer))
-		//	free(buffer);
+		free(buffer);
 		buffer = ft_calloc_line(buffer, BUFFER_SIZE);
 	}
 	return (buffer);

@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/19 19:24:51 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/20 03:27:44 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,17 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include "../libft/libft.h"
+
+# if defined(__linux__)
+	#include <mlx.h>
+	#define FORWARD 122
+	#define BACKWARD 115
+	#define EXIT 65307
+# else
+	#define FORWARD 13
+	#define BACKWARD 1
+	#define EXIT 53
+# endif
 
 typedef struct s_texture
 {
@@ -145,6 +156,7 @@ typedef struct s_map_data
 	int nb_pass;
 	int no_move_possible;
 	int is_againt_wall;
+	int	nb_move;
 }	t_map_data;
 
 
@@ -207,44 +219,44 @@ int		ft_init_text(t_data *data);
 
 
 /* PARSING */
-int ft_parsing(t_data *data);
-void ft_sub_fill_caract(char **caract, char *str);
-int ft_nb_section_split(char **line_splited);
-void ft_parse_color(int *color, char **tab);
-int ft_check_comma(char *str);
-int ft_check_miss_caract(t_data *data);
+int		ft_parsing(t_data *data);
+void	ft_sub_fill_caract(char **caract, char *str);
+int		ft_nb_section_split(char **line_splited);
+void	ft_parse_color(int *color, char **tab);
+int		ft_check_comma(char *str);
+int		ft_check_miss_caract(t_data *data);
 
 /* CHECKER */
-int ft_checker(int argc, char **argv, t_data *data);
-int ft_nb_section_split(char **line_splited);
+int		ft_checker(int argc, char **argv, t_data *data);
+int		ft_nb_section_split(char **line_splited);
 
 /* CHECKER MAP */
-void ft_replace_space(t_data *data);
-int ft_check_out(t_map_data *d);
-int ft_move_is_valid(t_map_data *map_data, char *c);
-void ft_move(t_map_data *d);
-int ft_is_againt_wall(t_map_data *d);
-
+void	ft_replace_space(t_data *data);
+int		ft_check_out(t_map_data *d);
+int		ft_move_is_valid(t_map_data *map_data, char *c);
+void	ft_move(t_map_data *d);
+int		ft_is_againt_wall(t_map_data *d);
+int		ft_check_ext_wall(t_map_data *d);
 
 /* PARSING MAP */
-void ft_copy_map(char *line, t_data *data);
-int ft_map_begin(char *line);
-int ft_is_map_border(char *line);
-int ft_check_map(t_data *data);
-int ft_follow_wall(t_map_data *d);
-void ft_sub_fill_color(t_data *data, char *str1, char *str2, char *line);
-void ft_sub_fill_texture(t_data *data, char *str1, char *str2, char *line);
+void	ft_copy_map(char *line, t_data *data);
+int		ft_map_begin(char *line);
+int		ft_is_map_border(char *line);
+int		ft_check_map(t_data *data);
+int		ft_follow_wall(t_map_data *d);
+void	ft_sub_fill_color(t_data *data, char *str1, char *str2, char *line);
+void	ft_sub_fill_texture(t_data *data, char *str1, char *str2, char *line);
 
 /* FREE */
-int ft_free_texture(t_data *data);
-void ft_free_tab(char **tab);
-void ft_close_and_free(t_data *data);
-void ft_free_list(t_list *list);
+int		ft_exit_game(t_data *data);
+int		ft_free_texture(t_data *data);
+void	ft_free_tab(char **tab);
+void	ft_close_and_free(t_data *data);
+void	ft_free_list(t_list *list);
 
 /* DEBUG */
 void	ft_printdata(t_data *data);
 void	ft_print_map(t_map_data *data);
 void	ft_printmap(t_data *data, char **map);
-
 
 #endif

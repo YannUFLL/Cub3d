@@ -80,4 +80,5 @@ void	ft_move(t_map_data *d)
 		d->y_start = d->posY;
 		d->dir = 'S';
 	}
+	d->nb_move += 1;
 }

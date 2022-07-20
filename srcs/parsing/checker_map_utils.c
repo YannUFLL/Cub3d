@@ -34,7 +34,6 @@ void	ft_sub_replace_space(t_data *data, int i, int j)
 		data->player_spawn_pos[0] = j;
 		data->player_spawn_pos[1] = i;
 		data->map.tab[i][j] = '0';
-		//ft_set_orientation(data);
 	}
 	else
 	{
