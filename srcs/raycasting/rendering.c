@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:31:47 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/20 22:07:25 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/20 23:17:48 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-#include <unistd.h>
 
 /*
 void	ft_printf_ray(t_ray *ray)
@@ -118,7 +117,7 @@ int	ft_render_next_frame(t_data *data)
 
 	ray = &data->ray_data;
 	ft_put_ceiling_and_roof(data);
-	ft_fps();
+	//ft_fps();
 	ft_movements(data);
 	ft_wall_casting(data, ray);
 	//ft_sprite_casting(data, ray, data->sprite);

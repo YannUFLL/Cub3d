@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   render_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 21:15:20 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/20 21:20:27 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/20 23:17:41 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-#include <sys/time.h>
+//#include <sys/time.h>
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -29,6 +29,7 @@ int	time_diff(struct timeval *start, struct timeval *end)
 		* 1000 + ((end->tv_usec - start->tv_usec) / 1000));
 }
 
+/*
 void	ft_fps(void)
 {
 	static struct timeval	time;
@@ -47,3 +48,4 @@ void	ft_fps(void)
 	}
 	return ;
 }
+*/
