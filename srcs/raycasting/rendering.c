@@ -6,30 +6,14 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:31:47 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/20 15:42:22 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/20 22:07:25 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include <unistd.h>
-#include <sys/time.h>
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	static int octet;
-
-	if (octet == 0)
-		octet = data->bits_per_pixel / 8;
-
-	*(unsigned int *)(data->display_add + (y * data->line_length + x * 4)) = color;
-}
-
-int	time_diff(struct timeval *start, struct timeval *end)
-{
-	return ((end->tv_sec - start->tv_sec)
-		* 1000 + ((end->tv_usec - start->tv_usec) / 1000));
-}
-
+/*
 void	ft_printf_ray(t_ray *ray)
 {
 	printf("\n\n");
@@ -52,65 +36,46 @@ void	ft_printf_ray(t_ray *ray)
 	printf("step y : %d \n", ray->step_y);
 	printf("ray_wall_distance : %f \n", ray->walldistance);
 }
-
+*/
 
 void	ft_put_ceiling_and_roof(t_data *data)
 {
 	int	x;
 	int	y;
+	int color;
+	//int shadding;
 
-	x = 0;
-	while(x <= data->resolution_x)
+	y = 0;
+	while (y < data->resolution_y)
 	{
-		y = data->resolution_y / 2;
-		y = 0;
-		while (y <= data->resolution_y / 2)
+		x = 0;
+		if (y > data->resolution_y / 2)
+			color = data->ceiling;
+		else
+			color = data->floor;
+		while (x < data->resolution_x)
 		{
-			my_mlx_pixel_put(data, x, y, data->floor);
-			y++;
+			my_mlx_pixel_put(data, x, y, color);
+			x++;
 		}
-		while (y <= data->resolution_y - 2)
-		{
-			my_mlx_pixel_put(data, x, y, 0x87CEEB);
-			y++;
-		}
-	x++;
+	y++;
 	}
 }
-
-void	ft_fps(void)
-{
-	static struct timeval time;
-	struct timeval actual_time;
-	static int	fps; 
-	if (fps == 0)
-	{
-		gettimeofday(&time, NULL);
-	}
-	fps++;
-	gettimeofday(&actual_time, NULL); 
-	if (time_diff(&time, &actual_time) > 1000)
-	{
-		ft_printf("fps : %d\n", fps);
-		fps = 0; 
-	}
-	return ;
-}
-
 
 void	ft_init_ray(t_ray *ray, int x)
 {
-	ray->hit = 0; 
+	ray->hit = 0;
 	ray->text_select = 0;
 	ray->map_x = (int)ray->pos_x;
 	ray->map_y = (int)ray->pos_y;
-	ray->camera_x =  2 * x / ray->resolution_x - 1;
+	ray->camera_x = 2 * x / ray->resolution_x - 1;
 }
+
 void	ft_movements(t_data *data)
 {
-	
-	t_key *key;
-	key = &data->key; 
+	t_key	*key;
+
+	key = &data->key;
 	ft_move_straight(&data->ray_data, data, key);
 	ft_move_right(&data->ray_data, data, key);
 	ft_move_left(&data->ray_data, data, key);
@@ -120,16 +85,12 @@ void	ft_movements(t_data *data)
 	ft_mouse_rotate_right(&data->ray_data, key);
 	return ;
 }
-int	ft_render_next_frame(t_data *data)
+
+void	ft_wall_casting(t_data *data, t_ray *ray)
 {
 	int	x;
-	t_ray *ray;
 
-	ray = &data->ray_data;
 	x = 0;
-	ft_put_ceiling_and_roof(data);
-	ft_fps();
-	ft_movements(data);
 	while (x < ray->resolution_x)
 	{
 		ft_init_ray(ray, x);
@@ -146,12 +107,23 @@ int	ft_render_next_frame(t_data *data)
 		ft_print_texture(data, ray, x);
 		//ft_printf_ray(ray);
 		//ft_floor_casting(data, ray, x);
-		data->zbuffer[x] = ray->walldistance; 
+		data->zbuffer[x] = ray->walldistance;
 		x++;
 	}
+}
+
+int	ft_render_next_frame(t_data *data)
+{
+	t_ray	*ray;
+
+	ray = &data->ray_data;
+	ft_put_ceiling_and_roof(data);
+	ft_fps();
+	ft_movements(data);
+	ft_wall_casting(data, ray);
+	//ft_sprite_casting(data, ray, data->sprite);
 	ft_print_minimap(data, ray);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->display, 0, 0);
 	ft_event(ray);
 	return (0);
 }
-

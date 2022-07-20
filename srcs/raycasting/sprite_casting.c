@@ -6,11 +6,11 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 22:15:25 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/20 15:27:28 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/20 21:20:56 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*#include "../../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 typedef struct sprite_calc
 {
@@ -30,8 +30,12 @@ typedef struct sprite_calc
 	int stripe;
 	int texx;
 	int texy;
-	int d;
-	int	color; 
+	unsigned int d;
+	unsigned int	color; 
+	int	img_height;
+	int resolution_y; 
+	int resolution_x; 
+	int	 *addr;
 }	t_sprite_calc;
 
 
@@ -65,37 +69,42 @@ void	ft_calc_pos(t_sprite *sprite, t_sprite_calc *sp, t_ray *ray, t_data *data)
 		sp->transformy = sp->invdet * (-ray->plane_y * sp->sprite_x + ray->plane_x * sp->sprite_y);
 		sp->spritescreenx = (int)((data->resolution_x / 2) * (1 + sp->transformx / sp->transformy));
 		sp->spriteheight = abs((int)(data->resolution_y / (sp->transformy)));
-		sp->drawstarty = -sp->spritewidth / 2 + data->resolution_y / 2;
+		sp->drawstarty = -sp->spriteheight / 2 + data->resolution_y / 2;
 		if (sp->drawstarty < 0) 
 			sp->drawstarty = 0;
-		sp->drawendy = sp->spritewidth / 2 + data->resolution_y / 2;
-		if (sp->drawendy >= data->resolution_x) 
-			sp->drawendy = data->resolution_y - 1;
+		sp->drawendy = sp->spriteheight / 2 + data->resolution_y / 2;
+		if (sp->drawendy >= data->resolution_y) 
+			sp->drawendy = data->resolution_y- 1;
 		sp->spritewidth = abs((int)(data->resolution_y / (sp->transformy)));
 		sp->drawstartx= -sp->spritewidth / 2 + sp->spritescreenx ;
 		if (sp->drawstartx < 0) 
 			sp->drawstartx = 0;
 		sp->drawendx = sp->spritewidth / 2 + sp->spritescreenx;  
 		if (sp->drawendx >= data->resolution_x) 
-			sp->drawendx = data->resolution_x- 1;
+			sp->drawendx = data->resolution_x;
 		sp->stripe = sp->drawstartx;
 }
 
 void	ft_print_sprite(t_sprite *sprite, t_sprite_calc *sp, t_data *data)
 {
+		int y;
+
 		while (sp->stripe < sp->drawendx)
 		{
 			sp->texx = (int)(256 * (sp->stripe - (-sp->spritewidth / 2 + sp->spritescreenx)) * data->texture[7].img_width / sp->spritewidth ) / 256; 
-			if (sp->transformy > 0 && sp->stripe > 0 && sp->stripe < data->resolution_x && sp->transformy < data->zbuffer[sp->stripe])
-				while (sp->drawstarty < sp->drawendy)
+			y = sp->drawstarty;
+			if (sp->transformy > 0 && sp->stripe >= 0 && sp->stripe < data->resolution_x && sp->transformy < data->zbuffer[sp->stripe])
+				while (y < sp->drawendy)
 				{
-					sp->d = sp->drawstarty * 256 - data->resolution_y * 128 + data->texture[7].img_height * 128;
-					sp->texy = ((sp->d * data->texture[7].img_height));
-					sp->color = data->texture[sprite[sp->i].texture].addr[data->texture[sprite[sp->i].texture].img_width * sp->texy + sp->texx];
-					if (sp->color != 16777215)
-					my_mlx_pixel_put(data, sp->drawstarty, sp->stripe, sp->color);
-					sp->drawstarty++;
+					sp->d = y * 256 - sp->resolution_y * 128 + sp->spriteheight * 128;
+					sp->texy = ((sp->d * sp->img_height) / sp->spriteheight) / 256;
+					sp->color = sp->addr[data->texture[sprite[sp->i].texture].img_width * sp->texy + sp->texx];
+					if (sp->color != 0x0)
+						my_mlx_pixel_put(data, sp->stripe, y, sp->color);
+					y++;
 				}
+			
+		sp->stripe++;
 		}
 }
 
@@ -115,9 +124,13 @@ void	ft_sprite_casting(t_data *data, t_ray *ray, t_sprite *sprite)
 	sp.i = 0;
 	while (sp.i < data->numsprites)
 	{
+		sp.img_height = data->texture[sprite[sp.i].texture].img_height; 
+		sp.addr = data->texture[sprite[sp.i].texture].addr; 
+		sp.resolution_y = data->resolution_y; 
+		sp.resolution_x = data->resolution_x; 
 		ft_calc_pos(sprite, &sp, ray, data);
 		ft_print_sprite(sprite, &sp, data);
 		sp.i++;
 	}
-}*/
+}
 
