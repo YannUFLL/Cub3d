@@ -57,6 +57,7 @@ void	ft_init_map_data(t_map_data *map_data, t_data *data)
 	map_data->height = data->map.height;
 	map_data->width = data->map.width;
 	map_data->nb_pass = 0;
+	map_data->nb_move = 0;
 	map_data->no_move_possible = 0;
 	map_data->is_againt_wall = 0;
 }
@@ -73,9 +74,16 @@ int	ft_check_map(t_data *data)
 	}
 	if (ft_check_map_border(&map_data))
 	{
-		printf("Error\nMap is open in (%d, %d)\n", map_data.posX, map_data.posY);
+		printf("Error\nMap is open in (%d, %d)\n\n", map_data.posX, map_data.posY);
 		ft_print_map(&map_data);
 		return (1);
+	}
+	if (ft_check_ext_wall(&map_data))
+	{
+		printf("Error\nMap is not close in (%d, %d)\n\n", \
+		map_data.posX, map_data.posY);
+		ft_print_map(&map_data);
+		exit (0);
 	}
 	ft_print_map(&map_data);
 	return (0);

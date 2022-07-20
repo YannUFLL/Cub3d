@@ -6,26 +6,42 @@
 #    By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/17 05:26:46 by jrasser           #+#    #+#              #
-#    Updated: 2022/07/19 17:19:51 by jrasser          ###   ########.fr        #
+#    Updated: 2022/07/20 01:56:09 by jrasser          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS 		= $(wildcard srcs/*/*.c)
 OBJS		:= $(addprefix objs/, $(notdir $(SRCS:.c=.o)))
-RM			= @rm -f
+OS			= ${shell uname}
+LIBMLXMAC	= make -C minilibx/
 NAME 		= cub3d
 CC			= gcc
+RM			= @rm -f
 CFLAGS		= -Wall -Wextra
-LDFLAGS		= -I./include/ -I./libft/ -I/Users/ydumaine/.brew/opt/readline/include -I./minilibx/
+CPPFLAGS	= -I./include/ -I./libft/ -I./minilibx/
 DEBEUG		= -g -fsanitize=address
-MINILIBX	= -L./minilibx -lmlx -framework OpenGL -framework AppKit -lz
 
 objs/%.o: */*/%.c
 			@${CC} -o $@ -c $< ${CFLAGS} ${DEBEUG}
 
+ifeq ($(OS),Linux)
+LDFLAGS			= -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz 
+CPPFLAGS 		+= -Imlx_linux -I/usr/include -Imlx_linux
+endif
+
+ifeq ($(OS),Darwin)
+LDFLAGS			= -L./minilibx -lmlx -framework OpenGL -framework AppKit -lm -lz
+CPPFLAGS 		+= -Imlx_mac
+endif
+
+$(NAME): 		$(OBJS)
+ifeq ($(OS),Darwin)
+				$(LIBMLXMAC)
+endif
+
 ${NAME}	:	${OBJS}
 			@$(MAKE) --no-print-directory -C ./libft
-			@${CC} -o ${NAME} ${OBJS} ${DEBEUG} -L./libft -lft ${MINILIBX}
+			@${CC} -o ${NAME} ${OBJS} ${DEBEUG} -L./libft -lft $(LDFLAGS)
 
 all :		${NAME}
 
