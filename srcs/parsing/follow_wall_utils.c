@@ -58,12 +58,32 @@ int	ft_move_is_valid(t_map_data *map_data, char *c)
 
 int	ft_is_againt_wall(t_map_data *d)
 {
-	if (d->map[d->posY][d->posX + 1] == '1')
+	if (d->dir == 'E' && d->map[d->posY][d->posX + 1] == '1')
+		return (1);
+	else if (d->dir == 'S' && d->map[d->posY + 1][d->posX] == '1')
+		return (1);
+	else if (d->dir == 'W' && d->map[d->posY][d->posX - 1] == '1')
+		return (1);
+	else if (d->dir == 'N' && d->map[d->posY - 1][d->posX] == '1')
 		return (1);
 	return (0);
 }
 
-void	ft_move(t_map_data *d)
+void	ft_set_dir_against_wall(t_map_data *d, int move_against_wall)
+{
+	if (d->is_againt_wall == 0 && ft_is_againt_wall(d))
+	{
+		d->is_againt_wall = 1;
+		d->x_start = d->posX;
+		d->y_start = d->posY;
+		if (move_against_wall == 0)
+			d->dir = 'S';
+		else
+			d->dir = 'N';
+	}
+}
+
+void	ft_move(t_map_data *d, int move_against_wall)
 {
 	if (d->dir == 'E')
 		d->posX += 1;
@@ -73,12 +93,6 @@ void	ft_move(t_map_data *d)
 		d->posX -= 1;
 	else if (d->dir == 'N')
 		d->posY -= 1;
-	if (d->is_againt_wall == 0 && ft_is_againt_wall(d))
-	{
-		d->is_againt_wall = 1;
-		d->x_start = d->posX;
-		d->y_start = d->posY;
-		d->dir = 'S';
-	}
+	ft_set_dir_against_wall(d, move_against_wall);
 	d->nb_move += 1;
 }

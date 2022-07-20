@@ -1,7 +1,7 @@
-NO ./assets/stone1.xpm
-SO ./assets/stone2.xpm
-WE ./assets/stone3.xpm
-EA ./assets/stone4.xpm
+NO ./texture/brick_256.xpm
+SO ./texture/rock_256.xpm
+WE ./texture/nothing.xpm
+EA ./texture/rock_256.xpm
 F 39,37,35
 C 39,37,35
 111111111111111111111111111111111111111111111111111
