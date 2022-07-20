@@ -1,0 +1,11 @@
+NO ./texture/brick_256.xpm
+SO ./texture/rock_256.xpm
+WE ./texture/brick_256.xpm
+EA ./texture/rock_256.xpm
+F 220,10,0,0
+D 225,30,0
+111111
+100101
+101001
+1100N1
+111111
