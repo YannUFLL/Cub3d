@@ -6,7 +6,7 @@
 #    By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/17 05:26:46 by jrasser           #+#    #+#              #
-#    Updated: 2022/07/20 15:27:18 by ydumaine         ###   ########.fr        #
+#    Updated: 2022/07/20 21:02:23 by ydumaine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ DEBEUG		= -g -fsanitize=address
 MINILIBX	= -L./minilibx -lmlx -framework OpenGL -framework AppKit -lz
 
 objs/%.o: */*/%.c
-			@${CC} -o $@ -c $< ${CFLAGS} ${DEBEUG}
+			@${CC} -o $@ -c $< ${CFLAGS} ${DEBEUG} 
 
 ${NAME}	:	${OBJS}
 			@$(MAKE) --no-print-directory -C ./libft

@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:16:27 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/20 15:38:08 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/20 20:55:30 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	ft_init_data(t_data *data)
 	data->fov = 70;
 	data->resolution_x = 1280;
 	data->resolution_y = 720;
-	data->move_speed = 0.01;
-	data->rotate_speed = 0.01;
+	data->move_speed = 0.05;
+	data->rotate_speed = 0.05;
 	data->keycode = -1;
-	data->textures_nb = 4;
+	data->textures_nb = 8;
 	data->line_length = 0;
 	data->bits_per_pixel = 0;
 	data->keycode = 0;
@@ -37,14 +37,14 @@ int	ft_init_data(t_data *data)
 	data->map.height = 0;
 	data->map.width = 0;
 	data->map.tab = NULL;
-	data->numsprites = 1;
+	// bonus
+	data->numsprites = 2;
 	ft_init_texture(data->texture);
 	return (0);
 }
 
 int	ft_init_display(t_data *data)
 {
-	data->ray_data.map = data->map.tab;
 	data->display = mlx_new_image(data->mlx, data->resolution_x,
 			data->resolution_y);
 	data->display_add = mlx_get_data_addr(data->display,
@@ -98,6 +98,10 @@ void	ft_init_key(t_key *key)
 
 void	ft_init_ray_data(t_data *data, t_ray *ray)
 {
+	ray->map = data->map.tab;
+//FOR TESTING CAR PAS DE PARSING, A SUPPRIMER
+	ray->map[4][5] = '2';
+//
 	ray->pos_x = data->player_spawn_pos[0] + 0.5 ;
 	ray->pos_y = data->player_spawn_pos[1] + 0.5 ;
 	ray->hit = 0;

@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/20 15:37:41 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/20 21:50:25 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ typedef struct s_data
 	int			player_spawn_pos[2];
 	int			edge_size;
 	int			fov;
+	int			shadding;
 	int			resolution_x;
 	int			resolution_y;
 	double		move_speed;
@@ -164,8 +165,8 @@ int		ft_key_press(int keycode, t_data *data);
 int		ft_key_release(int keycode, t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
-
-
+//a SUPPRIMER
+void	ft_fps(void);
 // texture
 void	ft_calc_x_texture(t_data *data);
 void	ft_choose_texture(t_ray *ray);
@@ -212,6 +213,8 @@ void	ft_init_direction(t_data *data, t_ray *ray);
 void	ft_init_ray_data(t_data *data, t_ray *ray);
 void	ft_init_texture(t_texture *tex);
 int		ft_init_text(t_data *data);
+// sprite
+void	ft_sprite_casting(t_data *data, t_ray *ray, t_sprite *sprite);
 
 
 

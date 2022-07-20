@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 19:59:45 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/20 15:49:52 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/20 21:16:25 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	ft_calc_y_texture(t_data *data)
 			/ 2 + ray->lineheight / 2) * ray->step;
 }
 
+// & (data->texture[text_select].img_height - 1);
 void	ft_print_texture(t_data *data, t_ray *ray, int x)
 {
 	int	text_select;
@@ -65,7 +66,7 @@ void	ft_print_texture(t_data *data, t_ray *ray, int x)
 	img_add = data->texture[text_select].addr;
 	while (ray->drawstart < ray->drawend)
 	{
-		ray->texy = (int)ray->texpos;// & (data->texture[text_select].img_height - 1);
+		ray->texy = (int)ray->texpos;
 		ray->texpos += ray->step;
 		my_mlx_pixel_put(data, x, ray->drawstart,
 			img_add[img_width * ray->texy + ray->texx]);

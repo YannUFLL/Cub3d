@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 21:55:08 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/19 17:22:44 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/20 21:44:23 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	ft_key_press(int	keycode, t_data *data)
+int	ft_key_press(int keycode, t_data *data)
 {
-	t_key *key;
+	t_key	*key;
 
-	key = &data->key; 
+	key = &data->key;
 	(void)keycode;
 	if (keycode == 0)
 	key->move_left = 1;
@@ -35,12 +35,12 @@ int	ft_key_press(int	keycode, t_data *data)
 	if (keycode == 53)
 		exit(0);
 	data->keycode = keycode;
-	return(0);
+	return (0);
 }
 
-int	ft_key_release(int	keycode, t_data *data)
+int	ft_key_release(int keycode, t_data *data)
 {
-	t_key *key;
+	t_key	*key;
 
 	key = &data->key;
 	(void)keycode;
@@ -58,25 +58,25 @@ int	ft_key_release(int	keycode, t_data *data)
 		key->rotate_right = 0;
 	if (keycode == 3)
 		key->use = 0;
-	return(0);
+	return (0);
 }
 
+//mlx_mouse_hide();
 int	ft_mouse(int x, int y, t_data *data)
 {
-	static int old_x; 
-	static int first;
+	static int	old_x;
+	static int	first;
 
 	if (first == 0)
 	{
-		old_x = x; 
+		old_x = x;
 		first = 1;
 	}
 	(void)y;
-	//mlx_mouse_hide();
 	if (old_x - x < 0)
-		data->key.mouse_rotate_left =  abs(x - old_x); 
+		data->key.mouse_rotate_left = abs(x - old_x);
 	if (old_x - x > 0)
-		data->key.mouse_rotate_right =  abs(x - old_x); 
-	old_x = x; 
+		data->key.mouse_rotate_right = abs(x - old_x);
+	old_x = x;
 	return (0);
 }
