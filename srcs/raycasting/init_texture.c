@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:18:52 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/19 18:32:16 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/20 23:14:48 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,9 @@ int	ft_init_text(t_data *data)
 	t_texture	*text;
 
 	x = 0;
-
 	text = data->texture; 
 	while (x < data->textures_nb)
 	{
-		ft_printf("path : %s \n", text[x].path);
 		text[x].mlx_img = mlx_xpm_file_to_image(data->mlx,
 			text[x].path, &text[x].img_width, &text[x].img_height);
 		if (text[x].mlx_img == NULL)

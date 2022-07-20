@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:16:27 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/20 22:24:27 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/20 23:14:58 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_init_data(t_data *data)
 	data->move_speed = 0.05;
 	data->rotate_speed = 0.05;
 	data->keycode = -1;
-	data->textures_nb = 8;
+	data->textures_nb = 4;
 	data->line_length = 0;
 	data->bits_per_pixel = 0;
 	data->keycode = 0;

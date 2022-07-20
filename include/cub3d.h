@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/20 22:56:43 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/20 23:17:42 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,8 +174,6 @@ int		ft_key_press(int keycode, t_data *data);
 int		ft_key_release(int keycode, t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
-//a SUPPRIMER
-void	ft_fps(void);
 // texture
 void	ft_calc_x_texture(t_data *data);
 void	ft_choose_texture(t_ray *ray);
