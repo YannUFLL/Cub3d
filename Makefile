@@ -6,12 +6,12 @@
 #    By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/17 05:26:46 by jrasser           #+#    #+#              #
-#    Updated: 2022/07/20 23:18:39 by jrasser          ###   ########.fr        #
+#    Updated: 2022/07/20 23:47:26 by jrasser          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS 		= $(wildcard srcs/*/*.c)
-OBJS		:= $(addprefix objs/, $(notdir $(SRCS:.c=.o)))
+SRCS 		= $(wildcard mandatory/srcs/*/*.c)
+OBJS		:= $(addprefix mandatory/objs/, $(notdir $(SRCS:.c=.o)))
 OS			= ${shell uname}
 LIBMLXMAC	= make -C minilibx/
 NAME 		= cub3d
@@ -21,8 +21,8 @@ CFLAGS		= -Wall -Wextra -Werror
 CPPFLAGS	= -I./include/ -I./libft/ -I./minilibx/
 DEBEUG		= -g -fsanitize=address
 
-objs/%.o: */*/%.c
-			@${CC} -o $@ -c $< ${CFLAGS}
+mandatory/objs/%.o: mandatory/*/*/%.c
+			@${CC} -o $@ -c $< ${CFLAGS} ${DEBEUG}
 
 ifeq ($(OS),Linux)
 LDFLAGS			= -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz 
@@ -41,7 +41,7 @@ endif
 
 ${NAME}	:	${OBJS}
 			@$(MAKE) --no-print-directory -C ./libft
-			@${CC} -o ${NAME} ${OBJS} -L./libft -lft $(LDFLAGS)
+			@${CC} -o ${NAME} ${OBJS} -L./libft -lft $(LDFLAGS) ${DEBEUG}
 
 all :		${NAME}
 
