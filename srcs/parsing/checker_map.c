@@ -57,22 +57,29 @@ void	ft_init_map_data(t_map_data *map_data, t_data *data)
 
 int	ft_check_map_border(t_map_data *d, t_data *data)
 {
-	ft_init_map_data(d, data);
-	if (ft_check_player_spawn(d, data))
+	int	i;
+	int	ret;
+
+	i = 0;
+	while(i < 4)
 	{
-		printf("Error\nNo spawner\n");
-		exit(0);
+		ret = ft_follow_wall_left(d, i);
+		if (ret)
+			return (1);
+		ft_init_map_data(d, data);
+		ft_check_player_spawn(d, data);
+		i++;
 	}
-	else if (ft_follow_wall_left(d))
-		return (1);
-	else if (ft_check_nb_move(d))
-		return (2);
-	ft_init_map_data(d, data);
-	ft_check_player_spawn(d, data);
-	if (ft_follow_wall_right(d))
-		return (1);
-	else if (ft_check_nb_move(d))
-		return (2);
+	i = 0;
+	while (i < 4)
+	{
+		ret = ft_follow_wall_right(d, i);
+		if (ret)
+			return (1);
+		ft_init_map_data(d, data);
+		ft_check_player_spawn(d, data);
+		i++;
+	}
 	return (0);
 }
 
@@ -81,13 +88,16 @@ int	ft_check_map(t_data *data)
 	t_map_data	map_data;
 	int			ret;
 
+	ft_init_map_data(&map_data, data);
+	if (ft_check_player_spawn(&map_data, data))
+	{
+		printf("Error\nNo spawner\n");
+		exit(0);
+	}
 	ret = ft_check_map_border(&map_data, data);
 	if (ret)
 	{
-		if (ret == 2)
-			printf("Error\nMap is open \n\n");
-		else
-			printf("Error\nMap is open in (%d, %d)\n\n", map_data.posX, map_data.posY);
+		printf("Error\nMap is open in (%d, %d)\n\n", map_data.posX, map_data.posY);
 		ft_print_map(&map_data);
 		return (1);
 	}
@@ -99,5 +109,6 @@ int	ft_check_map(t_data *data)
 		exit (0);
 	}
 	ft_print_map(&map_data);
+	printf("Map valid!\n");
 	return (0);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+         #
+#    By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/17 05:26:46 by jrasser           #+#    #+#              #
-#    Updated: 2022/07/20 01:56:09 by jrasser          ###   ########.fr        #
+#    Updated: 2022/07/20 20:17:36 by jrasser          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ CPPFLAGS	= -I./include/ -I./libft/ -I./minilibx/
 DEBEUG		= -g -fsanitize=address
 
 objs/%.o: */*/%.c
-			@${CC} -o $@ -c $< ${CFLAGS} ${DEBEUG}
+			@${CC} -o $@ -c $< ${CFLAGS}
 
 ifeq ($(OS),Linux)
 LDFLAGS			= -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz 
@@ -41,7 +41,7 @@ endif
 
 ${NAME}	:	${OBJS}
 			@$(MAKE) --no-print-directory -C ./libft
-			@${CC} -o ${NAME} ${OBJS} ${DEBEUG} -L./libft -lft $(LDFLAGS)
+			@${CC} -o ${NAME} ${OBJS} -L./libft -lft $(LDFLAGS)
 
 all :		${NAME}
 
