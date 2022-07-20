@@ -12,7 +12,7 @@
 
 #include "../../include/cub3d.h"
 
-void	ft_sub_checker_chang_dir_e(t_map_data *d)
+void	ft_sub_checker_chang_dir_l_e(t_map_data *d)
 {
 	int	a;
 
@@ -29,17 +29,17 @@ void	ft_sub_checker_chang_dir_e(t_map_data *d)
 		d->no_move_possible = 1;
 	else if (ft_move_is_valid(d, &(d->map[d->posY][d->posX + 1])))
 		;
-	else if (ft_move_is_valid(d, &(d->map[d->posY + 1][d->posX])))
-		d->dir = 'S';
-	else if (ft_move_is_valid(d, &(d->map[d->posY][d->posX - 1])))
-		d->dir = 'W';
-	else if (ft_move_is_valid(d, &(d->map[d->posY - 1][d->posX])))
-		d->dir = 'N';
+	//else if (ft_move_is_valid(d, &(d->map[d->posY + 1][d->posX])))
+	//	d->dir = 'S';
+	//else if (ft_move_is_valid(d, &(d->map[d->posY][d->posX - 1])))
+	//	d->dir = 'W';
+	//else if (ft_move_is_valid(d, &(d->map[d->posY - 1][d->posX])))
+	//	d->dir = 'N';
 	else
 		d->no_move_possible = 1;
 }
 
-void	ft_sub_checker_chang_dir_s(t_map_data *d)
+void	ft_sub_checker_chang_dir_l_s(t_map_data *d)
 {
 	if (ft_move_is_valid(d, &(d->map[d->posY][d->posX + 1])))
 		d->dir = 'E';
@@ -53,7 +53,7 @@ void	ft_sub_checker_chang_dir_s(t_map_data *d)
 		d->no_move_possible = 1;
 }
 
-void	ft_sub_checker_chang_dir_w(t_map_data *d)
+void	ft_sub_checker_chang_dir_l_w(t_map_data *d)
 {
 	if (ft_move_is_valid(d, &(d->map[d->posY + 1][d->posX])))
 		d->dir = 'S';
@@ -67,7 +67,7 @@ void	ft_sub_checker_chang_dir_w(t_map_data *d)
 		d->no_move_possible = 1;
 }
 
-void	ft_sub_checker_chang_dir_n(t_map_data *d)
+void	ft_sub_checker_chang_dir_l_n(t_map_data *d)
 {
 	if (ft_move_is_valid(d, &(d->map[d->posY][d->posX - 1])))
 		d->dir = 'W';
@@ -81,27 +81,29 @@ void	ft_sub_checker_chang_dir_n(t_map_data *d)
 		d->no_move_possible = 1;
 }
 
-int	ft_follow_wall(t_map_data *d)
+int	ft_follow_wall_left(t_map_data *d)
 {
 	int	i;
 
 	i = 0;
+	if (ft_is_againt_wall(d))
+		ft_set_dir_against_wall(d, 0);
 	while (i == 0 || d->nb_pass != 3)
 	{
 		if (d->dir == 'E' || d->dir == 'S' || d->dir == 'W' || d->dir == 'N')
 			if (ft_check_out(d))
 				return (1);
 		if (d->dir == 'E')
-			ft_sub_checker_chang_dir_e(d);
+			ft_sub_checker_chang_dir_l_e(d);
 		else if (d->dir == 'S')
-			ft_sub_checker_chang_dir_s(d);
+			ft_sub_checker_chang_dir_l_s(d);
 		else if (d->dir == 'W')
-			ft_sub_checker_chang_dir_w(d);
+			ft_sub_checker_chang_dir_l_w(d);
 		else if (d->dir == 'N')
-			ft_sub_checker_chang_dir_n(d);
+			ft_sub_checker_chang_dir_l_n(d);
 		if (d->no_move_possible)
 			return (0);
-		ft_move(d);
+		ft_move(d, 0);
 		if (d->posX == d->x_start && d->posY == d->y_start)
 			d->nb_pass += 1;
 		i++;

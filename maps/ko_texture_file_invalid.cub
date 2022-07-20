@@ -1,7 +1,7 @@
 NO ./texture/brick_256.xpm
 SO ./texture/rock_256.xpm
-WE ./texture/nothing.xpm
-E
+WE ./texture/invalidtexture.xpm
+EA ./texture/rock_256.xpm
 F 220,100,0
 C 225,30,0
 111111

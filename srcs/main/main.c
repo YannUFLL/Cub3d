@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
 	ft_printf("pos x : %d, pos y : %d\n", data.player_spawn_pos[0], data.player_spawn_pos[1] );
 
 	data.mlx = mlx_init();
-	data.mlx_win = mlx_new_window(data.mlx, data.resolution_x, data.resolution_y, "LE MEILLEUR JEU AU MONDE ");
+	data.mlx_win = mlx_new_window(data.mlx, data.resolution_x, data.resolution_y, "WOLFENCHTEIN");
 	ft_init_display(&data);
 	ft_init_ray_data(&data, &data.ray_data);
 	ft_init_text(&data);
