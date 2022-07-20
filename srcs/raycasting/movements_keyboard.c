@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movements.c                                        :+:      :+:    :+:   */
+/*   movements_keyboard.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 20:12:02 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/19 21:58:32 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/20 15:22:09 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,53 +119,3 @@ void	ft_rotate_left(t_ray *ray, t_data *data, t_key *key)
 			+ ray->plane_y * cos(-data->rotate_speed);
 	}
 }
-void	ft_mouse_rotate_right(t_ray *ray, t_key *key)
-{
-	double	old_dir_x;
-	double	old_plane_x;
-	int		rotate_nb;
-
-	rotate_nb = 0;
-	old_dir_x = ray->dir_x;
-	old_plane_x = ray->plane_x;
-	while (key->mouse_rotate_right > 1)
-	{
-		old_dir_x = ray->dir_x;
-		ray->dir_x = ray->dir_x * cos(-0.003)
-			- ray->dir_y * sin(-0.003);
-		ray->dir_y = old_dir_x * sin(-0.003)
-			+ ray->dir_y * cos(-0.003);
-		old_plane_x = ray->plane_x;
-		ray->plane_x = ray->plane_x * cos(-0.003)
-			- ray->plane_y * sin(-0.003);
-		ray->plane_y = old_plane_x * sin(-0.003)
-			+ ray->plane_y * cos(-0.003);
-	key->mouse_rotate_right--; 
-	}
-}
-
-void	ft_mouse_rotate_left(t_ray *ray, t_key *key)
-{
-	double	old_dir_x;
-	double	old_plane_x;
-	int		rotate_nb;
-
-	rotate_nb = 0;
-	old_dir_x = ray->dir_x;
-	old_plane_x = ray->plane_x;
-	while (key->mouse_rotate_left > 1)
-	{
-		old_dir_x = ray->dir_x;
-		ray->dir_x = ray->dir_x * cos(0.003)
-			- ray->dir_y * sin(0.003);
-		ray->dir_y = old_dir_x * sin(0.003)
-			+ ray->dir_y * cos(0.003);
-		old_plane_x = ray->plane_x;
-		ray->plane_x = ray->plane_x * cos(0.003)
-			- ray->plane_y * sin(0.003);
-		ray->plane_y = old_plane_x * sin(0.003)
-			+ ray->plane_y * cos(0.003);
-	key->mouse_rotate_left--; 
-	}
-}
-
