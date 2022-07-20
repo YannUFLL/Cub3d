@@ -1,2 +1,4 @@
 objs/*.o
 .vscode
+cub3d.dSYM/*
+*.DS_Store
