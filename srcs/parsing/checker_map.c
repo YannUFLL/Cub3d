@@ -61,7 +61,7 @@ int	ft_check_map_border(t_map_data *d, t_data *data)
 	int	ret;
 
 	i = 0;
-	while(i < 4)
+	while (i < 4)
 	{
 		ret = ft_follow_wall_left(d, i);
 		if (ret)
@@ -109,6 +109,5 @@ int	ft_check_map(t_data *data)
 		exit (0);
 	}
 	ft_print_map(&map_data);
-	printf("Map valid!\n");
 	return (0);
 }

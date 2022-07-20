@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:16:27 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/19 22:14:42 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/20 20:57:35 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-
-
 
 int	ft_init_data(t_data *data)
 {
@@ -21,8 +19,8 @@ int	ft_init_data(t_data *data)
 	data->floor = -1;
 	data->ceiling = -1;
 	data->player_spawn_dir = 0;
-	data->player_spawn_pos[0] = 0; // = -1 ?
-	data->player_spawn_pos[1] = 0; // = -1 ?
+	data->player_spawn_pos[0] = 0;
+	data->player_spawn_pos[1] = 0;
 	data->edge_size = 16;
 	data->fov = 70;
 	data->resolution_x = 1280;
@@ -41,7 +39,6 @@ int	ft_init_data(t_data *data)
 	data->map.tab = NULL;
 	data->floor = -1;
 	data->ceiling = -1;
-
 	ft_init_texture(data->texture);
 	return (0);
 }
@@ -103,7 +100,6 @@ void	ft_init_ray_data(t_data *data, t_ray *ray)
 {
 	ray->pos_x = data->player_spawn_pos[0] + 0.5 ;
 	ray->pos_y = data->player_spawn_pos[1] + 0.5 ;
-	
 	ray->hit = 0; 
 	ray->side = 0; 
 	ray->color = 0x9B9B9B;
