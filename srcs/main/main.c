@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:38:35 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/20 22:29:50 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/20 23:25:48 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int argc, char **argv)
 	if (ft_checker(argc, argv, &data) || ft_parsing(&data))
 		return (ft_free_texture(&data));
 	// FOR TESTING A SUPPRIMER
+	/*
 	data.texture[4].path = "texture/door_256.xpm";
 	data.texture[5].path = "texture/floor_512.xpm";
 	data.texture[6].path = "texture/ceiling_512.xpm";
@@ -29,6 +30,7 @@ int	main(int argc, char **argv)
 	data.sprite[0].y = 8;
 	data.sprite[1].x = 9;
 	data.sprite[1].y = 9;
+	*/
 	ft_replace_space(&data);
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, data.resolution_x, data.resolution_y, "WOLFENCHTEIN");
