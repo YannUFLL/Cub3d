@@ -16,11 +16,14 @@
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-	char	*dst;
+	static int octet;
 
-	dst = data->display_add + (y * data->line_length + x * 4); 
-	*(unsigned int*)dst = color;
+	if (octet == 0)
+		octet = data->bits_per_pixel / 8;
+
+	*(unsigned int *)(data->display_add + (y * data->line_length + x * 4)) = color;
 }
+
 int	time_diff(struct timeval *start, struct timeval *end)
 {
 	return ((end->tv_sec - start->tv_sec)

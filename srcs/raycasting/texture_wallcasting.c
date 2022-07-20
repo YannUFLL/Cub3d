@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_wallcasting.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 19:59:45 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/19 23:18:19 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/20 14:54:47 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	ft_calc_x_texture(t_data *data)
 		ray->wall_x = ray->pos_x + ray->walldistance * ray->raydir_x;
 	ray->wall_x -= floor(ray->wall_x);
 	ray->texx = (int)(ray->wall_x * data->texture[ray->text_select].img_width);
+	printf("data->texture[0].img_width : %d\n",data->texture[0].img_height );
 	if (ray->side == 0 && ray->raydir_x > 0)
 		ray->texx = data->texture[ray->text_select].img_width - ray->texx - 1;
 	if (ray->side == 1 && ray->raydir_y < 0)
@@ -57,18 +58,18 @@ void	ft_calc_y_texture(t_data *data)
 void	ft_print_texture(t_data *data, t_ray *ray, int x)
 {
 	int	text_select;
-	int	img_height;
+	int	img_width;
 	int	*img_add;
 
 	text_select = ray->text_select;
-	img_height = data->texture[text_select].img_height;
+	img_width = data->texture[text_select].img_width;
 	img_add = data->texture[text_select].addr;
 	while (ray->drawstart < ray->drawend)
 	{
 		ray->texy = (int)ray->texpos ;//& (data->texture[ray->text_select].img_height - 1);
 		ray->texpos += ray->step;
 		my_mlx_pixel_put(data, x, ray->drawstart,
-			img_add[img_height * ray->texy + ray->texx]);
+			img_add[img_width * ray->texy + ray->texx]);
 		ray->drawstart++;
 	}
 }
