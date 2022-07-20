@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/20 20:54:42 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/20 21:50:04 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,16 +240,28 @@ int		ft_check_ext_wall(t_map_data *d);
 int		ft_check_nb_move(t_map_data *d);
 void	ft_set_dir_against_wall(t_map_data *d, int move_against_wall);
 int		ft_is_againt_wall(t_map_data *d);
+int		ft_follow_wall_left(t_map_data *d, int nb);
+int		ft_follow_wall_right(t_map_data *d, int nb);
+void	ft_rotate_dir_right(t_map_data *d);
+void	ft_rotate_dir_left(t_map_data *d);
+void	ft_sub_follow_wall_left(t_map_data *d);
+void	ft_sub_follow_wall_right(t_map_data *d);
+
+/* PREFER MOVE */
+void	ft_sub_checker_chang_dir_l_n(t_map_data *d);
+void	ft_sub_checker_chang_dir_l_w(t_map_data *d);
+void	ft_sub_checker_chang_dir_l_s(t_map_data *d);
+void	ft_sub_checker_chang_dir_l_e(t_map_data *d);
+void	ft_sub_checker_chang_dir_r_n(t_map_data *d);
+void	ft_sub_checker_chang_dir_r_w(t_map_data *d);
+void	ft_sub_checker_chang_dir_r_s(t_map_data *d);
+void	ft_sub_checker_chang_dir_r_e(t_map_data *d);
 
 /* PARSING MAP */
 void	ft_copy_map(char *line, t_data *data);
 int		ft_map_begin(char *line);
 int		ft_is_map_border(char *line);
 int		ft_check_map(t_data *data);
-int		ft_follow_wall_left(t_map_data *d, int nb);
-int		ft_follow_wall_right(t_map_data *d, int nb);
-void	ft_sub_follow_wall_left(t_map_data *d);
-
 
 void	ft_sub_fill_color(t_data *data, char *str1, char *str2, char *line);
 void	ft_sub_fill_texture(t_data *data, char *str1, char *str2, char *line);
