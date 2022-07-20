@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_wallcasting.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 19:59:45 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/19 23:18:19 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/20 21:16:25 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,27 @@ void	ft_calc_y_texture(t_data *data)
 
 	ray = &data->ray_data;
 	ray->step = 1 * (double)data->texture[ray->text_select].img_height
-		/ ray->lineheight; // POURQUOI SI JE CASTE PAS EN DOUBLE J AI STEP = 0  au lieu de 0.83 pour le premier rayon lance ?
+		/ (double)ray->lineheight;
 	ray->texpos = (ray->drawstart - ray->resolution_y
 			/ 2 + ray->lineheight / 2) * ray->step;
 }
 
+// & (data->texture[text_select].img_height - 1);
 void	ft_print_texture(t_data *data, t_ray *ray, int x)
 {
 	int	text_select;
-	int	img_height;
+	int	img_width;
 	int	*img_add;
 
 	text_select = ray->text_select;
-	img_height = data->texture[text_select].img_height;
+	img_width = data->texture[text_select].img_width;
 	img_add = data->texture[text_select].addr;
 	while (ray->drawstart < ray->drawend)
 	{
-		ray->texy = (int)ray->texpos ;//& (data->texture[ray->text_select].img_height - 1);
+		ray->texy = (int)ray->texpos;
 		ray->texpos += ray->step;
 		my_mlx_pixel_put(data, x, ray->drawstart,
-			img_add[img_height * ray->texy + ray->texx]);
+			img_add[img_width * ray->texy + ray->texx]);
 		ray->drawstart++;
 	}
 }
