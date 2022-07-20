@@ -6,7 +6,7 @@
 #    By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/17 05:26:46 by jrasser           #+#    #+#              #
-#    Updated: 2022/07/20 22:50:26 by jrasser          ###   ########.fr        #
+#    Updated: 2022/07/20 22:55:51 by jrasser          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LIBMLXMAC	= make -C minilibx/
 NAME 		= cub3d
 CC			= gcc
 RM			= @rm -f
-CFLAGS		= -Wall -Wextra
+CFLAGS		= -Wall -Wextra -Werror
 CPPFLAGS	= -I./include/ -I./libft/ -I./minilibx/
 DEBEUG		= -g -fsanitize=address
 
@@ -34,7 +34,7 @@ LDFLAGS			= -L./minilibx -lmlx -framework OpenGL -framework AppKit -lm -lz
 CPPFLAGS 		+= -Imlx_mac
 endif
 
-$(NAME): 		$(OBJS)
+$(NAME): 	$(OBJS)
 ifeq ($(OS),Darwin)
 				$(LIBMLXMAC)
 endif

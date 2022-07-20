@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/20 22:24:55 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/20 22:56:43 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include "../libft/libft.h"
 
 # if defined(__linux__)
-	#include <mlx.h>
 	#define FORWARD 122
 	#define BACKWARD 115
 	#define EXIT 65307
