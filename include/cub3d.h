@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/20 17:44:01 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/20 19:57:02 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,8 +246,8 @@ void	ft_copy_map(char *line, t_data *data);
 int		ft_map_begin(char *line);
 int		ft_is_map_border(char *line);
 int		ft_check_map(t_data *data);
-int		ft_follow_wall_left(t_map_data *d);
-int		ft_follow_wall_right(t_map_data *d);
+int		ft_follow_wall_left(t_map_data *d, int nb);
+int		ft_follow_wall_right(t_map_data *d, int nb);
 void	ft_sub_fill_color(t_data *data, char *str1, char *str2, char *line);
 void	ft_sub_fill_texture(t_data *data, char *str1, char *str2, char *line);
 

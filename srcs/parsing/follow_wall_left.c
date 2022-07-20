@@ -81,7 +81,22 @@ void	ft_sub_checker_chang_dir_l_n(t_map_data *d)
 		d->no_move_possible = 1;
 }
 
-int	ft_follow_wall_left(t_map_data *d)
+void	ft_rotate_dir_left(t_map_data *d)
+{
+	int	a;
+
+	a = d->is_againt_wall;
+	if (!a && ft_move_is_valid(d, &(d->map[d->posY - 1][d->posX])))
+		d->dir = 'N';
+	else if (!a && ft_move_is_valid(d, &(d->map[d->posY][d->posX + 1])))
+		;
+	else if (!a && ft_move_is_valid(d, &(d->map[d->posY + 1][d->posX])))
+		d->dir = 'S';
+	else if (!a && ft_move_is_valid(d, &(d->map[d->posY][d->posX - 1])))
+		d->dir = 'W';
+}
+
+int	ft_follow_wall_left(t_map_data *d, int nb)
 {
 	int	i;
 
@@ -90,6 +105,8 @@ int	ft_follow_wall_left(t_map_data *d)
 		ft_set_dir_against_wall(d, 0);
 	while (i == 0 || d->nb_pass != 3)
 	{
+		if (i == nb && i != 0)
+			ft_rotate_dir_left(d);
 		if (d->dir == 'E' || d->dir == 'S' || d->dir == 'W' || d->dir == 'N')
 			if (ft_check_out(d))
 				return (1);

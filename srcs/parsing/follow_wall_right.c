@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 14:40:04 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/20 17:45:16 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/20 20:12:49 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,22 @@ void	ft_sub_checker_chang_dir_r_n(t_map_data *d)
 		d->no_move_possible = 1;
 }
 
-int	ft_follow_wall_right(t_map_data *d)
+void	ft_rotate_dir_right(t_map_data *d)
+{
+	int	a;
+
+	a = d->is_againt_wall;
+	if (!a && ft_move_is_valid(d, &(d->map[d->posY + 1][d->posX])))
+		d->dir = 'S';
+	else if (!a && ft_move_is_valid(d, &(d->map[d->posY][d->posX + 1])))
+		;
+	else if (!a && ft_move_is_valid(d, &(d->map[d->posY - 1][d->posX])))
+		d->dir = 'N';
+	else if (!a && ft_move_is_valid(d, &(d->map[d->posY][d->posX - 1])))
+		d->dir = 'W';
+}
+
+int	ft_follow_wall_right(t_map_data *d, int nb)
 {
 	int	i;
 
@@ -91,6 +106,8 @@ int	ft_follow_wall_right(t_map_data *d)
 		ft_set_dir_against_wall(d, 1);
 	while (i == 0 || d->nb_pass != 3)
 	{
+		if (i == nb && i != 0)
+			ft_rotate_dir_right(d);
 		if (d->dir == 'E' || d->dir == 'S' || d->dir == 'W' || d->dir == 'N')
 			if (ft_check_out(d))
 				return (1);
