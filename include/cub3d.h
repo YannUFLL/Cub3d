@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/19 19:24:51 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/20 15:37:41 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,15 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include "../libft/libft.h"
+
+typedef struct sprite
+{
+  double x;
+  double y;
+  int texture;
+}	t_sprite;
+
+
 
 typedef struct s_texture
 {
@@ -101,7 +110,7 @@ typedef struct s_data
 {
 	void		*mlx_win;
 	void		*mlx;
-	t_texture	texture[7];
+	t_texture	texture[8];
 	int			floor;
 	int			ceiling;
 	void		*display;
@@ -121,9 +130,11 @@ typedef struct s_data
 	t_key		key;
 	int			keycode;
 	int			textures_nb;
+	t_sprite	sprite[20];
 	int			sprite_order[20];
 	double		sprite_distance[20];
-	double		*zbuffer;
+	double		*zbuffer; 
+	int			numsprites; 
 	int			fd;
 	t_map		map;
 	int 		is_map_started;
@@ -147,8 +158,7 @@ typedef struct s_map_data
 	int is_againt_wall;
 }	t_map_data;
 
-
-
+// render
 int		ft_render_next_frame(t_data *data);
 int		ft_key_press(int keycode, t_data *data);
 int		ft_key_release(int keycode, t_data *data);

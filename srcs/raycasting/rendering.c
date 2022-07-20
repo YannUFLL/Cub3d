@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:31:47 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/17 20:15:43dumaine         ###   ########.fr       */
+/*   Updated: 2022/07/20 15:42:22 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ void	ft_put_ceiling_and_roof(t_data *data)
 			my_mlx_pixel_put(data, x, y, data->floor);
 			y++;
 		}
-		while (y <= data->resolution_y  - 2)
+		while (y <= data->resolution_y - 2)
 		{
 			my_mlx_pixel_put(data, x, y, 0x87CEEB);
 			y++;
 		}
-		x++;
+	x++;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 19:59:45 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/20 14:54:47 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/20 15:49:52 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	ft_calc_x_texture(t_data *data)
 		ray->wall_x = ray->pos_x + ray->walldistance * ray->raydir_x;
 	ray->wall_x -= floor(ray->wall_x);
 	ray->texx = (int)(ray->wall_x * data->texture[ray->text_select].img_width);
-	printf("data->texture[0].img_width : %d\n",data->texture[0].img_height );
 	if (ray->side == 0 && ray->raydir_x > 0)
 		ray->texx = data->texture[ray->text_select].img_width - ray->texx - 1;
 	if (ray->side == 1 && ray->raydir_y < 0)
@@ -50,7 +49,7 @@ void	ft_calc_y_texture(t_data *data)
 
 	ray = &data->ray_data;
 	ray->step = 1 * (double)data->texture[ray->text_select].img_height
-		/ ray->lineheight; // POURQUOI SI JE CASTE PAS EN DOUBLE J AI STEP = 0  au lieu de 0.83 pour le premier rayon lance ?
+		/ (double)ray->lineheight;
 	ray->texpos = (ray->drawstart - ray->resolution_y
 			/ 2 + ray->lineheight / 2) * ray->step;
 }
@@ -66,7 +65,7 @@ void	ft_print_texture(t_data *data, t_ray *ray, int x)
 	img_add = data->texture[text_select].addr;
 	while (ray->drawstart < ray->drawend)
 	{
-		ray->texy = (int)ray->texpos ;//& (data->texture[ray->text_select].img_height - 1);
+		ray->texy = (int)ray->texpos;// & (data->texture[text_select].img_height - 1);
 		ray->texpos += ray->step;
 		my_mlx_pixel_put(data, x, ray->drawstart,
 			img_add[img_width * ray->texy + ray->texx]);
