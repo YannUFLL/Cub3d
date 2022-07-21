@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   floorcasting.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 16:38:32 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/19 17:53:22 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/21 14:26:54 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,9 @@ void	ft_draw_line(t_data *data, t_ray *ray, t_flo *flo, int x)
 {
 	int	width;
 	int	*text1;
-	int	*text2;
 
 	ray->text_select = 5;
 	text1 = data->texture[ray->text_select].addr;
-	text2 = data->texture[ray->text_select].addr;
 	width = data->texture[ray->text_select].img_width;
 	while (ray->drawend < ray->resolution_y + 1)
 	{

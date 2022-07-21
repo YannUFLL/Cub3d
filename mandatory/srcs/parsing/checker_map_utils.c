@@ -12,24 +12,6 @@
 
 #include "../../include/cub3d.h"
 
-int	ft_check_nb_move(t_map_data *d)
-{
-	int	i;
-	int	height;
-	int	len;
-
-	i = 0;
-	height = 0;
-	while (d->map && d->map[height])
-		height++;
-	height--;
-	len = (height - 2) * 2 + ((int)ft_strlen(d->map[0]) - 3 + \
-	(int)ft_strlen(d->map[height]) - 3);
-	if (d->nb_move < len)
-		return (1);
-	return (0);
-}
-
 void	ft_sub_replace_space(t_data *data, int i, int j)
 {
 	if (data->player_spawn_pos[0] == 0)
