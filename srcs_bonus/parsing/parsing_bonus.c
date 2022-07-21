@@ -6,11 +6,58 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:21:13 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 17:55:16 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 19:51:03 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d_bonus.h"
+
+int	ft_empty_line(char *line)
+{
+	int	i;
+	int	c;
+
+	c = 0;
+	i = 0;
+	while (line && line[i])
+	{
+		if (line[i] == ' ' || (line[i] >= 9 && line[i] <= 13))
+			c++;
+		i++;
+	}
+	if (i == c)
+		return (1);
+	return (0);
+}
+
+int	ft_check_all_caract(t_data *data)
+{
+	if (ft_check_miss_caract(data))
+		printf("Error\n");
+	if (data->is_map_started == 0)
+		printf("Missing map\n");
+	if (data->texture[0].path == NULL)
+		printf("Missing North texture\n");
+	if (data->texture[1].path == NULL)
+		printf("Missing South texture\n");
+	if (data->texture[2].path == NULL)
+		printf("Missing East texture\n");
+	if (data->texture[3].path == NULL)
+		printf("Missing West texture\n");
+	if (data->ceiling == -1 && data->texture[TEXTURE_CEIL].use_color == 1)
+		printf("Missing ceil color\n");
+	if (data->texture[TEXTURE_CEIL].use_color == 0
+			&& !(data->texture[TEXTURE_CEIL].path))
+		printf("Missing ceil texture\n");
+	if (data->floor == -1 && data->texture[TEXTURE_FLOOR].use_color == 1)
+		printf("Missing floor color\n");
+	if (data->texture[TEXTURE_FLOOR].use_color == 0
+			&& !(data->texture[TEXTURE_FLOOR].path))
+		printf("Missing floor texture\n");
+	if (ft_check_miss_caract(data))
+		return (1);
+	return (0);
+}
 
 void	ft_fill_caract(t_data *data, char **line_splited, char *line)
 {
@@ -35,56 +82,6 @@ void	ft_fill_caract(t_data *data, char **line_splited, char *line)
 		printf("Error\nInvalid line '%s'\n", line);
 		exit (0);
 	}
-}
-
-int	ft_check_all_caract(t_data *data)
-{
-	if (ft_check_miss_caract(data))
-		printf("Error\n");
-	if (data->is_map_started == 0)
-		printf("Missing map\n");
-	if (data->texture[0].path == NULL)
-		printf("Missing North texture\n");
-	if (data->texture[1].path == NULL)
-		printf("Missing South texture\n");
-	if (data->texture[2].path == NULL)
-		printf("Missing East texture\n");
-	if (data->texture[3].path == NULL)
-		printf("Missing West texture\n");
-
-	if (data->ceiling == -1 && data->texture[TEXTURE_CEIL].use_color == 1)
-		printf("Missing ceil color\n");
-	if (data->texture[TEXTURE_CEIL].use_color == 0
-			&& !(data->texture[TEXTURE_CEIL].path))
-		printf("Missing ceil texture\n");
-
-	if (data->floor == -1 && data->texture[TEXTURE_FLOOR].use_color == 1)
-		printf("Missing floor color\n");
-	if (data->texture[TEXTURE_FLOOR].use_color == 0
-			&& !(data->texture[TEXTURE_FLOOR].path))
-		printf("Missing floor texture\n");
-
-	if (ft_check_miss_caract(data))
-		return (1);
-	return (0);
-}
-
-int	ft_empty_line(char *line)
-{
-	int	i;
-	int	c;
-
-	c = 0;
-	i = 0;
-	while (line && line[i])
-	{
-		if (line[i] == ' ' || (line[i] >= 9 && line[i] <= 13))
-			c++;
-		i++;
-	}
-	if (i == c)
-		return (1);
-	return (0);
 }
 
 int	ft_checker_line(char *line, t_data *data)

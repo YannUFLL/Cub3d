@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:16:27 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 17:52:02 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 20:44:03 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ int	ft_init_data(t_data *data)
 	data->map.height = 0;
 	data->map.width = 0;
 	data->map.tab = NULL;
-	data->textures_nb = 6;
-	ft_init_texture(data, data->texture);
+	ft_init_texture(data);
 
 	return (0);
 }
@@ -44,18 +43,18 @@ int	ft_init_data(t_data *data)
 void	ft_sub_init_direction(t_data *data, t_ray *ray)
 {
 	if (data->player_spawn_dir == 'W')
-	{
-		ray->dir_x = 1;
-		ray->dir_y = 0;
-		ray->plane_x = 0;
-		ray->plane_y = -(double)data->fov / 100;
-	}
-	if (data->player_spawn_dir == 'E')
-	{
-		ray->dir_x = -1;
-		ray->dir_y = 0;
-		ray->plane_x = 0;
-		ray->plane_y = (double)data->fov / 100;
+    {
+        ray->dir_x = 1;
+        ray->dir_y = 0;
+        ray->plane_x = 0;
+        ray->plane_y = (double)data->fov / 100;
+    }
+    if (data->player_spawn_dir == 'E')
+    {
+        ray->dir_x = -1;
+        ray->dir_y = 0;
+        ray->plane_x = 0;
+        ray->plane_y = -(double)data->fov / 100;
 	}
 }
 

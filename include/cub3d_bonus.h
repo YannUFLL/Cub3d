@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 19:20:26 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 21:38:42 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_texture
 	int		bit_per_pixel;
 	int		endian;
 	int		use_color;
+	char	type;
 }	t_texture;
 
 typedef struct s_ray_data
@@ -144,7 +145,7 @@ typedef struct s_data
 {
 	void		*mlx_win;
 	void		*mlx;
-	t_texture	texture[8];
+	t_texture	*texture;
 	int			floor;
 	int			ceiling;
 	void		*display;
@@ -243,7 +244,7 @@ int		ft_init_data(t_data *data);
 int		ft_init_display(t_data *data);
 void	ft_init_direction(t_data *data, t_ray *ray);
 void	ft_init_ray_data(t_data *data, t_ray *ray);
-void	ft_init_texture(t_data *data, t_texture *tex);
+void	ft_init_texture(t_data *data);
 int		ft_init_text(t_data *data);
 
 
@@ -334,8 +335,7 @@ void	ft_draw_line_floor(t_data *data, t_ray *ray, t_flo *flo, int x);
 void	ft_calc_pos_textfloor(t_ray *ray, t_flo *flo, t_data *data, int width);
 
 
-
-void	ft_add_texture(t_data *data, t_texture *tex);
+void	ft_add_texture(t_data *data, char **map, int x, int y);
 
 
 

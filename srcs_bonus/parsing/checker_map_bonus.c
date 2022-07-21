@@ -14,10 +14,13 @@
 
 int	ft_check_player_spawn(t_map_data *d, t_data *data)
 {
-	int		i;
-	int		j;
-	char	**map;
+	int				i;
+	int				j;
+	char			**map;
+	int				is_spawn;
+	static int		add_door = 0;
 
+	is_spawn = 1;
 	map = data->map.tab;
 	i = 0;
 	while (map && map[i])
@@ -30,13 +33,20 @@ int	ft_check_player_spawn(t_map_data *d, t_data *data)
 			{
 				d->posY = i;
 				d->posX = j;
-				return (0);
+				is_spawn = 0;
+			}
+
+			if (map[i][j] == 'D' && add_door == 0)
+			{
+				printf("ajoue de texture!!!\n");
+				add_door = 1;
+				ft_add_texture(data, map, j, i);
 			}
 			j++;
 		}
 		i++;
 	}
-	return (1);
+	return (is_spawn);
 }
 
 void	ft_init_map_data(t_map_data *map_data, t_data *data)

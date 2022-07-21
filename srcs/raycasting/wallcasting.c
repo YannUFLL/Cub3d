@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 20:02:24 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/19 17:22:44 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 21:52:13 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_calc_ray_dir(t_ray *ray)
 	ray->raydir_y = ray->dir_y + ray->plane_y * ray->camera_x;
 	if (ray->raydir_x == 0)
 		ray->raydir_x = 0.000001;
-	if (ray->dir_y == 0)
+	if (ray->raydir_y == 0)
 		ray->raydir_y = 0.000001;
 }
 

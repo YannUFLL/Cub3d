@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:38:35 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 18:01:39 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 20:08:06 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,7 @@ int	main(int argc, char **argv)
 	if (ft_checker(argc, argv, &data) || ft_parsing(&data))
 		return (ft_free_texture(&data));
 
-
-	//data.sprites_nb = 2;
-	//ft_add_texture(&data, data.texture);
-
 	ft_printdata(&data);
-
 
 	ft_replace_space(&data);
 	data.mlx = mlx_init();
