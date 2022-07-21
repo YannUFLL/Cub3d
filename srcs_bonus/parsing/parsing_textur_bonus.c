@@ -24,6 +24,7 @@ void	ft_check_location_texture(t_data *data, char *str1)
 
 void	ft_sub_fill_caract(char **caract, char *str)
 {
+	printf("str : '%s'\n", str);
 	if (*caract != NULL)
 		free(*caract);
 	*caract = malloc(sizeof(char) * (ft_strlen(str) + 1));
@@ -45,14 +46,10 @@ void	ft_sub_fill_texture(t_data *data, char *str1, char *str2, char *line)
 	else if (str1[0] == 'W' && (str1[1] == '\0' \
 	|| (str1[1] == 'E' && str1[2] == '\0')))
 		ft_sub_fill_caract(&(data->texture[3].path), str2);
-
 	else if (str1[0] == 'C' && str1[1] == '\0' && data->texture[TEXTURE_CEIL].use_color == 0)
 		ft_sub_fill_caract(&(data->texture[TEXTURE_CEIL].path), str2);
 	else if (str1[0] == 'F' && str1[1] == '\0' && data->texture[TEXTURE_FLOOR].use_color == 0)
 		ft_sub_fill_caract(&(data->texture[TEXTURE_FLOOR].path), str2);
-
-
-
 	else if (ft_map_begin(line) && data->is_map_started == 0)
 	{
 		data->is_map_started = 1;

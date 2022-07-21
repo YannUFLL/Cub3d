@@ -6,7 +6,7 @@
 #    By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/17 05:26:46 by jrasser           #+#    #+#              #
-#    Updated: 2022/07/21 16:12:52 by jrasser          ###   ########.fr        #
+#    Updated: 2022/07/21 20:27:52 by jrasser          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ NAME 		= cub3D
 NAME_BONUS	= cub3D_bonus
 CC			= gcc
 RM			= @rm -f
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra
 CPPFLAGS	= -I./include/ -I./libft/
 DEBEUG		= -g -fsanitize=address
 

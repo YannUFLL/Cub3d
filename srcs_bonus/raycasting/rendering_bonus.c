@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:31:47 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 18:46:35 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 21:09:54 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int	ft_render_next_frame(t_data *data)
 	ft_fps();
 	ft_movements(data);
 	ft_wall_casting(data, ray);
-	//ft_sprite_casting(data, ray, data->sprite);
+	ft_sprite_casting(data, ray, data->sprite);
 	ft_print_minimap(data, ray);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->display, 0, 0);
 	ft_event(ray);

@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 19:15:52 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/21 19:21:51 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 20:53:06 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,21 @@ void	ft_draw_line_both(t_data *data, t_ray *ray, t_flo *flo, int x)
 	}
 }
 
+/*
+	text_select = ray->text_select;
+	img_width = data->texture[text_select].img_width;
+	img_add = data->texture[text_select].addr;
+	while (ray->drawstart <= ray->drawend)
+	{
+		ray->texy = (int)ray->texpos & \
+		(data->texture[text_select].img_height - 1);
+		ray->texpos += ray->step;
+		my_mlx_pixel_put(data, x, ray->drawstart,
+			img_add[img_width * ray->texy + ray->texx]);
+		ray->drawstart++;
+	}
+*/
+
 void	ft_draw_line_floor(t_data *data, t_ray *ray, t_flo *flo, int x)
 {
 	int	width;
@@ -58,6 +73,7 @@ void	ft_draw_line_floor(t_data *data, t_ray *ray, t_flo *flo, int x)
 	ray->text_select = 4;
 	text1 = data->texture[ray->text_select].addr;
 	width = data->texture[ray->text_select].img_width;
+
 	while (ray->drawend < ray->resolution_y)
 	{
 		ft_calc_pos_textfloor(ray, flo, data, width);

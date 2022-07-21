@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 15:51:21 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/21 17:23:06 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 21:40:40 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	ft_free_texture(t_data *data)
 	i = 0;
 	while (i < data->textures_nb)
 	{
-		free(data->texture[i].path);
+		if (data->texture[i].type != 'D')
+			free(data->texture[i].path);
 		i++;
 	}
 	return (0);
