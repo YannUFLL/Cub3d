@@ -1,4 +1,4 @@
-mandatory/objs/*.o
+*/*.o
 .vscode
-cub3d.dSYM/*
+cubd3D*
 *.DS_Store
