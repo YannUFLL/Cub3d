@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/20 23:17:42 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 02:28:53 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,9 +128,7 @@ typedef struct s_data
 	int			endian;
 	char		player_spawn_dir;
 	int			player_spawn_pos[2];
-	int			edge_size;
 	int			fov;
-	int			shadding;
 	int			resolution_x;
 	int			resolution_y;
 	double		move_speed;
@@ -139,11 +137,15 @@ typedef struct s_data
 	t_key		key;
 	int			keycode;
 	int			textures_nb;
+	
+	//bonus
+	int			shadding;
 	t_sprite	sprite[20];
 	int			sprite_order[20];
 	double		sprite_distance[20];
 	double		*zbuffer; 
 	int			numsprites; 
+
 	int			fd;
 	t_map		map;
 	int 		is_map_started;
