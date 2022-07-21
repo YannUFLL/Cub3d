@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 18:02:29 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/20 23:44:15 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 02:58:58 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,11 @@ void	ft_printmap(t_data *data, char **map)
 		j = -1;
 		while (map && map[i] && map[i][++j])
 		{
-			if (data->player_spawn_pos[0] == j && data->player_spawn_pos[1] == i)
+			if (data->player_spawn_pos[0] == j && \
+			data->player_spawn_pos[1] == i)
 			{
 				temp_i = i;
 				temp_j = j;
-				printf("(%d, %d)fdsf\n", temp_j, temp_i);
 				temp = map[i][j];
 				map[i][j] = '.';
 			}
@@ -105,7 +105,5 @@ void	ft_printmap(t_data *data, char **map)
 		}
 		printf("\n");
 	}
-	printf("(%d, %d)\n", temp_j, temp_i);
 	map[temp_i][temp_j] = temp;
-	printf("\n\n");
 }

@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:18:52 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 01:41:47 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 02:56:17 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	ft_init_texture(t_texture *tex, t_data *data)
 {
 	int	x;
-	
+
 	x = 0;
-	while(x < data->textures_nb)
+	while (x < data->textures_nb)
 	{
 		tex[x].path = NULL;
 		tex[x].mlx_img = NULL;
@@ -37,19 +37,19 @@ int	ft_init_text(t_data *data)
 	t_texture	*text;
 
 	x = 0;
-	text = data->texture; 
+	text = data->texture;
 	while (x < data->textures_nb)
 	{
-		text[x].mlx_img = mlx_xpm_file_to_image(data->mlx,
+		text[x].mlx_img = mlx_xpm_file_to_image(data->mlx, \
 			text[x].path, &text[x].img_width, &text[x].img_height);
 		if (text[x].mlx_img == NULL)
 		{
-			printf("Error\nTexture not found: %d %s\n",x, text[x].path);
+			printf("Error\nTexture not found: %d %s\n", x, text[x].path);
 			exit(0);
 		}
-		text[x].addr = (int *)mlx_get_data_addr(text[x].mlx_img,
+		text[x].addr = (int *)mlx_get_data_addr(text[x].mlx_img, \
 			&text[x].bit_per_pixel, &text[x].lenght, &text[x].endian);
-		x++; 
+		x++;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:38:35 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 02:06:13 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 02:53:37 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int argc, char **argv)
 {
-	t_data data;
+	t_data	data;
 
 	ft_init_data(&data);
 	if (ft_checker(argc, argv, &data) || ft_parsing(&data))
@@ -29,7 +29,6 @@ int	main(int argc, char **argv)
 	mlx_hook(data.mlx_win, 17, 0, ft_exit_game, &data);
 	mlx_hook(data.mlx_win, 2, 1L << 0, ft_key_press, &data);
 	mlx_hook(data.mlx_win, 3, 1L << 1, ft_key_release, &data);
-	mlx_hook(data.mlx_win, 6, 1L << 6, ft_mouse, &data);
 	mlx_loop_hook(data.mlx, ft_render_next_frame, &data);
 	mlx_loop(data.mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 02:00:20 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 02:48:27 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,6 @@ typedef struct s_ray_data
 	int			texx;
 	int			texy;
 	int			text_select;
-	int			door_open;
-	int			pos_door_x;
-	int			pos_door_y;
 	double		wall_x;
 	double		step;
 	double		texpos;
@@ -102,9 +99,6 @@ typedef struct s_key
 	int	move_right;
 	int	rotate_left;
 	int	rotate_right;
-	int	mouse_rotate_left;
-	int	mouse_rotate_right;
-	int	use;
 }	t_key;
 
 typedef struct s_map
@@ -139,11 +133,6 @@ typedef struct s_data
 	t_key		key;
 	int			keycode;
 	int			textures_nb;
-	t_sprite	sprite[20];
-	int			sprite_order[20];
-	double		sprite_distance[20];
-	double		*zbuffer; 
-	int			numsprites; 
 	int			fd;
 	t_map		map;
 	int 		is_map_started;
@@ -220,6 +209,9 @@ void	ft_init_direction(t_data *data, t_ray *ray);
 void	ft_init_ray_data(t_data *data, t_ray *ray);
 void	ft_init_texture(t_texture *tex, t_data *data);
 int		ft_init_text(t_data *data);
+void	ft_init_key(t_key *key);
+int		ft_init_display(t_data *data);
+
 // sprite
 void	ft_sprite_casting(t_data *data, t_ray *ray, t_sprite *sprite);
 

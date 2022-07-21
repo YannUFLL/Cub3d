@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 21:55:08 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/20 22:23:26 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 02:49:39 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ int	ft_key_press(int keycode, t_data *data)
 	key->rotate_left = 1;
 	if (keycode == 124)
 	key->rotate_right = 1;
-	if (keycode == 3)
-		key->use = 1;
 	if (keycode == EXIT)
 		ft_exit_game(data);
 	data->keycode = keycode;
@@ -56,27 +54,5 @@ int	ft_key_release(int keycode, t_data *data)
 		key->rotate_left = 0;
 	if (keycode == 124)
 		key->rotate_right = 0;
-	if (keycode == 3)
-		key->use = 0;
-	return (0);
-}
-
-//mlx_mouse_hide();
-int	ft_mouse(int x, int y, t_data *data)
-{
-	static int	old_x;
-	static int	first;
-
-	if (first == 0)
-	{
-		old_x = x;
-		first = 1;
-	}
-	(void)y;
-	if (old_x - x < 0)
-		data->key.mouse_rotate_left = abs(x - old_x);
-	if (old_x - x > 0)
-		data->key.mouse_rotate_right = abs(x - old_x);
-	old_x = x;
 	return (0);
 }

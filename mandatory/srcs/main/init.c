@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:16:27 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 02:04:49 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 02:52:40 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	ft_init_data(t_data *data)
 	data->player_spawn_dir = 0;
 	data->player_spawn_pos[0] = 0;
 	data->player_spawn_pos[1] = 0;
-	data->edge_size = 16;
 	data->fov = 70;
 	data->resolution_x = 1280;
 	data->resolution_y = 720;
@@ -32,24 +31,30 @@ int	ft_init_data(t_data *data)
 	data->line_length = 0;
 	data->bits_per_pixel = 0;
 	data->keycode = 0;
-	data->zbuffer = malloc(sizeof(double) * data->resolution_x);
 	data->is_map_started = 0;
 	data->map.height = 0;
 	data->map.width = 0;
 	data->map.tab = NULL;
-	// bonus
-	data->numsprites = 2;
 	ft_init_texture(data->texture, data);
 	return (0);
 }
 
-int	ft_init_display(t_data *data)
+void	ft_sub_init_direction(t_data *data, t_ray *ray)
 {
-	data->display = mlx_new_image(data->mlx, data->resolution_x,
-			data->resolution_y);
-	data->display_add = mlx_get_data_addr(data->display,
-			&data->bits_per_pixel, &data->line_length, &data->endian);
-	return (0);
+	if (data->player_spawn_dir == 'W')
+	{
+		ray->dir_x = 1;
+		ray->dir_y = 0;
+		ray->plane_x = 0;
+		ray->plane_y = -(double)data->fov / 100;
+	}
+	if (data->player_spawn_dir == 'E')
+	{
+		ray->dir_x = -1;
+		ray->dir_y = 0;
+		ray->plane_x = 0;
+		ray->plane_y = (double)data->fov / 100;
+	}
 }
 
 void	ft_init_direction(t_data *data, t_ray *ray)
@@ -68,45 +73,11 @@ void	ft_init_direction(t_data *data, t_ray *ray)
 		ray->plane_x = (double)data->fov / 100;
 		ray->plane_y = 0;
 	}
-	if (data->player_spawn_dir == 'W')
-	{
-		ray->dir_x = 1;
-		ray->dir_y = 0;
-		ray->plane_x = 0;
-		ray->plane_y = -(double)data->fov / 100;
-	}
-	if (data->player_spawn_dir == 'E')
-	{
-		ray->dir_x = -1;
-		ray->dir_y = 0;
-		ray->plane_x = 0;
-		ray->plane_y = (double)data->fov / 100;
-	}
+	ft_sub_init_direction(data, ray);
 }
 
-void	ft_init_key(t_key *key)
+void	ft_init_ray_data2(t_ray *ray)
 {
-	key->move_forward = 0;
-	key->move_back = 0;
-	key->move_left = 0;
-	key->move_right = 0;
-	key->rotate_left = 0;
-	key->rotate_right = 0;
-	key->mouse_rotate_left = 0;
-	key->mouse_rotate_right = 0;
-}
-
-void	ft_init_ray_data(t_data *data, t_ray *ray)
-{
-	ray->map = data->map.tab;
-	ray->pos_x = data->player_spawn_pos[0] + 0.5;
-	ray->pos_y = data->player_spawn_pos[1] + 0.5;
-	ray->hit = 0;
-	ray->side = 0;
-	ray->color = 0x9B9B9B;
-	ray->resolution_x = data->resolution_x;
-	ray->resolution_y = data->resolution_y;
-	ft_init_direction(data, ray);
 	ray->camera_x = 0;
 	ray->raydir_x = 0;
 	ray->raydir_y = 0;
@@ -120,11 +91,22 @@ void	ft_init_ray_data(t_data *data, t_ray *ray)
 	ray->map_y = 0;
 	ray->texx = 0;
 	ray->texy = 0;
-	ray->door_open = 0;
-	ray->pos_door_x = 0;
-	ray->pos_door_y = 0;
 	ray->wall_x = 0;
 	ray->step = 0;
 	ray->texpos = 0;
+}
+
+void	ft_init_ray_data(t_data *data, t_ray *ray)
+{
+	ray->map = data->map.tab;
+	ray->pos_x = data->player_spawn_pos[0] + 0.5;
+	ray->pos_y = data->player_spawn_pos[1] + 0.5;
+	ray->hit = 0;
+	ray->side = 0;
+	ray->color = 0x9B9B9B;
+	ray->resolution_x = data->resolution_x;
+	ray->resolution_y = data->resolution_y;
+	ft_init_ray_data2(ray);
+	ft_init_direction(data, ray);
 	ft_init_key(&data->key);
 }

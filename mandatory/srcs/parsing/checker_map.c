@@ -96,13 +96,13 @@ int	ft_check_sub_map(t_map_data *map_data, t_data *data)
 	ret = ft_check_map_border(map_data, data);
 	if (ret)
 	{
-		printf("Error\nMap is open in (%d, %d)\n\n", map_data->posX, map_data->posY);
+		printf("Error\nMap is open in (%d, %d)\n\n", \
+		map_data->posX, map_data->posY);
 		ft_print_map(map_data);
 		return (1);
 	}
 	return (0);
 }
-
 
 int	ft_check_map(t_data *data)
 {
