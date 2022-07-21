@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 02:48:27 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 14:36:07 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,18 @@
 # if defined(__linux__)
 	#define FORWARD 122
 	#define BACKWARD 115
+	#define MOVE_LEFT 113
+	#define MOVE_RIGHT 100
+	#define ROTATE_LEFT 65361
+	#define ROTATE_RIGHT 65363
 	#define EXIT 65307
 # else
 	#define FORWARD 13
 	#define BACKWARD 1
+	#define MOVE_LEFT 0
+	#define MOVE_RIGHT 2
+	#define ROTATE_LEFT 123
+	#define ROTATE_RIGHT 124
 	#define EXIT 53
 # endif
 
