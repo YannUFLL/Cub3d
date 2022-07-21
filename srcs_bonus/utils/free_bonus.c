@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 15:51:21 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/21 21:40:40 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 22:29:03 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_free_texture(t_data *data)
 	i = 0;
 	while (i < data->textures_nb)
 	{
-		if (data->texture[i].type != 'D')
+		if (ft_is_not_sprite(data, i))
 			free(data->texture[i].path);
 		i++;
 	}
@@ -59,4 +59,12 @@ void	ft_free_tab(char **tab)
 		i++;
 	}
 	free(tab);
+}
+
+int	ft_is_not_sprite(t_data *data, int i)
+{
+	if (data->texture[i].type != 'D' && data->texture[i].type != 'B' \
+	&& data->texture[i].type != 'M' && data->texture[i].type != 'L')
+		return (1);
+	return (0);
 }

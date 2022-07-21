@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:16:27 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 20:44:03 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 22:35:54 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	ft_init_data(t_data *data)
 	data->map.width = 0;
 	data->map.tab = NULL;
 	ft_init_texture(data);
-
 	return (0);
 }
 
