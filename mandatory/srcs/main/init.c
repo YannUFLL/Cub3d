@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:16:27 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/20 23:14:58 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 02:04:49 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_init_data(t_data *data)
 	data->map.tab = NULL;
 	// bonus
 	data->numsprites = 2;
-	ft_init_texture(data->texture);
+	ft_init_texture(data->texture, data);
 	return (0);
 }
 
@@ -99,11 +99,8 @@ void	ft_init_key(t_key *key)
 void	ft_init_ray_data(t_data *data, t_ray *ray)
 {
 	ray->map = data->map.tab;
-//FOR TESTING CAR PAS DE PARSING, A SUPPRIMER
-	ray->map[4][5] = '2';
-//
-	ray->pos_x = data->player_spawn_pos[0] + 0.5 ;
-	ray->pos_y = data->player_spawn_pos[1] + 0.5 ;
+	ray->pos_x = data->player_spawn_pos[0] + 0.5;
+	ray->pos_y = data->player_spawn_pos[1] + 0.5;
 	ray->hit = 0;
 	ray->side = 0;
 	ray->color = 0x9B9B9B;

@@ -6,18 +6,18 @@
 /*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:18:52 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/20 23:14:48 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 01:41:47 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	ft_init_texture(t_texture *tex)
+void	ft_init_texture(t_texture *tex, t_data *data)
 {
 	int	x;
 	
 	x = 0;
-	while(x < 5)
+	while(x < data->textures_nb)
 	{
 		tex[x].path = NULL;
 		tex[x].mlx_img = NULL;
@@ -44,7 +44,7 @@ int	ft_init_text(t_data *data)
 			text[x].path, &text[x].img_width, &text[x].img_height);
 		if (text[x].mlx_img == NULL)
 		{
-			printf("Texture not found: %s\n", text[x].path);
+			printf("Error\nTexture not found: %d %s\n",x, text[x].path);
 			exit(0);
 		}
 		text[x].addr = (int *)mlx_get_data_addr(text[x].mlx_img,
