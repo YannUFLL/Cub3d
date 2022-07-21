@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 21:38:42 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 22:27:29 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -304,6 +304,7 @@ int		ft_free_texture(t_data *data);
 void	ft_free_tab(char **tab);
 void	ft_close_and_free(t_data *data);
 void	ft_free_list(t_list *list);
+int		ft_is_not_sprite(t_data *data, int i);
 
 /* DEBUG */
 void	ft_printdata(t_data *data);

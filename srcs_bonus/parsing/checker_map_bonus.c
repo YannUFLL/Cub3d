@@ -12,13 +12,41 @@
 
 #include "../../include/cub3d_bonus.h"
 
+int	ft_checker_char(t_map_data *d, t_data *data, int i, int j)
+{
+	char		**map;
+	static int	add_door = 0;
+	static int	add_barrel = 0;
+
+	map = data->map.tab;
+	if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' \
+	|| map[i][j] == 'E')
+	{
+		d->posY = i;
+		d->posX = j;
+		return (1);
+	}
+	else if (map[i][j] == 'D' && add_door == 0)
+	{
+		printf("ajoue de texture door\n");
+		add_door = 1;
+		ft_add_texture(data, map, j, i);
+	}
+	else if (map[i][j] == 'B' && add_barrel == 0)
+	{
+		printf("ajoue de texture barrel\n");
+		add_barrel = 1;
+		ft_add_texture(data, map, j, i);
+	}
+	return (0);
+}
+
 int	ft_check_player_spawn(t_map_data *d, t_data *data)
 {
-	int				i;
-	int				j;
-	char			**map;
-	int				is_spawn;
-	static int		add_door = 0;
+	int		i;
+	int		j;
+	char	**map;
+	int		is_spawn;
 
 	is_spawn = 1;
 	map = data->map.tab;
@@ -28,20 +56,8 @@ int	ft_check_player_spawn(t_map_data *d, t_data *data)
 		j = 0;
 		while (map && map[i] && map[i][j])
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' \
-			|| map[i][j] == 'E')
-			{
-				d->posY = i;
-				d->posX = j;
+			if (ft_checker_char(d, data, i, j))
 				is_spawn = 0;
-			}
-
-			if (map[i][j] == 'D' && add_door == 0)
-			{
-				printf("ajoue de texture!!!\n");
-				add_door = 1;
-				ft_add_texture(data, map, j, i);
-			}
 			j++;
 		}
 		i++;
