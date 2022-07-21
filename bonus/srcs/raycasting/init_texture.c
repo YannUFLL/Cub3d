@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:18:52 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/20 23:14:48 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 00:48:57 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_init_text(t_data *data)
 	t_texture	*text;
 
 	x = 0;
-	text = data->texture; 
+	text = data->texture;
 	while (x < data->textures_nb)
 	{
 		text[x].mlx_img = mlx_xpm_file_to_image(data->mlx,
