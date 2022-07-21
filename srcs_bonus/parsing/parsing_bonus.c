@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:21:13 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 19:51:03 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/22 00:13:11 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,6 @@ int	ft_checker_line(char *line, t_data *data)
 	}
 	else if (ft_nb_section_split(line_splited) >= 2)
 		ft_fill_caract(data, line_splited, line);
-	else
-		printf("on est là \n");
 	ft_free_tab(line_splited);
 	return (0);
 }
@@ -127,5 +125,6 @@ int	ft_parsing(t_data *data)
 	close(data->fd);
 	if (ft_check_all_caract(data))
 		exit(0);
+	ft_sub_fill_caract(&(data->texture[TEXTURE_DOOR].path), "./sprites/door_256.xpm");
 	return (0);
 }

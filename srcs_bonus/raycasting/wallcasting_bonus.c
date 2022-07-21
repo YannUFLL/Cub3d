@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 20:02:24 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 21:52:35 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/22 00:10:11 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	ft_launch_ray(t_ray *ray)
 			|| ray->map[ray->map_y][ray->map_x] == '2')
 			ray->hit = 1;
 		if (ray->map[ray->map_y][ray->map_x] == '2')
-			ray->text_select = 4;
+			ray->text_select = TEXTURE_DOOR;
 	}
 }
 

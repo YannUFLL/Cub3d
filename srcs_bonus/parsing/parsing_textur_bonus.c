@@ -24,7 +24,6 @@ void	ft_check_location_texture(t_data *data, char *str1)
 
 void	ft_sub_fill_caract(char **caract, char *str)
 {
-	printf("str : '%s'\n", str);
 	if (*caract != NULL)
 		free(*caract);
 	*caract = malloc(sizeof(char) * (ft_strlen(str) + 1));

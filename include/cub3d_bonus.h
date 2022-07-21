@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 22:42:57 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/22 00:28:39 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 #define TEXTURE_FLOOR 4
 #define TEXTURE_CEIL 5
+#define TEXTURE_DOOR 6
 
 # if defined(__linux__)
 	#define FORWARD 122
