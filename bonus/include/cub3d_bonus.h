@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 02:28:53 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 15:18:15 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,23 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-# include "../libft/libft.h"
+# include "../../libft/libft.h"
 
 # if defined(__linux__)
 	#define FORWARD 122
 	#define BACKWARD 115
+	#define MOVE_LEFT 113
+	#define MOVE_RIGHT 100
+	#define ROTATE_LEFT 65361
+	#define ROTATE_RIGHT 65363
 	#define EXIT 65307
 # else
 	#define FORWARD 13
 	#define BACKWARD 1
+	#define MOVE_LEFT 0
+	#define MOVE_RIGHT 2
+	#define ROTATE_LEFT 123
+	#define ROTATE_RIGHT 124
 	#define EXIT 53
 # endif
 
@@ -57,28 +65,28 @@ typedef struct s_ray_data
 	double		resolution_x;
 	double		resolution_y;
 	double		camera_x;
-	double		plane_x; // vecteur plan camera
+	double		plane_x;
 	double		plane_y;
-	double		dir_x; // vecteur du regard du joueur
+	double		dir_x;
 	double		dir_y;
-	double		raydir_x; // vecteur rayon lanceé pour detecter un mur
+	double		raydir_x;
 	double		raydir_y;
-	double		pos_x; // position du joueur
+	double		pos_x;
 	double		pos_y;
-	int			map_x; // position du carre dans lequel est le joueur sur la carte
+	int			map_x;
 	int			map_y;
-	double		ray_side_x; // distance a parcourir avant la premiere intersection de la position du joueur
+	double		ray_side_x;
 	double		ray_side_y;
-	double		ray_delta_x; // distance a parcourir avant une intersection
+	double		ray_delta_x;
 	double		ray_delta_y;
-	int			step_x; // sens du rayon ( positif ou negatif ) x
-	int			step_y; // sens du rayon ( positif ou negatif ) y
-	int			hit;	// indique si un mur a ete touche
+	int			step_x;
+	int			step_y;
+	int			hit;
 	int			side;
-	double		walldistance; // distance du rayon jusqu au mur
-	int			lineheight;		 // hauteur de la ligne de pixel
-	int			drawstart;		 // debut de la ligne de pixel
-	int			drawend;		 // fin de la ligne de pixel
+	double		walldistance;
+	int			lineheight;
+	int			drawstart;
+	int			drawend;
 	int			color;
 	double		rotate_left;
 	double		rotate_right;
@@ -225,9 +233,6 @@ int		ft_init_text(t_data *data);
 // sprite
 void	ft_sprite_casting(t_data *data, t_ray *ray, t_sprite *sprite);
 
-
-
-
 /* PARSING */
 int		ft_parsing(t_data *data);
 void	ft_sub_fill_caract(char **caract, char *str);
@@ -287,5 +292,13 @@ void	ft_free_list(t_list *list);
 void	ft_printdata(t_data *data);
 void	ft_print_map(t_map_data *data);
 void	ft_printmap(t_data *data, char **map);
+
+/* bonus */
+void	ft_init_key(t_key *key);
+void	ft_mouse_rotate_left(t_ray *ray, t_key *key);
+void	ft_mouse_rotate_right(t_ray *ray, t_key *key);
+void	ft_use(t_data *data, t_ray *ray);
+void	ft_print_minimap(t_data *data, t_ray *ray);
+void	ft_fps(void);
 
 #endif

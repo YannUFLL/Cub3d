@@ -6,11 +6,11 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 15:51:21 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/19 19:02:31 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 14:59:28 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../include/cub3d_bonus.h"
 
 void	ft_close_and_free(t_data *data)
 {
