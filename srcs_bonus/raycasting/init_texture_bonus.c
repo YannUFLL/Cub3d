@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:18:52 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 23:10:09 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/22 00:14:16 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ void	ft_cpy_texture(t_data *data, t_texture **new_texture)
 
 void	ft_fill_new_texture(t_data *data, t_texture **new_texture, char c)
 {
-	if (c == 'D')
-		(*new_texture)[data->textures_nb - 1].path = "./sprites/door_256.xpm";
 	if (c == 'B')
 		(*new_texture)[data->textures_nb - 1].path = "./sprites/barrel.xpm";
 	(*new_texture)[data->textures_nb - 1].mlx_img = NULL;
@@ -69,8 +67,8 @@ void	ft_add_texture(t_data *data, char **map, int x, int y)
 	c = map[y][x];
 	ft_fill_new_texture(data, &new_texture, c);
 	data->sprites_nb += 1;
-	data->sprite[j].x = x;
-	data->sprite[j].y = y;
+	data->sprite[j].x = x + 0.5;
+	data->sprite[j].y = y + 0.5;
 	data->sprite[j].texture = data->textures_nb - 1;
 	j++;
 	data->texture = new_texture;
@@ -80,7 +78,7 @@ void	ft_init_texture(t_data *data)
 {
 	int	x;
 
-	data->textures_nb = 6;
+	data->textures_nb = 7;
 	data->sprites_nb = 0;
 	data->texture = malloc(sizeof(t_texture) * data->textures_nb);
 	x = 0;

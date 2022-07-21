@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   event.c                                            :+:      :+:    :+:   */
+/*   event_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 16:33:42 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 14:59:28 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/22 00:27:35 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	ft_use(t_data *data, t_ray *ray)
 {
-	if (data->key.use == 1 && ray->walldistance < 1 && ray->text_select == 4)
+	if (data->key.use == 1 && ray->walldistance < 1 \
+	&& ray->text_select == TEXTURE_DOOR)
 		ray->map[ray->map_y][ray->map_x] = '/';
 }
 

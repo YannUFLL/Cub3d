@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 21:55:08 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 22:58:54 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/22 00:30:14 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	ft_key_press(int keycode, t_data *data)
 {
 	t_key	*key;
 
-	printf("key use : %d\n", keycode);
 	key = &data->key;
 	if (keycode == MOVE_LEFT)
 		key->move_left = 1;

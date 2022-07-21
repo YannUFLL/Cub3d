@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 01:30:17 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/21 19:58:59 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/22 00:28:19 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_check_map_line(char *line, t_data *data)
 	{
 		if (c != '0' && c != '1' && c != 'N' && c != 'S' && c != 'E' \
 		&& c != 'W' && c != ' ' && c != 'D' && c != 'B' && c != 'M' \
-		&& c != 'L')
+		&& c != 'L' && c != '2')
 		{
 			printf("Error\nInvalid caracter '%c' on the map\n", c);
 			return (1);
