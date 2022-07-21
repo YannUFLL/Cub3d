@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 22:27:29 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 22:42:57 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 	#define MOVE_RIGHT 100
 	#define ROTATE_LEFT 65361
 	#define ROTATE_RIGHT 65363
+	#define ACTION 101
+
 	#define EXIT 65307
 # else
 	#define FORWARD 13
@@ -41,6 +43,7 @@
 	#define MOVE_RIGHT 2
 	#define ROTATE_LEFT 123
 	#define ROTATE_RIGHT 124
+	#define ACTION 3
 	#define EXIT 53
 # endif
 

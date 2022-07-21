@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hook.c                                             :+:      :+:    :+:   */
+/*   hook_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 21:55:08 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 14:59:44 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 22:44:56 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ft_key_press(int keycode, t_data *data)
 {
 	t_key	*key;
 
+	printf("key use : %d\n", keycode);
 	key = &data->key;
 	if (keycode == MOVE_LEFT)
 		key->move_left = 1;
@@ -29,7 +30,7 @@ int	ft_key_press(int keycode, t_data *data)
 		key->rotate_left = 1;
 	if (keycode == ROTATE_RIGHT)
 		key->rotate_right = 1;
-	if (keycode == 3)
+	if (keycode == ACTION)
 		key->use = 1;
 	if (keycode == EXIT)
 		ft_exit_game(data);
@@ -55,18 +56,18 @@ int	ft_key_release(int keycode, t_data *data)
 		key->rotate_left = 0;
 	if (keycode == ROTATE_RIGHT)
 		key->rotate_right = 0;
-	if (keycode == 3)
+	if (keycode == ACTION)
 		key->use = 0;
 	return (0);
 }
 
-//mlx_mouse_hide();
 int	ft_mouse(int x, int y, t_data *data)
 {
 	static int	old_x;
 	static int	first;
 
 	(void)y;
+	mlx_mouse_hide(data->mlx, data->mlx_win);
 	if (first == 0)
 	{
 		old_x = x;
