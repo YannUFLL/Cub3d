@@ -96,9 +96,7 @@ void	ft_sub_sub_fill_color(t_data *data, char *str1, char *str2, char *line)
 			data->texture[TEXTURE_FLOOR].use_color = 0;
 		else if (str1[0] == 'C')
 			data->texture[TEXTURE_CEIL].use_color = 0;
-		
 	}
-	
 }
 
 void	ft_sub_fill_color(t_data *data, char *str1, char *str2, char *line)
