@@ -12,6 +12,19 @@
 
 #include "../../include/cub3d_bonus.h"
 
+int	ft_check_door(char **map, int i, int j)
+{
+	int	ret;
+
+	ret = 0;
+	if (map[i - 1][j] == '1' && map[i + 1][j] == '1')
+		ret = 1;
+	if (map[i][j - 1] == '1' && map[i][j + 1] == '1')
+		ret = 1;
+	map[i][j] = '2';
+	return (ret);
+}
+
 int	ft_checker_char(t_map_data *d, t_data *data, int i, int j)
 {
 	char		**map;
@@ -25,8 +38,12 @@ int	ft_checker_char(t_map_data *d, t_data *data, int i, int j)
 		d->posX = j;
 		return (1);
 	}
-	else if (map[i][j] == 'D')
-		map[i][j] = '2';
+	else if (map[i][j] == 'D' && !(ft_check_door(map, i, j)))
+	{
+		printf("Error\nDoor is not between wall...dumbass\n");
+		printf("Please check in (%d, %d)\n", i, j);
+		exit(0);
+	}
 	else if (map[i][j] == 'B' && add_barrel == 0)
 	{
 		printf("ajoue de texture barrel\n");
