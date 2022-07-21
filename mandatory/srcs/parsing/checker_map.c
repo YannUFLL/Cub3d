@@ -83,24 +83,33 @@ int	ft_check_map_border(t_map_data *d, t_data *data)
 	return (0);
 }
 
-int	ft_check_map(t_data *data)
+int	ft_check_sub_map(t_map_data *map_data, t_data *data)
 {
-	t_map_data	map_data;
 	int			ret;
 
-	ft_init_map_data(&map_data, data);
-	if (ft_check_player_spawn(&map_data, data))
+	ft_init_map_data(map_data, data);
+	if (ft_check_player_spawn(map_data, data))
 	{
 		printf("Error\nNo spawner\n");
 		exit(0);
 	}
-	ret = ft_check_map_border(&map_data, data);
+	ret = ft_check_map_border(map_data, data);
 	if (ret)
 	{
-		printf("Error\nMap is open in (%d, %d)\n\n", map_data.posX, map_data.posY);
-		ft_print_map(&map_data);
+		printf("Error\nMap is open in (%d, %d)\n\n", map_data->posX, map_data->posY);
+		ft_print_map(map_data);
 		return (1);
 	}
+	return (0);
+}
+
+
+int	ft_check_map(t_data *data)
+{
+	t_map_data	map_data;
+
+	if (ft_check_sub_map(&map_data, data))
+		return (1);
 	if (ft_check_ext_wall(&map_data))
 	{
 		printf("Error\nMap is not close in (%d, %d)\n\n", \
@@ -109,5 +118,6 @@ int	ft_check_map(t_data *data)
 		exit (0);
 	}
 	ft_print_map(&map_data);
+	printf("\nTest Map 	\u2705 \n");
 	return (0);
 }

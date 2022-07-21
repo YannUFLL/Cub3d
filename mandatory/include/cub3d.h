@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/20 23:37:48 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 02:00:20 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,7 +218,7 @@ int		ft_init_data(t_data *data);
 int		ft_init_display(t_data *data);
 void	ft_init_direction(t_data *data, t_ray *ray);
 void	ft_init_ray_data(t_data *data, t_ray *ray);
-void	ft_init_texture(t_texture *tex);
+void	ft_init_texture(t_texture *tex, t_data *data);
 int		ft_init_text(t_data *data);
 // sprite
 void	ft_sprite_casting(t_data *data, t_ray *ray, t_sprite *sprite);
@@ -270,7 +270,6 @@ void	ft_copy_map(char *line, t_data *data);
 int		ft_map_begin(char *line);
 int		ft_is_map_border(char *line);
 int		ft_check_map(t_data *data);
-
 void	ft_sub_fill_color(t_data *data, char *str1, char *str2, char *line);
 void	ft_sub_fill_texture(t_data *data, char *str1, char *str2, char *line);
 

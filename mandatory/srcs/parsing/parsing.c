@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:21:13 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/20 02:31:21 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 01:58:56 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	ft_check_all_caract(t_data *data)
 		printf("Missing floor color\n");
 	if (ft_check_miss_caract(data))
 		return (1);
+	printf("Test Texture	\u2705 \n");
+	printf("Test Color 	\u2705 \n\n");
 	return (0);
 }
 
