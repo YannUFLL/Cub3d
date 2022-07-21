@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 18:02:29 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/21 18:40:56 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 23:07:20 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_print_logo(t_map_data *data, int i, int j)
 	|| data->map[i][j] == 'W' || data->map[i][j] == 'E')
 		printf("\u2B50");
 	else
-		printf("%c", (data->map[i][j]));
+		printf(" %c", (data->map[i][j]));
 }
 
 void	ft_print_map(t_map_data *data)
@@ -76,7 +76,7 @@ void	ft_printlogo(char **map, int i, int j)
 	else if (map[i][j] == '.')
 		printf("\u2B55");
 	else
-		printf("%c", (map[i][j]));
+		printf(" %c", (map[i][j]));
 }
 
 void	ft_printmap(t_data *data, char **map)
