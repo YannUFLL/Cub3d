@@ -6,14 +6,14 @@
 #    By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/17 05:26:46 by jrasser           #+#    #+#              #
-#    Updated: 2022/07/21 15:22:38 by jrasser          ###   ########.fr        #
+#    Updated: 2022/07/21 16:12:52 by jrasser          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS 		= $(wildcard mandatory/srcs/*/*.c)
-SRCS_BONUS	= $(wildcard bonus/srcs/*/*.c)
-OBJS		:= $(addprefix mandatory/objs/, $(notdir $(SRCS:.c=.o)))
-OBJS_BONUS	:= $(addprefix bonus/objs/, $(notdir $(SRCS_BONUS:.c=.o)))
+SRCS 		= $(wildcard srcs/*/*.c)
+SRCS_BONUS	= $(wildcard srcs_bonus/*/*.c)
+OBJS		:= $(addprefix objs/, $(notdir $(SRCS:.c=.o)))
+OBJS_BONUS	:= $(addprefix objs/, $(notdir $(SRCS_BONUS:.c=.o)))
 OS			= ${shell uname}
 LIBMLXMAC	= make -C minilibx/
 NAME 		= cub3D
@@ -24,10 +24,10 @@ CFLAGS		= -Wall -Wextra -Werror
 CPPFLAGS	= -I./include/ -I./libft/
 DEBEUG		= -g -fsanitize=address
 
-mandatory/objs/%.o: mandatory/*/*/%.c
+objs/%.o: srcs/*/%.c
 			@${CC} -o $@ -c $< ${CFLAGS} ${DEBEUG}
 
-bonus/objs/%.o: bonus/*/*/%.c
+objs/%.o: srcs_bonus/*/%.c
 			@${CC} -o $@ -c $< ${CFLAGS} ${DEBEUG}
 
 ifeq ($(OS),Linux)
@@ -54,23 +54,15 @@ endif
 			@$(MAKE) --no-print-directory -C ./libft
 			@${CC} -o ${NAME_BONUS} ${OBJS_BONUS} -L./libft -lft $(LDFLAGS) ${DEBEUG}
 
-
 all :		${NAME}
 bonus :		${NAME_BONUS}
 clean :
-			${RM} ${OBJS}
-
-clean_bonus :
-			${RM} ${OBJS_BONUS}
+			${RM} ${OBJS} ${OBJS_BONUS}
 
 fclean :	clean
-			${RM} ${NAME}
+			${RM} ${NAME} ${NAME_BONUS}
 			@make --no-print-directory fclean -C libft/
 
-fclean_bonus :	clean_bonus
-				${RM} ${NAME_BONUS}
-				@make --no-print-directory fclean -C libft/
-
 re : 		fclean all
-re_bonus :	fclean_bonus bonus
-.PHONY:		all clean fclean re bonus clean_bonus fclean_bonus re_bonus
+reb :		fclean bonus
+.PHONY:		all clean fclean re bonus reb
