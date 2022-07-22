@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init2.c                                            :+:      :+:    :+:   */
+/*   init2_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 02:08:45 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/21 15:11:19 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/22 12:56:41 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,6 @@ void	ft_init_key(t_key *key)
 	key->move_right = 0;
 	key->rotate_left = 0;
 	key->rotate_right = 0;
+	key->mouse_rotate_left = 0;
+	key->mouse_rotate_right = 0;
 }

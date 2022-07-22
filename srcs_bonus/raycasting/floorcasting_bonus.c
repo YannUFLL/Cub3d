@@ -6,11 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 16:38:32 by ydumaine          #+#    #+#             */
-<<<<<<< HEAD:bonus/srcs/raycasting/floorcasting_bonus.c
-/*   Updated: 2022/07/22 12:20:59 by ydumaine         ###   ########.fr       */
-=======
-/*   Updated: 2022/07/21 19:22:23 by jrasser          ###   ########.fr       */
->>>>>>> jm:srcs_bonus/raycasting/floorcasting_bonus.c
+/*   Updated: 2022/07/22 15:04:56 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,30 +149,6 @@ void	ft_calc_pos_textfloor(t_ray *ray, t_flo *flo, t_data *data, int width)
 		% data->texture[ray->text_select].img_height;
 }
 
-<<<<<<< HEAD:bonus/srcs/raycasting/floorcasting_bonus.c
-void	ft_draw_line(t_data *data, t_ray *ray, t_flo *flo, int x)
-{
-	int	width;
-	int	*text1;
-	int *text2;
-
-	ray->text_select = 4;
-	text1 = data->texture[ray->text_select].addr;
-	text2 = data->texture[ray->text_select + 1].addr;
-	width = data->texture[ray->text_select].img_width;
-	while (ray->drawend < ray->resolution_y)
-	{
-		ft_calc_pos_textfloor(ray, flo, data, width);
-		my_mlx_pixel_put(data, x, ray->drawend,
-			text1[width * flo->floortexty + flo->floortextx]);
-		my_mlx_pixel_put(data, x, data->resolution_y - ray->drawend,
-			text2[width * flo->floortexty + flo->floortextx]);
-		ray->drawend++;
-	}
-}
-
-=======
->>>>>>> jm:srcs_bonus/raycasting/floorcasting_bonus.c
 void	ft_floor_casting(t_data *data, t_ray *ray, int x)
 {
 	t_flo	flo;

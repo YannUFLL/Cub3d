@@ -6,11 +6,7 @@
 #    By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/17 05:26:46 by jrasser           #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2022/07/21 20:13:40 by ydumaine         ###   ########.fr        #
-=======
-#    Updated: 2022/07/21 20:27:52 by jrasser          ###   ########.fr        #
->>>>>>> jm
+#    Updated: 2022/07/22 12:29:25 by ydumaine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,13 +27,8 @@ DEBEUG		= -g -fsanitize=address
 objs/%.o: srcs/*/%.c
 			@${CC} -o $@ -c $< ${CFLAGS} ${DEBEUG}
 
-<<<<<<< HEAD
-bonus/objs/%.o: bonus/*/*/%.c
-			@${CC} -o $@ -c $< ${CFLAGS} ${DEBEUG} 
-=======
 objs/%.o: srcs_bonus/*/%.c
 			@${CC} -o $@ -c $< ${CFLAGS} ${DEBEUG}
->>>>>>> jm
 
 ifeq ($(OS),Linux)
 LDFLAGS			= -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz 

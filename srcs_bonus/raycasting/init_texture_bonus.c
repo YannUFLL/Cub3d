@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_texture_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:18:52 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/22 00:14:16 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/22 12:31:58 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ft_init_texture(t_data *data)
 {
 	int	x;
 
-	data->textures_nb = 7;
+	data->textures_nb = 8;
 	data->sprites_nb = 0;
 	data->texture = malloc(sizeof(t_texture) * data->textures_nb);
 	x = 0;

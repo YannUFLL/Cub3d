@@ -6,11 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:16:27 by ydumaine          #+#    #+#             */
-<<<<<<< HEAD:bonus/srcs/main/init_bonus.c
-/*   Updated: 2022/07/21 21:42:24 by ydumaine         ###   ########.fr       */
-=======
-/*   Updated: 2022/07/21 22:35:54 by jrasser          ###   ########.fr       */
->>>>>>> jm:srcs_bonus/main/init_bonus.c
+/*   Updated: 2022/07/22 16:14:23 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +27,6 @@ int	ft_init_data(t_data *data)
 	data->move_speed = 0.05;
 	data->rotate_speed = 0.05;
 	data->keycode = -1;
-<<<<<<< HEAD:bonus/srcs/main/init_bonus.c
-	data->textures_nb = 8;
-=======
->>>>>>> jm:srcs_bonus/main/init_bonus.c
 	data->line_length = 0;
 	data->bits_per_pixel = 0;
 	data->keycode = 0;
@@ -43,33 +35,14 @@ int	ft_init_data(t_data *data)
 	data->map.height = 0;
 	data->map.width = 0;
 	data->map.tab = NULL;
-<<<<<<< HEAD:bonus/srcs/main/init_bonus.c
-	// bonus
-	data->sprites_nb = 3;
-	ft_init_texture(data->texture);
-=======
+	data->fog_color = 0x0;
 	ft_init_texture(data);
->>>>>>> jm:srcs_bonus/main/init_bonus.c
 	return (0);
 }
 
 void	ft_sub_init_direction(t_data *data, t_ray *ray)
 {
 	if (data->player_spawn_dir == 'W')
-<<<<<<< HEAD:bonus/srcs/main/init_bonus.c
-	{
-		ray->dir_x = -1;
-		ray->dir_y = 0;
-		ray->plane_x = 0;
-		ray->plane_y = -(double)data->fov / 100;
-	}
-	if (data->player_spawn_dir == 'E')
-	{
-		ray->dir_x = 1;
-		ray->dir_y = 0;
-		ray->plane_x = 0;
-		ray->plane_y = (double)data->fov / 100;
-=======
     {
         ray->dir_x = 1;
         ray->dir_y = 0;
@@ -82,7 +55,6 @@ void	ft_sub_init_direction(t_data *data, t_ray *ray)
         ray->dir_y = 0;
         ray->plane_x = 0;
         ray->plane_y = -(double)data->fov / 100;
->>>>>>> jm:srcs_bonus/main/init_bonus.c
 	}
 }
 

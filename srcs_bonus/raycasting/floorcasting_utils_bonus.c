@@ -3,14 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   floorcasting_utils_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 19:15:52 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/21 20:53:06 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/22 16:03:56 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d_bonus.h"
+#ifdef FOG
+
+void	ft_draw_line_ceil(t_data *data, t_ray *ray, t_flo *flo, int x)
+{
+	int	width;
+	int	*text2;
+	float shade; 
+
+	ray->text_select = 5;
+	text2 = data->texture[ray->text_select].addr;
+	width = data->texture[ray->text_select].img_width;
+	while (ray->drawend < ray->resolution_y)
+	{
+		shade = flo->distplayer * 0.50;
+		ft_calc_pos_textfloor(ray, flo, data, width);
+		my_mlx_pixel_put(data, x, data->resolution_y - ray->drawend,
+			ft_mix_color(text2[width * flo->floortexty + flo->floortextx], data->fog_color, shade));
+		ray->drawend++;
+	}
+}
+
+void	ft_draw_line_both(t_data *data, t_ray *ray, t_flo *flo, int x)
+{
+	int	width;
+	int	*text1;
+	int	*text2;
+	float shade; 
+	int color;
+
+	ray->text_select = 4;
+	text1 = data->texture[ray->text_select].addr;
+	text2 = data->texture[ray->text_select + 1].addr;
+	width = data->texture[ray->text_select].img_width;
+	while (ray->drawend < ray->resolution_y)
+	{
+		ft_calc_pos_textfloor(ray, flo, data, width);
+		shade = (data->resolution_y - ray->drawend) / (float)(data->resolution_y) + 0.60;
+		my_mlx_pixel_put(data, x, ray->drawend,
+			ft_mix_color(text1[width * flo->floortexty + flo->floortextx], data->fog_color,shade));
+		my_mlx_pixel_put(data, x, data->resolution_y - ray->drawend,
+			ft_mix_color(text2[width * flo->floortexty + flo->floortextx], data->fog_color, shade));
+		ray->drawend++;
+	}
+}
+#else
 
 void	ft_draw_line_ceil(t_data *data, t_ray *ray, t_flo *flo, int x)
 {
@@ -49,6 +94,7 @@ void	ft_draw_line_both(t_data *data, t_ray *ray, t_flo *flo, int x)
 		ray->drawend++;
 	}
 }
+#endif
 
 /*
 	text_select = ray->text_select;

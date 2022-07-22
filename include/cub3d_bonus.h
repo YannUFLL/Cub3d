@@ -6,11 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-<<<<<<< HEAD:bonus/include/cub3d_bonus.h
-/*   Updated: 2022/07/22 12:21:03 by ydumaine         ###   ########.fr       */
-=======
-/*   Updated: 2022/07/22 00:28:39 by jrasser          ###   ########.fr       */
->>>>>>> jm:include/cub3d_bonus.h
+/*   Updated: 2022/07/22 15:00:11 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +26,7 @@
 #define TEXTURE_FLOOR 4
 #define TEXTURE_CEIL 5
 #define TEXTURE_DOOR 6
+#define FOG 1 
 
 # if defined(__linux__)
 	#define FORWARD 122
@@ -146,8 +143,7 @@ typedef struct s_map
 {
 	char	**tab;
 	int		width;
-	int		height;
-}	t_map;
+	int		height;}	t_map;
 
 typedef struct s_data
 {
@@ -172,19 +168,15 @@ typedef struct s_data
 	t_key		key;
 	int			keycode;
 	int			textures_nb;
+	int			fog_color; 
 	
 	//bonus
 	int			shadding;
 	t_sprite	sprite[20];
 	int			sprite_order[20];
 	double		sprite_distance[20];
-<<<<<<< HEAD:bonus/include/cub3d_bonus.h
-	double		*zbuffer; 
-	int			sprites_nb; 
-=======
 	double		*zbuffer;
 	int			sprites_nb;
->>>>>>> jm:include/cub3d_bonus.h
 
 	int			fd;
 	t_map		map;
@@ -215,6 +207,7 @@ int		ft_render_next_frame(t_data *data);
 int		ft_key_press(int keycode, t_data *data);
 int		ft_key_release(int keycode, t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int		ft_mix_color(int color1, int color2, float power);
 
 // texture
 void	ft_calc_x_texture(t_data *data);

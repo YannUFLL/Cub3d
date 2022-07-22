@@ -6,11 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 22:15:25 by ydumaine          #+#    #+#             */
-<<<<<<< HEAD:bonus/srcs/raycasting/sprite_casting_bonus.c
-/*   Updated: 2022/07/21 23:20:26 by ydumaine         ###   ########.fr       */
-=======
-/*   Updated: 2022/07/21 23:00:26 by jrasser          ###   ########.fr       */
->>>>>>> jm:srcs_bonus/raycasting/sprite_casting_bonus.c
+/*   Updated: 2022/07/22 12:34:31 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

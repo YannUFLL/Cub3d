@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 21:15:20 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 17:06:44 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/22 16:08:40 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	static int	octet;
+	static int	line_lenght; 
 
+	if (line_lenght == 0)
+		line_lenght = data->line_length;
 	if (octet == 0)
 		octet = data->bits_per_pixel / 8;
 	*(unsigned int *)(data->display_add
-			+ (y * data->line_length + x * 4)) = color;
+			+ (y * line_lenght + x * 4)) = color;
 }
 
 int	time_diff(struct timeval *start, struct timeval *end)

@@ -6,11 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:31:47 by ydumaine          #+#    #+#             */
-<<<<<<< HEAD:bonus/srcs/raycasting/rendering_bonus.c
-/*   Updated: 2022/07/22 12:22:02 by ydumaine         ###   ########.fr       */
-=======
-/*   Updated: 2022/07/22 00:22:17 by jrasser          ###   ########.fr       */
->>>>>>> jm:srcs_bonus/raycasting/rendering_bonus.c
+/*   Updated: 2022/07/22 16:15:08 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +37,58 @@ void	ft_printf_ray(t_ray *ray)
 }
 */
 
+
+typedef struct s_color 
+{
+	unsigned char red;
+	unsigned char green;
+	unsigned char blue;
+}	t_color;
+
+int	ft_mix_color(int color1, int color2, float power)
+{
+	t_color c1;
+	t_color c2;
+
+	if (power > 1)
+		power = 1;
+	c1.blue = (char)color1;  
+	c1.green = (char)(color1 >> 8);
+	c1.red = (char)(color1 >> 16);  
+	c2.blue = (char)color2;
+	c2.green = (char)(color2 >> 8);  
+	c2.red = (char)(color2 >> 16);  
+	c1.red = (1 - power) * c1.red + power * c2.red; 
+	c1.green = (1 - power) * c1.green + power * c2.green; 
+	c1.blue = (1 - power) * c1.blue + power * c2.blue; 
+	return ( c1.red << 16 | c1.green << 8 | c1.blue);
+
+}
+#ifdef FOG
 void	ft_put_ceiling_and_roof(t_data *data)
 {
 	int	x;
 	int	y;
 	int color;
-	//int shadding;
+	float shade;
+	float ratio;
 
+	ratio = 1 / ((float)data->resolution_y / 2);
+	shade = 0.40;
 	y = 0;
 	while (y < data->resolution_y)
 	{
 		x = 0;
 		if (y > data->resolution_y / 2)
-			color = data->floor;
+		{
+			shade -= ratio;
+			color = ft_mix_color(data->ceiling,data->fog_color, shade);
+		}
 		else
-			color = data->ceiling;
+		{
+			shade += ratio; 
+			color = ft_mix_color(data->floor,data->fog_color, shade);
+		}
 		while (x < data->resolution_x)
 		{
 			my_mlx_pixel_put(data, x, y, color);
@@ -64,6 +97,33 @@ void	ft_put_ceiling_and_roof(t_data *data)
 	y++;
 	}
 }
+#else
+
+void	ft_put_ceiling_and_roof(t_data *data)
+{
+	int	x;
+	int	y;
+	int color;
+
+	y = 0;
+	while (y < data->resolution_y)
+	{
+		x = 0;
+		if (y > data->resolution_y / 2)
+			color = data->ceiling;
+		else
+			color = data->floor; 
+		while (x < data->resolution_x)
+		{
+			my_mlx_pixel_put(data, x, y, color);
+			x++;
+		}
+	y++;
+	}
+}
+#endif
+
+
 
 void	ft_init_ray(t_ray *ray, int x)
 {
@@ -107,14 +167,10 @@ void	ft_wall_casting(t_data *data, t_ray *ray)
 		ft_choose_texture(ray);
 		ft_calc_x_texture(data);
 		ft_calc_y_texture(data);
-		ft_print_texture(data, ray, x);
-		ft_floor_casting(data, ray, x);
-		//ft_printf_ray(ray);
-<<<<<<< HEAD:bonus/srcs/raycasting/rendering_bonus.c
-=======
-		ft_floor_casting(data, ray, x);
->>>>>>> jm:srcs_bonus/raycasting/rendering_bonus.c
 		data->zbuffer[x] = ray->walldistance;
+		ft_print_texture(data, ray, x);
+		//ft_printf_ray(ray);
+		//ft_floor_casting(data, ray, x);
 		x++;
 	}
 }
@@ -124,11 +180,11 @@ int	ft_render_next_frame(t_data *data)
 	t_ray	*ray;
 
 	ray = &data->ray_data;
-	//ft_put_ceiling_and_roof(data);
+	ft_put_ceiling_and_roof(data);
 	ft_fps();
 	ft_movements(data);
 	ft_wall_casting(data, ray);
-	ft_sprite_casting(data, ray, data->sprite);
+	//ft_sprite_casting(data, ray, data->sprite);
 	ft_print_minimap(data, ray);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->display, 0, 0);
 	ft_event(ray);

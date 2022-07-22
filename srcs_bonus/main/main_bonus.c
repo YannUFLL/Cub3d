@@ -6,11 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:38:35 by ydumaine          #+#    #+#             */
-<<<<<<< HEAD:bonus/srcs/main/main_bonus.c
-/*   Updated: 2022/07/21 21:42:31 by ydumaine         ###   ########.fr       */
-=======
-/*   Updated: 2022/07/21 20:08:06 by jrasser          ###   ########.fr       */
->>>>>>> jm:srcs_bonus/main/main_bonus.c
+/*   Updated: 2022/07/22 15:07:08 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +26,10 @@ int	main(int argc, char **argv)
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, data.resolution_x, \
 	data.resolution_y, "WOLFENCHTEIN");
-	data.texture[4].path = "bonus/texture/floor_512.xpm";
-	data.texture[5].path = "bonus/texture/ceiling_512.xpm";
-	data.texture[6].path = "bonus/texture/door_256.xpm";
-	data.texture[7].path = "bonus/texture/barrel.xpm";
+	data.texture[4].path = "texture/floor_512.xpm";
+	data.texture[5].path = "texture/ceiling_512.xpm";
+	data.texture[6].path = "sprites/door_256.xpm";
+	data.texture[7].path = "sprites/barrel.xpm";
 	data.sprite[0].texture = 7;
 	data.sprite[1].texture = 7;
 	data.sprite[2].texture = 7;
@@ -43,6 +39,8 @@ int	main(int argc, char **argv)
 	data.sprite[2].y = 1.7; 
 	data.sprite[1].x = 4.7;
 	data.sprite[1].y = 2.7; 
+	data.texture[TEXTURE_FLOOR].use_color = 0;
+	data.texture[TEXTURE_CEIL].use_color = 0;
 	ft_init_display(&data);
 	ft_init_ray_data(&data, &data.ray_data);
 	ft_init_text(&data);
