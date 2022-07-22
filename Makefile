@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+         #
+#    By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/17 05:26:46 by jrasser           #+#    #+#              #
-#    Updated: 2022/07/21 15:22:38 by jrasser          ###   ########.fr        #
+#    Updated: 2022/07/21 20:13:40 by ydumaine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ mandatory/objs/%.o: mandatory/*/*/%.c
 			@${CC} -o $@ -c $< ${CFLAGS} ${DEBEUG}
 
 bonus/objs/%.o: bonus/*/*/%.c
-			@${CC} -o $@ -c $< ${CFLAGS} ${DEBEUG}
+			@${CC} -o $@ -c $< ${CFLAGS} ${DEBEUG} 
 
 ifeq ($(OS),Linux)
 LDFLAGS			= -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz 
@@ -45,14 +45,14 @@ ifeq ($(OS),Darwin)
 				$(LIBMLXMAC)
 endif
 			@$(MAKE) --no-print-directory -C ./libft
-			@${CC} -o ${NAME} ${OBJS} -L./libft -lft $(LDFLAGS) ${DEBEUG}
+			@${CC} -o ${NAME} ${OBJS} -L./libft -lft $(LDFLAGS) ${DEBEUG} 
 
 $(NAME_BONUS): 	$(OBJS_BONUS)
 ifeq ($(OS),Darwin)
 				$(LIBMLXMAC)
 endif
 			@$(MAKE) --no-print-directory -C ./libft
-			@${CC} -o ${NAME_BONUS} ${OBJS_BONUS} -L./libft -lft $(LDFLAGS) ${DEBEUG}
+			@${CC} -o ${NAME_BONUS} ${OBJS_BONUS} -L./libft -lft $(LDFLAGS) ${DEBEUG} 
 
 
 all :		${NAME}

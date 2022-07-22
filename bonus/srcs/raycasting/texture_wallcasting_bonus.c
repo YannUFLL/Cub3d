@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture_wallcasting.c                              :+:      :+:    :+:   */
+/*   texture_wallcasting_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 19:59:45 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 14:59:28 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/22 12:19:35 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	ft_calc_x_texture(t_data *data)
 		ray->texx = data->texture[ray->text_select].img_width - ray->texx - 1;
 	if (ray->side == 1 && ray->raydir_y < 0)
 		ray->texx = data->texture[ray->text_select].img_width - ray->texx - 1;
+	
 }
 
 void	ft_calc_y_texture(t_data *data)
@@ -54,7 +55,6 @@ void	ft_calc_y_texture(t_data *data)
 			/ 2 + ray->lineheight / 2) * ray->step;
 }
 
-// & (data->texture[text_select].img_height - 1);
 void	ft_print_texture(t_data *data, t_ray *ray, int x)
 {
 	int	text_select;
@@ -66,7 +66,7 @@ void	ft_print_texture(t_data *data, t_ray *ray, int x)
 	img_add = data->texture[text_select].addr;
 	while (ray->drawstart <= ray->drawend)
 	{
-		ray->texy = (int)ray->texpos;
+		ray->texy = (int)ray->texpos & (data->texture[text_select].img_height - 1);;
 		ray->texpos += ray->step;
 		my_mlx_pixel_put(data, x, ray->drawstart,
 			img_add[img_width * ray->texy + ray->texx]);

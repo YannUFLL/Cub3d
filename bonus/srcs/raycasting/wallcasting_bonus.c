@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wallcasting.c                                      :+:      :+:    :+:   */
+/*   wallcasting_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 20:02:24 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 14:59:28 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/22 12:22:45 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_calc_ray_dir(t_ray *ray)
 	ray->raydir_y = ray->dir_y + ray->plane_y * ray->camera_x;
 	if (ray->raydir_x == 0)
 		ray->raydir_x = 0.000001;
-	if (ray->dir_y == 0)
+	if (ray->raydir_y == 0)
 		ray->raydir_y = 0.000001;
 }
 

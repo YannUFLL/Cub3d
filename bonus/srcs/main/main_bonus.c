@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:38:35 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 14:59:42 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 21:42:31 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,19 @@ int	main(int argc, char **argv)
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, data.resolution_x, \
 	data.resolution_y, "WOLFENCHTEIN");
+	data.texture[4].path = "bonus/texture/floor_512.xpm";
+	data.texture[5].path = "bonus/texture/ceiling_512.xpm";
+	data.texture[6].path = "bonus/texture/door_256.xpm";
+	data.texture[7].path = "bonus/texture/barrel.xpm";
+	data.sprite[0].texture = 7;
+	data.sprite[1].texture = 7;
+	data.sprite[2].texture = 7;
+	data.sprite[0].x = 4.5;
+	data.sprite[0].y = 1.5; 
+	data.sprite[2].x = 4.7;
+	data.sprite[2].y = 1.7; 
+	data.sprite[1].x = 4.7;
+	data.sprite[1].y = 2.7; 
 	ft_init_display(&data);
 	ft_init_ray_data(&data, &data.ray_data);
 	ft_init_text(&data);

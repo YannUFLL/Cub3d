@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rendering.c                                        :+:      :+:    :+:   */
+/*   rendering_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:31:47 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 15:16:48 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/22 12:22:02 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	ft_put_ceiling_and_roof(t_data *data)
 	{
 		x = 0;
 		if (y > data->resolution_y / 2)
-			color = data->ceiling;
-		else
 			color = data->floor;
+		else
+			color = data->ceiling;
 		while (x < data->resolution_x)
 		{
 			my_mlx_pixel_put(data, x, y, color);
@@ -104,8 +104,8 @@ void	ft_wall_casting(t_data *data, t_ray *ray)
 		ft_calc_x_texture(data);
 		ft_calc_y_texture(data);
 		ft_print_texture(data, ray, x);
+		ft_floor_casting(data, ray, x);
 		//ft_printf_ray(ray);
-		//ft_floor_casting(data, ray, x);
 		data->zbuffer[x] = ray->walldistance;
 		x++;
 	}
@@ -116,11 +116,11 @@ int	ft_render_next_frame(t_data *data)
 	t_ray	*ray;
 
 	ray = &data->ray_data;
-	ft_put_ceiling_and_roof(data);
+	//ft_put_ceiling_and_roof(data);
 	ft_fps();
 	ft_movements(data);
 	ft_wall_casting(data, ray);
-	//ft_sprite_casting(data, ray, data->sprite);
+	ft_sprite_casting(data, ray, data->sprite);
 	ft_print_minimap(data, ray);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->display, 0, 0);
 	ft_event(ray);

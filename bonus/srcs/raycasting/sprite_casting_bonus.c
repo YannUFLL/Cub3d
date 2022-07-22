@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprite_casting.c                                   :+:      :+:    :+:   */
+/*   sprite_casting_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 22:15:25 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 14:59:28 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 23:20:26 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,25 @@ typedef struct sprite_calc
 	unsigned int d;
 	unsigned int	color; 
 	int	img_height;
+	int	img_width;
 	int resolution_y; 
 	int resolution_x; 
 	int	 *addr;
 }	t_sprite_calc;
 
 
-void	ft_sort_sprite(int	*sprite_order, double *sprite_distance, int numsprites)
+void	ft_sort_sprite(int	*sprite_order, double *sprite_distance, int sprites_nb)
 {
 	int	i;
 	int	j;
 	int	x;
 
 	i = 1;
-	while (i < numsprites)
+	while (i < sprites_nb)
 	{
 		x = sprite_order[i];
 		j = i;
-		while (j > 0 && (sprite_distance[x] < sprite_distance[sprite_order[j - 1]]))
+		while (j > 0 && (sprite_distance[x] > sprite_distance[sprite_order[j - 1]]))
 		{	
 				sprite_order[j] = sprite_order[j - 1]; //
 				j = j - 1;
@@ -85,21 +86,22 @@ void	ft_calc_pos(t_sprite *sprite, t_sprite_calc *sp, t_ray *ray, t_data *data)
 		sp->stripe = sp->drawstartx;
 }
 
-void	ft_print_sprite(t_sprite *sprite, t_sprite_calc *sp, t_data *data)
+void	ft_print_sprite(t_sprite_calc *sp, t_data *data)
 {
 		int y;
 
+		(void)data;
 		while (sp->stripe < sp->drawendx)
 		{
-			sp->texx = (int)(256 * (sp->stripe - (-sp->spritewidth / 2 + sp->spritescreenx)) * data->texture[7].img_width / sp->spritewidth ) / 256; 
+			sp->texx = (int)(256 * (sp->stripe - (-sp->spritewidth / 2 + sp->spritescreenx)) * sp->img_width / sp->spritewidth ) / 256; 
 			y = sp->drawstarty;
 			if (sp->transformy > 0 && sp->stripe >= 0 && sp->stripe < data->resolution_x && sp->transformy < data->zbuffer[sp->stripe])
 				while (y < sp->drawendy)
 				{
 					sp->d = y * 256 - sp->resolution_y * 128 + sp->spriteheight * 128;
 					sp->texy = ((sp->d * sp->img_height) / sp->spriteheight) / 256;
-					sp->color = sp->addr[data->texture[sprite[sp->i].texture].img_width * sp->texy + sp->texx];
-					if (sp->color != 0x0)
+					sp->color = sp->addr[sp->img_width * sp->texy + sp->texx];
+					if (sp->color > 0x0)
 						my_mlx_pixel_put(data, sp->stripe, y, sp->color);
 					y++;
 				}
@@ -114,22 +116,23 @@ void	ft_sprite_casting(t_data *data, t_ray *ray, t_sprite *sprite)
 
 	sprite = data->sprite; 
 	sp.i = 0;
-	while (sp.i < data->numsprites)
+	while (sp.i < data->sprites_nb)
 	{
 		data->sprite_order[sp.i] = sp.i;
 		data->sprite_distance[sp.i] = ((ray->pos_x - sprite[sp.i].x ) * (ray->pos_x - sprite[sp.i].x) + (ray->pos_y - sprite[sp.i].y ) *(ray->pos_y - sprite[sp.i].y ));
 		sp.i++;
 	}
-	ft_sort_sprite(data->sprite_order, data->sprite_distance, data->numsprites);
+	ft_sort_sprite(data->sprite_order, data->sprite_distance, data->sprites_nb);
 	sp.i = 0;
-	while (sp.i < data->numsprites)
+	while (sp.i < data->sprites_nb)
 	{
 		sp.img_height = data->texture[sprite[sp.i].texture].img_height; 
+		sp.img_width = data->texture[sprite[sp.i].texture].img_width; 
 		sp.addr = data->texture[sprite[sp.i].texture].addr; 
 		sp.resolution_y = data->resolution_y; 
 		sp.resolution_x = data->resolution_x; 
 		ft_calc_pos(sprite, &sp, ray, data);
-		ft_print_sprite(sprite, &sp, data);
+		ft_print_sprite(&sp, data);
 		sp.i++;
 	}
 }

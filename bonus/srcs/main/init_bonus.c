@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:16:27 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 15:11:24 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/21 21:42:24 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_init_data(t_data *data)
 	data->move_speed = 0.05;
 	data->rotate_speed = 0.05;
 	data->keycode = -1;
-	data->textures_nb = 4;
+	data->textures_nb = 8;
 	data->line_length = 0;
 	data->bits_per_pixel = 0;
 	data->keycode = 0;
@@ -37,7 +37,7 @@ int	ft_init_data(t_data *data)
 	data->map.width = 0;
 	data->map.tab = NULL;
 	// bonus
-	data->numsprites = 2;
+	data->sprites_nb = 3;
 	ft_init_texture(data->texture);
 	return (0);
 }
@@ -46,14 +46,14 @@ void	ft_sub_init_direction(t_data *data, t_ray *ray)
 {
 	if (data->player_spawn_dir == 'W')
 	{
-		ray->dir_x = 1;
+		ray->dir_x = -1;
 		ray->dir_y = 0;
 		ray->plane_x = 0;
 		ray->plane_y = -(double)data->fov / 100;
 	}
 	if (data->player_spawn_dir == 'E')
 	{
-		ray->dir_x = -1;
+		ray->dir_x = 1;
 		ray->dir_y = 0;
 		ray->plane_x = 0;
 		ray->plane_y = (double)data->fov / 100;
@@ -66,14 +66,14 @@ void	ft_init_direction(t_data *data, t_ray *ray)
 	{
 		ray->dir_x = 0;
 		ray->dir_y = 1;
-		ray->plane_x = -(double)data->fov / 100;
+		ray->plane_x = (double)data->fov / 100;
 		ray->plane_y = 0;
 	}
 	if (data->player_spawn_dir == 'N')
 	{
 		ray->dir_x = 0;
 		ray->dir_y = -1;
-		ray->plane_x = (double)data->fov / 100;
+		ray->plane_x = -(double)data->fov / 100;
 		ray->plane_y = 0;
 	}
 	ft_sub_init_direction(data, ray);
