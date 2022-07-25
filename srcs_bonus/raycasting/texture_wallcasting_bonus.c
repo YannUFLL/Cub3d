@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_wallcasting_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 19:59:45 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 18:09:47 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/25 14:44:50 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_print_texture(t_data *data, t_ray *ray, int x)
 	img_add = data->texture[text_select].addr;
 	while (ray->drawstart <= ray->drawend)
 	{
-		ray->texy = (int)ray->texpos;
+		ray->texy = (int)ray->texpos & (data->texture[text_select].img_height - 1);
 		ray->texpos += ray->step;
 		my_mlx_pixel_put(data, x, ray->drawstart,
 			img_add[img_width * ray->texy + ray->texx]);
