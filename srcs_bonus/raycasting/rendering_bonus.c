@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:31:47 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/26 19:39:45 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/26 23:11:53 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,6 @@ int	ft_render_next_frame(t_data *data)
 	ft_sprite_casting(data, ray, data->sprite);
 	ft_print_minimap_render(data, ray, &data->minimap);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->display, 0, 0);
-	ft_event(ray);
+	ft_event(ray, data);
 	return (0);
 }

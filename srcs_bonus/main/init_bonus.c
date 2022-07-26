@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:16:27 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/26 18:57:37 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/26 23:12:35 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	ft_init_ray_data2(t_ray *ray)
 	ray->size_door = 1;
 	ray->pos_door_x = 0;
 	ray->pos_door_y = 0;
-
+	ray->door_before = 0;
 }
 
 void	ft_init_ray_data(t_data *data, t_ray *ray)
