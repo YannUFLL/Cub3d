@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 16:33:42 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 01:07:44 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/27 01:44:25 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,17 @@ void	ft_event(t_ray *ray, t_data *data)
 	if (count_sprite == 10)
 	{
 		count_sprite = 0;
-		while (i < data->sprites_nb)
+		while (i <= data->sprites_nb)
 		{
 			data->sprite[i].select_sprite =  data->sprite[i].texture[0]; 
 			if (data->sprite[i].texture[1] != -1)
 			{
-				data->sprite[i].select_sprite = data->sprite[i].texture[sprite_texture_select + i];
+				data->sprite[i].select_sprite = data->sprite[i].texture[sprite_texture_select];
 			}
-			printf("sprite : %d \n",sprite_texture_select + i);
 			i++;
 		}
 		sprite_texture_select++;
-		if (sprite_texture_select == 5)
+		if (sprite_texture_select == 6)
 			sprite_texture_select = 0;
 	}
 	else 
