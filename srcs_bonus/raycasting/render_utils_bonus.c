@@ -1,17 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_utils.c                                     :+:      :+:    :+:   */
+/*   render_utils_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 21:15:20 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 15:18:00 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/25 15:19:19 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d_bonus.h"
 #include <sys/time.h>
+
+typedef struct s_color 
+{
+	unsigned char red;
+	unsigned char green;
+	unsigned char blue;
+}	t_color;
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -47,4 +54,24 @@ void	ft_fps(void)
 		fps = 0; 
 	}
 	return ;
+}
+
+int	ft_mix_color(int color1, int color2, float power)
+{
+	t_color c1;
+	t_color c2;
+
+	if (power > 1)
+		power = 1;
+	c1.blue = (char)color1;  
+	c1.green = (char)(color1 >> 8);
+	c1.red = (char)(color1 >> 16);  
+	c2.blue = (char)color2;
+	c2.green = (char)(color2 >> 8);  
+	c2.red = (char)(color2 >> 16);  
+	c1.red = (1 - power) * c1.red + power * c2.red; 
+	c1.green = (1 - power) * c1.green + power * c2.green; 
+	c1.blue = (1 - power) * c1.blue + power * c2.blue; 
+	return ( c1.red << 16 | c1.green << 8 | c1.blue);
+
 }

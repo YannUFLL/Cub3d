@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/22 00:28:39 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/26 01:47:43 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+//FONCTION ET HEADER DE TEST DE FLUIDITE, A SUPPRIMER AVANT RENDRE
+#include <sys/time.h>
+	struct timeval debut;
+	struct timeval fin;
+int	time_diff(struct timeval *start, struct timeval *end);	
+
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -26,6 +32,8 @@
 #define TEXTURE_FLOOR 4
 #define TEXTURE_CEIL 5
 #define TEXTURE_DOOR 6
+#define TEXTURE_SIDE_DOOR 7
+#define FOG 0
 
 # if defined(__linux__)
 	#define FORWARD 122
@@ -123,6 +131,8 @@ typedef struct s_ray_data
 	double		step;
 	double		texpos;
 	char		**map;
+	int			ray_touch_door; 
+	double		size_door;
 }	t_ray;
 
 typedef struct s_key
@@ -152,6 +162,7 @@ typedef struct s_data
 	t_texture	*texture;
 	int			floor;
 	int			ceiling;
+	int			fog_color;
 	void		*display;
 	char		*display_add;
 	int			bits_per_pixel;
@@ -206,6 +217,7 @@ int		ft_render_next_frame(t_data *data);
 int		ft_key_press(int keycode, t_data *data);
 int		ft_key_release(int keycode, t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int		ft_mix_color(int color1, int color2, float power);
 
 // texture
 void	ft_calc_x_texture(t_data *data);

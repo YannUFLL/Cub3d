@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:16:27 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 22:35:54 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/26 01:37:44 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_init_data(t_data *data)
 	data->player_spawn_pos[0] = 0;
 	data->player_spawn_pos[1] = 0;
 	data->fov = 70;
-	data->resolution_x = 1280;
+	data->resolution_x = 1080;
 	data->resolution_y = 720;
 	data->move_speed = 0.05;
 	data->rotate_speed = 0.05;
@@ -94,6 +94,11 @@ void	ft_init_ray_data2(t_ray *ray)
 	ray->wall_x = 0;
 	ray->step = 0;
 	ray->texpos = 0;
+	ray->ray_touch_door = 0;
+	ray->size_door = 1;
+	ray->pos_door_x = 0;
+	ray->pos_door_y = 0;
+
 }
 
 void	ft_init_ray_data(t_data *data, t_ray *ray)
