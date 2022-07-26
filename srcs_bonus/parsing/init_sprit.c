@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 14:36:35 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/26 16:30:17 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/26 19:34:05 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,28 +65,28 @@ void	ft_fill_new_texture2(t_data *data, t_texture **new_texture, char c, int i)
 	(*new_texture)[data->textures_nb - 1].type = c;
 }
 
-
-void	ft_add_texture_anime(t_data *data, char **map, int x, int y)
+void	ft_add_texture_anime(t_data *data, int x, int y, int *j)
 {
 	t_texture	*new_texture;
-	static int	j = 0;
 	char		c;
 	int 		i;
 
+	printf("add sprite anime: x : %d, y : %d", x, y);
+
 	i = 0;
-	while (i < 5)
+	data->sprites_nb += 1;
+	data->sprite[*j].x = x + 0.5;
+	data->sprite[*j].y = y + 0.5;
+	while (i < 6)
 	{
 		data->textures_nb += 1;
 		new_texture = NULL;
 		ft_cpy_old_texture(data, &new_texture);
-		c = map[y][x];
+		c = data->map.tab[y][x];
 		ft_fill_new_texture2(data, &new_texture, c, i);
-		data->sprites_nb += 1;
-		data->sprite[j].x = x + 0.5;
-		data->sprite[j].y = y + 0.5;
-		data->sprite[j].texture = data->textures_nb - 1;
-		j++;
+		data->sprite[*j].texture[i] = data->textures_nb - 1;
 		data->texture = new_texture;
 		i++;
 	}
+	*j += 1;
 }
