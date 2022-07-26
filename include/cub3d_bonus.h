@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/26 16:11:29 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/26 19:16:41 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,20 @@
 	#define ACTION 3
 	#define EXIT 53
 # endif
+
+
+typedef struct s_minimap
+{
+	int	i;
+	int	j;
+	int	x;
+	int	height;
+	int	width;
+	int	y;
+	int	color;
+	int	step;
+	int middle;
+}		t_minimap;
 
 typedef struct floor_casting
 {
@@ -187,6 +201,7 @@ typedef struct s_data
 	double		sprite_distance[20];
 	double		*zbuffer;
 	int			sprites_nb;
+	t_minimap	minimap;
 
 	int			fd;
 	t_map		map;
@@ -234,7 +249,8 @@ void	ft_calc_wall_distance(t_ray *ray);
 void	ft_calc_wall_line(t_ray *ray);
 
 // mini_map
-void	ft_print_minimap(t_data *data, t_ray *ray);
+void	ft_init_minimap(t_data *data, t_minimap *m, t_ray *ray);
+void	ft_print_minimap_render(t_data *data, t_ray *ray, t_minimap *m);
 
 // movements
 void	ft_move_straight(t_ray *ray, t_data *data, t_key *key);

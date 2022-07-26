@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 22:15:25 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/26 02:06:39 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/26 19:25:56 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ void	ft_print_sprite(t_sprite_calc *sp, t_data *data)
 					sp->d = y * 256 - sp->resolution_y * 128 + sp->spriteheight * 128;
 					sp->texy = ((sp->d * sp->img_height) / sp->spriteheight) / 256;
 					sp->color = sp->addr[sp->img_width * sp->texy + sp->texx];
-					if (sp->color > 0x0)
+					if (sp->color > 0x0 && sp->color < 2147483647)
 						my_mlx_pixel_put(data, sp->stripe, y, sp->color);
-					y++;
+					++y;
 				}
 			
 		sp->stripe++;
@@ -126,6 +126,7 @@ void	ft_sprite_casting(t_data *data, t_ray *ray, t_sprite *sprite)
 	sp.i = 0;
 	while (sp.i < data->sprites_nb)
 	{
+		printf("data->sprites_nb : %d\n", data->sprites_nb);
 		sp.img_height = data->texture[sprite[sp.i].texture].img_height; 
 		sp.img_width = data->texture[sprite[sp.i].texture].img_width; 
 		sp.addr = data->texture[sprite[sp.i].texture].addr; 
