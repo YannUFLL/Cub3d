@@ -1,89 +1,73 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_map.c                                         :+:      :+:    :+:   */
+/*   mini_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 20:08:02 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 15:16:37 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/26 19:20:54 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d_bonus.h"
 
-void	ft_print_wall(t_data *data, int x, int y)
+void	ft_print_square_map(t_data *data, t_minimap *m, int color)
 {
 	int	old_x;
 	int	old_y;
 
-	old_y = y * 10;
-	while (old_y <= ((y * 10) + 10))
+	old_y = m->y;
+	while (old_y <= (m->y + m->step))
 	{
-		old_x = x * 10;
-		while (old_x <= ((x * 10) + 10))
+		old_x = m->x;
+		while (old_x <= (m->x + m->step))
 		{
-			my_mlx_pixel_put(data, old_x, old_y, 0xD3D3D3);
+			my_mlx_pixel_put(data, old_x, old_y, color);
 			old_x++;
 		}
 		old_y++;
 	}
 }
 
-void	ft_print_walkable(t_data *data, int x, int y)
-{
-	int	old_x;
-	int	old_y;
 
-	old_y = y * 10;
-	while (old_y <= ((y * 10) + 10))
+
+void	ft_print_grind(t_data *data, t_ray *ray, t_minimap *m)
+{
+	while (m->j <= (int)ray->pos_y + 5  && m->j >= (int)ray->pos_y - 5)
 	{
-		old_x = x * 10;
-		while (((old_y != (y * 10)) || (old_y != (y * 10 + 10)))
-			&& (old_x <= ((x * 10) + 10)))
+		m->x = data->resolution_y / 25;
+		m->i = (int)ray->pos_x - 5; 
+		while (m->i <= (int)ray->pos_x + 5 && m->i >= (int)ray->pos_x - 5)
 		{
-			my_mlx_pixel_put(data, old_x, old_y, 16777215);
-			old_x++;
+			if (m->j < 0 || m->i < 0 || m->j >= m->height || m->i > m->width || ray->map[m->j][m->i] == '1')
+				m->color =  0xD3D3D3;
+			else if (ray->map[m->j][m->i] == '2')
+				m->color =  0x582900;
+			else if (ray->map[m->j][m->i] <= '0'|| ray->map[m->j][m->i] == 'N'
+				|| ray->map[m->j][m->i] == 'S'|| ray->map[m->j][m->i] == 'W'
+				|| ray->map[m->j][m->i] == 'E')
+				m->color =  0xF0F0F2;
+			ft_print_square_map(data,m,m->color);
+			m->x += m->step; 
+			m->i++;
 		}
-		old_y++;
+	m->y += m->step;
+	m->j++;
 	}
 }
 
-void	ft_print_grind(t_data *data, t_ray *ray)
+void	ft_print_pos(t_data *data, t_ray *ray, t_minimap *m)
 {
 	int	x;
 	int	y;
 
-	x = 0;
-	y = 0;
-	while (ray->map[y])
+	x = m->middle - 3;
+	y = m->middle - 3;
+	while (y <= m->middle + 3)
 	{
-		x = 0;
-		while (ray->map[y][x])
-		{
-			if (ray->map[y][x] > '0')
-				ft_print_wall(data, x, y);
-			if (ray->map[y][x] <= '0' || ray->map[y][x] == 'N'
-				|| ray->map[y][x] == 'S' || ray->map[y][x] == 'W'
-				|| ray->map[y][x] == 'E')
-				ft_print_walkable(data, x, y);
-			x++;
-		}
-	y++;
-	}
-}
-
-void	ft_print_pos(t_data *data, t_ray *ray)
-{
-	int	x;
-	int	y;
-
-	x = (ray->pos_x * 10) - 3;
-	y = (ray->pos_y * 10) - 3;
-	while (y <= (ray->pos_y * 10) + 3)
-	{
-		x = (ray->pos_x * 10) - 3;
-		while (x <= ((ray->pos_x * 10) + 3))
+		x = m->middle - 3;
+		while (x <= (m->middle  + 3))
 		{
 			my_mlx_pixel_put(data, x, y, 65280);
 			x++;
@@ -92,9 +76,10 @@ void	ft_print_pos(t_data *data, t_ray *ray)
 	}
 }
 
-void	ft_print_minimap(t_data *data, t_ray *ray)
+void	ft_print_minimap_render(t_data *data, t_ray *ray, t_minimap *m)
 {
-	ft_print_grind(data, ray);
-	ft_print_pos(data, ray);
+	ft_init_minimap(data,m,ray);
+	ft_print_grind(data, ray, m);
+	ft_print_pos(data, ray, m);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->display, 0, 0);
 }

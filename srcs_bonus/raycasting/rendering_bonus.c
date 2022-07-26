@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:31:47 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/26 01:45:26 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/26 19:17:01 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,19 +151,14 @@ int	ft_render_next_frame(t_data *data)
 {
 	t_ray	*ray;
 
-	struct timeval debut;
-	struct timeval fin;
 	ray = &data->ray_data;
 	ft_put_ceiling_and_roof(data);
 	ft_fps();
 	ft_movements(data);
 	ft_wall_casting(data, ray);
-	gettimeofday(&debut, NULL);
 	ft_sprite_casting(data, ray, data->sprite);
-	gettimeofday(&fin, NULL);
-	ft_print_minimap(data, ray);
+	ft_print_minimap_render(data, ray, &data->minimap);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->display, 0, 0);
 	ft_event(ray);
-	ft_printf("timedif : %d \n", time_diff(&debut, &fin));
 	return (0);
 }
