@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 16:33:42 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/26 17:14:00 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/26 23:18:25 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,31 @@ void	ft_use(t_data *data, t_ray *ray)
 	}
 }
 
-void	ft_event(t_ray *ray)
+void	ft_event(t_ray *ray, t_data *data)
 {
 	static int count; 
+	static int	count_sprite; 
+	int i;
+	static int sprite_texture_select; 
+
+	i = 0;
+	if (count_sprite == 10)
+	{
+		count_sprite = 0;
+		while (i < data->sprites_nb)
+		{
+			data->sprite[i].select_sprite =  data->sprite[i].texture[0]; 
+			if (data->sprite[i].texture[1] != -1)
+				data->sprite[i].select_sprite = data->sprite[i].texture[sprite_texture_select];
+			i++;
+		}
+		sprite_texture_select++;
+		if (sprite_texture_select == 5)
+			sprite_texture_select = 0;
+	}
+	else 
+		count_sprite++; 
+	
 
 	if (ray->map[(int)ray->pos_door_y][(int)ray->pos_door_x] != '/' && ray->door_open == 1 && count != 30)
 	{

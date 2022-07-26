@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 20:02:24 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/25 23:30:43 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/26 22:55:09 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,13 @@ void	ft_launch_ray(t_ray *ray)
 					ray->ray_touch_door = 1;
 				}
 				else 
+				{
 					ray->ray_side_y -=  (ray->ray_delta_y / 2);
+					ray->door_before = 1;
+				}
 			}
+			else if (ray->side == 1)
+				ray->text_select = TEXTURE_SIDE_DOOR;
 			if (ray->side == 0 && (ray->wall_x >= ray->map_y) && (ray->wall_x < ray->map_y + 1))
 			{
 				ray->wall_x -= floor(ray->wall_x);
@@ -104,11 +109,20 @@ void	ft_launch_ray(t_ray *ray)
 					ray->ray_touch_door = 1;
 				}
 				else 
+				{
 					ray->ray_side_x -=  (ray->ray_delta_x / 2);
+					ray->door_before = 1;
+				}
 			}
+			else if (ray->side == 0)
+				ray->text_select = TEXTURE_SIDE_DOOR;
 		}
 		if (ray->map[ray->map_y][ray->map_x] == '1')
 			ray->hit = 1;
+		if (ray->hit == 1 && ray->door_before == 1)
+				ray->text_select = TEXTURE_SIDE_DOOR;
+
+
 	}
 }
 

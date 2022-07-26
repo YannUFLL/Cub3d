@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 22:15:25 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/26 19:56:47 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/26 23:14:53 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,9 +126,9 @@ void	ft_sprite_casting(t_data *data, t_ray *ray, t_sprite *sprite)
 	sp.i = 0;
 	while (sp.i < data->sprites_nb)
 	{
-		sp.img_height = data->texture[sprite[data->sprite_order[sp.i]].texture[0]].img_height;
-		sp.img_width = data->texture[sprite[data->sprite_order[sp.i]].texture[0]].img_width;
-		sp.addr = data->texture[sprite[data->sprite_order[sp.i]].texture[0]].addr;
+		sp.img_height = data->texture[sprite[data->sprite_order[sp.i]].select_sprite].img_height;
+		sp.img_width = data->texture[sprite[data->sprite_order[sp.i]].select_sprite].img_width;
+		sp.addr = data->texture[sprite[data->sprite_order[sp.i]].select_sprite].addr;
 		sp.resolution_y = data->resolution_y;
 		sp.resolution_x = data->resolution_x;
 		ft_calc_pos(sprite, &sp, ray, data);

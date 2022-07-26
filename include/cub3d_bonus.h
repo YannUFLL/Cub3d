@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/26 19:38:46 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/26 23:04:41 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct sprite
 	double	x;
 	double	y;
 	int		texture[6];
+	int		select_sprite;
 }	t_sprite;
 
 typedef struct s_texture
@@ -147,6 +148,7 @@ typedef struct s_ray_data
 	char		**map;
 	int			ray_touch_door; 
 	double		size_door;
+	int			door_before;
 }	t_ray;
 
 typedef struct s_key
@@ -268,7 +270,7 @@ void	ft_mouse_rotate_left(t_ray *ray, t_key *key);
 void	ft_mouse_rotate_right(t_ray *ray, t_key *key);
 
 // event
-void	ft_event(t_ray *ray);
+void	ft_event(t_ray *ray, t_data *data);
 void	ft_use(t_data *data, t_ray *ray);
 
 // init
