@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_casting_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 22:15:25 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/26 02:06:39 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/26 17:42:14 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,9 @@ void	ft_print_sprite(t_sprite_calc *sp, t_data *data)
 
 void	ft_sprite_casting(t_data *data, t_ray *ray, t_sprite *sprite)
 {
-	t_sprite_calc sp; 
+	t_sprite_calc sp;
 
-	sprite = data->sprite; 
+	sprite = data->sprite;
 	sp.i = 0;
 	while (sp.i < data->sprites_nb)
 	{
@@ -126,9 +126,9 @@ void	ft_sprite_casting(t_data *data, t_ray *ray, t_sprite *sprite)
 	sp.i = 0;
 	while (sp.i < data->sprites_nb)
 	{
-		sp.img_height = data->texture[sprite[sp.i].texture].img_height; 
-		sp.img_width = data->texture[sprite[sp.i].texture].img_width; 
-		sp.addr = data->texture[sprite[sp.i].texture].addr; 
+		sp.img_height = data->texture[sprite[sp.i].texture[0]].img_height; 
+		sp.img_width = data->texture[sprite[sp.i].texture[0]].img_width; 
+		sp.addr = data->texture[sprite[sp.i].texture[0]].addr; 
 		sp.resolution_y = data->resolution_y; 
 		sp.resolution_x = data->resolution_x; 
 		ft_calc_pos(sprite, &sp, ray, data);

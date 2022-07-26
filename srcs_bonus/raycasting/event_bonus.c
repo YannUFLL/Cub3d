@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 16:33:42 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/26 00:03:30 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/26 17:14:00 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	ft_event(t_ray *ray)
 				count = 0;
 				ray->door_open = 0;
 			}
-
 	}
 
 	else if (count != 30)
