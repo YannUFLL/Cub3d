@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:38:35 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/26 01:20:44 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/26 03:13:50 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	main(int argc, char **argv)
 
 	ft_replace_space(&data);
 	data.mlx = mlx_init();
-	data.mlx_win = mlx_new_window(data.mlx, data.resolution_x, \
-	data.resolution_y, "WOLFENCHTEIN");
+	data.mlx_win = mlx_new_window(data.mlx, 2560, \
+	1440, "WOLFENCHTEIN");
 	ft_init_display(&data);
 	ft_init_ray_data(&data, &data.ray_data);
 	ft_init_text(&data);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init2.c                                            :+:      :+:    :+:   */
+/*   init2_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 02:08:45 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/21 15:11:19 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/26 03:14:06 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_init_display(t_data *data)
 {
-	data->display = mlx_new_image(data->mlx, data->resolution_x,
-			data->resolution_y);
+	data->display = mlx_new_image(data->mlx, 2560,
+			1440);
 	data->display_add = mlx_get_data_addr(data->display,
 			&data->bits_per_pixel, &data->line_length, &data->endian);
 	return (0);

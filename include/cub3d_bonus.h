@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/26 01:47:43 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/26 03:25:01 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ typedef struct s_map
 
 typedef struct s_data
 {
+	unsigned int			b[640][360];
 	void		*mlx_win;
 	void		*mlx;
 	t_texture	*texture;

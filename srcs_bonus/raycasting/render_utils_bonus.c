@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 21:15:20 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/25 15:19:19 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/26 02:50:40 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,7 @@ typedef struct s_color
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-	static int	octet;
-
-	if (octet == 0)
-		octet = data->bits_per_pixel / 8;
-	*(unsigned int *)(data->display_add
-			+ (y * data->line_length + x * 4)) = color;
+	data->b[x][y] = color;
 }
 
 int	time_diff(struct timeval *start, struct timeval *end)
