@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 20:08:02 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/26 19:20:54 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/26 19:41:14 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_print_grind(t_data *data, t_ray *ray, t_minimap *m)
 	}
 }
 
-void	ft_print_pos(t_data *data, t_ray *ray, t_minimap *m)
+void	ft_print_pos(t_data *data, t_minimap *m)
 {
 	int	x;
 	int	y;
@@ -80,6 +80,6 @@ void	ft_print_minimap_render(t_data *data, t_ray *ray, t_minimap *m)
 {
 	ft_init_minimap(data,m,ray);
 	ft_print_grind(data, ray, m);
-	ft_print_pos(data, ray, m);
+	ft_print_pos(data, m);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->display, 0, 0);
 }
