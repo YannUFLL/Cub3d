@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/26 16:11:29 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/26 17:39:15 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct sprite
 {
 	double	x;
 	double	y;
-	int		texture;
+	int		texture[6];
 }	t_sprite;
 
 typedef struct s_texture
@@ -352,8 +352,8 @@ void	ft_draw_line_floor(t_data *data, t_ray *ray, t_flo *flo, int x);
 void	ft_calc_pos_textfloor(t_ray *ray, t_flo *flo, t_data *data, int width);
 
 
-void	ft_add_texture(t_data *data, char **map, int x, int y);
-void	ft_add_texture_anime(t_data *data, char **map, int x, int y);
+void	ft_add_texture_anime(t_data *data, int x, int y, int *j);
+void	ft_add_texture(t_data *data, int x, int y, int *j);
 
 
 
