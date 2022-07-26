@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 16:33:42 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/26 23:18:25 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/27 01:07:44 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ void	ft_event(t_ray *ray, t_data *data)
 		{
 			data->sprite[i].select_sprite =  data->sprite[i].texture[0]; 
 			if (data->sprite[i].texture[1] != -1)
-				data->sprite[i].select_sprite = data->sprite[i].texture[sprite_texture_select];
+			{
+				data->sprite[i].select_sprite = data->sprite[i].texture[sprite_texture_select + i];
+			}
+			printf("sprite : %d \n",sprite_texture_select + i);
 			i++;
 		}
 		sprite_texture_select++;
@@ -47,8 +50,6 @@ void	ft_event(t_ray *ray, t_data *data)
 	}
 	else 
 		count_sprite++; 
-	
-
 	if (ray->map[(int)ray->pos_door_y][(int)ray->pos_door_x] != '/' && ray->door_open == 1 && count != 30)
 	{
 		if (ray->size_door <= 0)
