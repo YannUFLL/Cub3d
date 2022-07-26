@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/26 01:47:43 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:11:29 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <sys/time.h>
 	struct timeval debut;
 	struct timeval fin;
-int	time_diff(struct timeval *start, struct timeval *end);	
+	int	time_diff(struct timeval *start, struct timeval *end);
 
 
 # include <stdlib.h>
@@ -353,6 +353,7 @@ void	ft_calc_pos_textfloor(t_ray *ray, t_flo *flo, t_data *data, int width);
 
 
 void	ft_add_texture(t_data *data, char **map, int x, int y);
+void	ft_add_texture_anime(t_data *data, char **map, int x, int y);
 
 
 
