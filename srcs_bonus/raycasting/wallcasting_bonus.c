@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wallcasting_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 20:02:24 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/22 00:10:11 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/25 23:30:43 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,47 @@ void	ft_launch_ray(t_ray *ray)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (ray->map[ray->map_y][ray->map_x] == '1'
-			|| ray->map[ray->map_y][ray->map_x] == '2')
-			ray->hit = 1;
 		if (ray->map[ray->map_y][ray->map_x] == '2')
-			ray->text_select = TEXTURE_DOOR;
+		{
+			if (ray->side == 0)
+				ray->ray_side_x += (ray->ray_delta_x / 2);
+			else
+				ray->ray_side_y += (ray->ray_delta_y / 2);
+			if (ray->side == 0)
+				ray->walldistance = (ray->ray_side_x - ray->ray_delta_x);
+			else if (ray->side == 1)
+				ray->walldistance = (ray->ray_side_y - ray->ray_delta_y);
+			if (ray->side == 0)
+				ray->wall_x = ray->pos_y + (ray->walldistance) * ray->raydir_y ;
+			else
+				ray->wall_x = ray->pos_x + (ray->walldistance) * ray->raydir_x;
+			if (ray->side == 1 && (ray->wall_x >= ray->map_x) && (ray->wall_x < ray->map_x + 1))
+			{
+				ray->wall_x -= floor(ray->wall_x);
+				if (ray->wall_x < ray->size_door ||  ray->map_y != ray->pos_door_y || ray->map_x != ray->pos_door_x)
+				{
+					ray->hit = 1;
+					ray->text_select = TEXTURE_DOOR;
+					ray->ray_touch_door = 1;
+				}
+				else 
+					ray->ray_side_y -=  (ray->ray_delta_y / 2);
+			}
+			if (ray->side == 0 && (ray->wall_x >= ray->map_y) && (ray->wall_x < ray->map_y + 1))
+			{
+				ray->wall_x -= floor(ray->wall_x);
+				if (ray->wall_x < ray->size_door || ray->map_y != ray->pos_door_y || ray->map_x != ray->pos_door_x)
+				{
+					ray->hit = 1;
+					ray->text_select = TEXTURE_DOOR;
+					ray->ray_touch_door = 1;
+				}
+				else 
+					ray->ray_side_x -=  (ray->ray_delta_x / 2);
+			}
+		}
+		if (ray->map[ray->map_y][ray->map_x] == '1')
+			ray->hit = 1;
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:31:47 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/22 00:22:17 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/26 01:45:26 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,31 @@ void	ft_printf_ray(t_ray *ray)
 }
 */
 
+#if FOG == 1
 void	ft_put_ceiling_and_roof(t_data *data)
 {
 	int	x;
 	int	y;
 	int color;
-	//int shadding;
+	float shade;
+	float ratio;
 
+	ratio = 1 / ((float)data->resolution_y / 2);
+	shade = 0.40;
 	y = 0;
 	while (y < data->resolution_y)
 	{
 		x = 0;
 		if (y > data->resolution_y / 2)
-			color = data->floor;
+		{
+			shade -= ratio;
+			color = ft_mix_color(data->floor,data->fog_color, shade);
+		}
 		else
-			color = data->ceiling;
+		{
+			shade += ratio; 
+			color = ft_mix_color(data->ceiling,data->fog_color, shade);
+		}
 		while (x < data->resolution_x)
 		{
 			my_mlx_pixel_put(data, x, y, color);
@@ -60,6 +70,31 @@ void	ft_put_ceiling_and_roof(t_data *data)
 	y++;
 	}
 }
+#else
+
+void	ft_put_ceiling_and_roof(t_data *data)
+{
+	int	x;
+	int	y;
+	int color;
+
+	y = 0;
+	while (y < data->resolution_y)
+	{
+		x = 0;
+		if (y > data->resolution_y / 2)
+			color = data->floor;
+		else
+			color = data->ceiling; 
+		while (x < data->resolution_x)
+		{
+			my_mlx_pixel_put(data, x, y, color);
+			x++;
+		}
+	y++;
+	}
+}
+#endif
 
 void	ft_init_ray(t_ray *ray, int x)
 {
@@ -84,7 +119,8 @@ void	ft_movements(t_data *data)
 	ft_mouse_rotate_right(&data->ray_data, key);
 	return ;
 }
-
+#include <sys/time.h>
+int	time_diff(struct timeval *start, struct timeval *end);
 void	ft_wall_casting(t_data *data, t_ray *ray)
 {
 	int	x;
@@ -103,10 +139,10 @@ void	ft_wall_casting(t_data *data, t_ray *ray)
 		ft_choose_texture(ray);
 		ft_calc_x_texture(data);
 		ft_calc_y_texture(data);
+		data->zbuffer[x] = ray->walldistance;
 		ft_print_texture(data, ray, x);
 		//ft_printf_ray(ray);
 		ft_floor_casting(data, ray, x);
-		data->zbuffer[x] = ray->walldistance;
 		x++;
 	}
 }
@@ -115,14 +151,19 @@ int	ft_render_next_frame(t_data *data)
 {
 	t_ray	*ray;
 
+	struct timeval debut;
+	struct timeval fin;
 	ray = &data->ray_data;
 	ft_put_ceiling_and_roof(data);
 	ft_fps();
 	ft_movements(data);
 	ft_wall_casting(data, ray);
+	gettimeofday(&debut, NULL);
 	ft_sprite_casting(data, ray, data->sprite);
+	gettimeofday(&fin, NULL);
 	ft_print_minimap(data, ray);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->display, 0, 0);
 	ft_event(ray);
+	ft_printf("timedif : %d \n", time_diff(&debut, &fin));
 	return (0);
 }

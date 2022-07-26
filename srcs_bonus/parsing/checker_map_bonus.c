@@ -28,7 +28,6 @@ int	ft_check_door(char **map, int i, int j)
 int	ft_checker_char(t_map_data *d, t_data *data, int i, int j)
 {
 	char		**map;
-	static int	add_barrel = 0;
 
 	map = data->map.tab;
 	if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' \
@@ -44,10 +43,9 @@ int	ft_checker_char(t_map_data *d, t_data *data, int i, int j)
 		printf("Please check in (%d, %d)\n", i, j);
 		exit(0);
 	}
-	else if (map[i][j] == 'B' && add_barrel == 0)
+	else if (map[i][j] == 'B')
 	{
 		printf("ajoue de texture barrel\n");
-		add_barrel = 1;
 		ft_add_texture(data, map, j, i);
 	}
 	return (0);
