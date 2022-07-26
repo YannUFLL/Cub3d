@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_texture_bonus.c                               :+:      :+:    :+:   */
+/*   init_sprit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/18 19:18:52 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/26 15:27:22 by jrasser          ###   ########.fr       */
+/*   Created: 2022/07/26 14:36:35 by jrasser           #+#    #+#             */
+/*   Updated: 2022/07/26 16:30:17 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d_bonus.h"
 
-void	ft_cpy_texture(t_data *data, t_texture **new_texture)
+void	ft_cpy_old_texture(t_data *data, t_texture **new_texture)
 {
 	int	i;
 
@@ -40,10 +40,20 @@ void	ft_cpy_texture(t_data *data, t_texture **new_texture)
 	free(data->texture);
 }
 
-void	ft_fill_new_texture(t_data *data, t_texture **new_texture, char c)
+void	ft_fill_new_texture2(t_data *data, t_texture **new_texture, char c, int i)
 {
-	if (c == 'B')
-		(*new_texture)[data->textures_nb - 1].path = "./sprites/barrel.xpm";
+	if (c == 'M' && i == 0)
+		(*new_texture)[data->textures_nb - 1].path = "./sprites/champ_1.xpm";
+	else if (c == 'M' && i == 1)
+		(*new_texture)[data->textures_nb - 1].path = "./sprites/champ_2.xpm";
+	else if (c == 'M' && i == 2)
+		(*new_texture)[data->textures_nb - 1].path = "./sprites/champ_3.xpm";
+	else if (c == 'M' && i == 3)
+		(*new_texture)[data->textures_nb - 1].path = "./sprites/champ_4.xpm";
+	else if (c == 'M' && i == 4)
+		(*new_texture)[data->textures_nb - 1].path = "./sprites/champ_5.xpm";
+	else if (c == 'M' && i == 5)
+		(*new_texture)[data->textures_nb - 1].path = "./sprites/champ_6.xpm";
 	(*new_texture)[data->textures_nb - 1].mlx_img = NULL;
 	(*new_texture)[data->textures_nb - 1].addr = NULL;
 	(*new_texture)[data->textures_nb - 1].img_width = 0;
@@ -55,74 +65,28 @@ void	ft_fill_new_texture(t_data *data, t_texture **new_texture, char c)
 	(*new_texture)[data->textures_nb - 1].type = c;
 }
 
-void	ft_add_texture(t_data *data, char **map, int x, int y)
+
+void	ft_add_texture_anime(t_data *data, char **map, int x, int y)
 {
 	t_texture	*new_texture;
 	static int	j = 0;
 	char		c;
+	int 		i;
 
-	data->textures_nb += 1;
-	new_texture = NULL;
-	ft_cpy_texture(data, &new_texture);
-	c = map[y][x];
-	ft_fill_new_texture(data, &new_texture, c);
-	data->sprites_nb += 1;
-	data->sprite[j].x = x + 0.5;
-	data->sprite[j].y = y + 0.5;
-	data->sprite[j].texture = data->textures_nb - 1;
-	j++;
-	data->texture = new_texture;
-}
-
-void	ft_init_texture(t_data *data)
-{
-	int	x;
-
-	data->textures_nb = 8;
-	data->sprites_nb = 0;
-	data->texture = malloc(sizeof(t_texture) * data->textures_nb);
-	x = 0;
-	while (x < data->textures_nb)
+	i = 0;
+	while (i < 5)
 	{
-		data->texture[x].path = NULL;
-		data->texture[x].mlx_img = NULL;
-		data->texture[x].addr = NULL;
-		data->texture[x].img_width = 0;
-		data->texture[x].img_height = 0;
-		data->texture[x].lenght = 0;
-		data->texture[x].bit_per_pixel = 0;
-		data->texture[x].endian = 0;
-		data->texture[x].type = 0;
-		if (x == TEXTURE_FLOOR || x == TEXTURE_CEIL)
-			data->texture[x].use_color = 1;
-		else
-			data->texture[x].use_color = 0;
-		x++;
+		data->textures_nb += 1;
+		new_texture = NULL;
+		ft_cpy_old_texture(data, &new_texture);
+		c = map[y][x];
+		ft_fill_new_texture2(data, &new_texture, c, i);
+		data->sprites_nb += 1;
+		data->sprite[j].x = x + 0.5;
+		data->sprite[j].y = y + 0.5;
+		data->sprite[j].texture = data->textures_nb - 1;
+		j++;
+		data->texture = new_texture;
+		i++;
 	}
-}
-
-int	ft_init_text(t_data *data)
-{
-	int			x;
-	t_texture	*text;
-
-	x = 0;
-	text = data->texture;
-	while (x < data->textures_nb)
-	{
-		if (!(text[x].use_color))
-		{
-			text[x].mlx_img = mlx_xpm_file_to_image(data->mlx, \
-				text[x].path, &text[x].img_width, &text[x].img_height);
-			if (text[x].mlx_img == NULL)
-			{
-				printf("Error\nTexture %d not found: %s\n", x, text[x].path);
-				exit(0);
-			}
-			text[x].addr = (int *)mlx_get_data_addr(text[x].mlx_img, \
-				&text[x].bit_per_pixel, &text[x].lenght, &text[x].endian);
-		}
-		x++;
-	}
-	return (0);
 }

@@ -27,7 +27,7 @@ int	ft_check_door(char **map, int i, int j)
 
 int	ft_checker_char(t_map_data *d, t_data *data, int i, int j)
 {
-	char		**map;
+	char	**map;
 
 	map = data->map.tab;
 	if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' \
@@ -45,13 +45,33 @@ int	ft_checker_char(t_map_data *d, t_data *data, int i, int j)
 	}
 	else if (map[i][j] == 'B')
 	{
-		printf("ajoue de texture barrel\n");
+		printf("ajoue de texture barrel %c\n", map[i][j]);
 		ft_add_texture(data, map, j, i);
+	}
+	else if (map[i][j] == 'M')
+	{
+		printf("ajoue de sprite anim\n");
+		ft_add_texture_anime(data, map, j, i);
 	}
 	return (0);
 }
 
-int	ft_check_player_spawn(t_map_data *d, t_data *data)
+int	ft_checker_pos(t_map_data *d, t_data *data, int i, int j)
+{
+	char	**map;
+
+	map = data->map.tab;
+	if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' \
+	|| map[i][j] == 'E')
+	{
+		d->posY = i;
+		d->posX = j;
+		return (1);
+	}
+	return (0);
+}
+
+int	ft_check_player_spawn(t_map_data *d, t_data *data, int check_all)
 {
 	int		i;
 	int		j;
@@ -66,8 +86,13 @@ int	ft_check_player_spawn(t_map_data *d, t_data *data)
 		j = 0;
 		while (map && map[i] && map[i][j])
 		{
-			if (ft_checker_char(d, data, i, j))
-				is_spawn = 0;
+			if (check_all)
+			{
+				if (ft_checker_char(d, data, i, j))
+					is_spawn = 0;
+			}
+			else
+				ft_checker_pos(d, data, i, j);
 			j++;
 		}
 		i++;
@@ -103,7 +128,7 @@ int	ft_check_map_border(t_map_data *d, t_data *data)
 		if (ret)
 			return (1);
 		ft_init_map_data(d, data);
-		ft_check_player_spawn(d, data);
+		ft_check_player_spawn(d, data, 0);
 		i++;
 	}
 	i = 0;
@@ -113,7 +138,7 @@ int	ft_check_map_border(t_map_data *d, t_data *data)
 		if (ret)
 			return (1);
 		ft_init_map_data(d, data);
-		ft_check_player_spawn(d, data);
+		ft_check_player_spawn(d, data, 0);
 		i++;
 	}
 	return (0);
@@ -125,7 +150,7 @@ int	ft_check_map(t_data *data)
 	int			ret;
 
 	ft_init_map_data(&map_data, data);
-	if (ft_check_player_spawn(&map_data, data))
+	if (ft_check_player_spawn(&map_data, data, 1))
 	{
 		printf("Error\nNo spawner\n");
 		exit(0);

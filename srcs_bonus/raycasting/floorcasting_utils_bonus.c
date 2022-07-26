@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   floorcasting_utils_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 19:15:52 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/25 15:22:20 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:29:06 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_draw_line_ceil(t_data *data, t_ray *ray, t_flo *flo, int x)
 	int	*text2;
 	float shade; 
 
-	ray->text_select = 5;
+	ray->text_select = TEXTURE_CEIL;
 	text2 = data->texture[ray->text_select].addr;
 	width = data->texture[ray->text_select].img_width;
 	while (ray->drawend < ray->resolution_y)
@@ -39,7 +39,7 @@ void	ft_draw_line_both(t_data *data, t_ray *ray, t_flo *flo, int x)
 	int	*text2;
 	float shade; 
 
-	ray->text_select = 4;
+	ray->text_select = TEXTURE_FLOOR;
 	text1 = data->texture[ray->text_select].addr;
 	text2 = data->texture[ray->text_select + 1].addr;
 	width = data->texture[ray->text_select].img_width;
@@ -60,7 +60,7 @@ void	ft_draw_line_floor(t_data *data, t_ray *ray, t_flo *flo, int x)
 	int	*text1;
 	float shade; 
 
-	ray->text_select = 4;
+	ray->text_select = TEXTURE_FLOOR;
 	text1 = data->texture[ray->text_select].addr;
 	width = data->texture[ray->text_select].img_width;
 
@@ -80,7 +80,7 @@ void	ft_draw_line_ceil(t_data *data, t_ray *ray, t_flo *flo, int x)
 	int	width;
 	int	*text2;
 
-	ray->text_select = 5;
+	ray->text_select = TEXTURE_CEIL;
 	text2 = data->texture[ray->text_select].addr;
 	width = data->texture[ray->text_select].img_width;
 	while (ray->drawend < ray->resolution_y)
@@ -98,7 +98,7 @@ void	ft_draw_line_both(t_data *data, t_ray *ray, t_flo *flo, int x)
 	int	*text1;
 	int	*text2;
 
-	ray->text_select = 4;
+	ray->text_select = TEXTURE_FLOOR;
 	text1 = data->texture[ray->text_select].addr;
 	text2 = data->texture[ray->text_select + 1].addr;
 	width = data->texture[ray->text_select].img_width;
@@ -118,7 +118,7 @@ void	ft_draw_line_floor(t_data *data, t_ray *ray, t_flo *flo, int x)
 	int	width;
 	int	*text1;
 
-	ray->text_select = 4;
+	ray->text_select = TEXTURE_FLOOR;
 	text1 = data->texture[ray->text_select].addr;
 	width = data->texture[ray->text_select].img_width;
 
