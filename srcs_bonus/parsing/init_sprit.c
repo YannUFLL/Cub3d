@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 14:36:35 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/26 17:39:41 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/26 19:34:05 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,13 @@ void	ft_fill_new_texture2(t_data *data, t_texture **new_texture, char c, int i)
 	(*new_texture)[data->textures_nb - 1].type = c;
 }
 
-
 void	ft_add_texture_anime(t_data *data, int x, int y, int *j)
 {
 	t_texture	*new_texture;
 	char		c;
 	int 		i;
+
+	printf("add sprite anime: x : %d, y : %d", x, y);
 
 	i = 0;
 	data->sprites_nb += 1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:31:47 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/26 01:45:26 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/26 18:15:18 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,6 @@ int	ft_render_next_frame(t_data *data)
 	ft_print_minimap(data, ray);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->display, 0, 0);
 	ft_event(ray);
-	ft_printf("timedif : %d \n", time_diff(&debut, &fin));
+	//ft_printf("timedif : %d \n", time_diff(&debut, &fin));
 	return (0);
 }
