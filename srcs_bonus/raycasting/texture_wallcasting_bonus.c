@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 19:59:45 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/26 16:52:42 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/27 00:48:24 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	ft_choose_texture(t_ray *ray)
 		ray->text_select = 1;
 	if (ray->side == 0 && ray->raydir_x > 0)
 		ray->text_select = 3;
+	if (ray->side == 0 && ray->raydir_x < 0)
+		ray->text_select = 2;
 	if (ray->side == 0 && ray->raydir_x < 0)
 		ray->text_select = 2;
 }

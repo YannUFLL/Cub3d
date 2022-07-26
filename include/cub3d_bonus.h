@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/26 23:04:41 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/27 01:14:51 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ typedef struct s_ray_data
 	double		ray_delta_y;
 	int			step_x;
 	int			step_y;
+	int			case_count;
 	int			hit;
 	int			side;
 	double		walldistance;
