@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_texture_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:18:52 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/26 19:34:06 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/27 17:22:14 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	ft_add_texture(t_data *data, int x, int y, int *j)
 	t_texture	*new_texture;
 	char		c;
 
-
 	printf("add texture : x : %d, y : %d", x, y);
 	data->textures_nb += 1;
 	new_texture = NULL;
@@ -72,6 +71,7 @@ void	ft_add_texture(t_data *data, int x, int y, int *j)
 	data->sprite[*j].y = y + 0.5;
 	data->sprite[*j].texture[0] = data->textures_nb - 1;
 	data->sprite[*j].texture[1] = -1;
+	data->sprite[*j].select_sprite = 0;
 	*j += 1;
 	data->texture = new_texture;
 }

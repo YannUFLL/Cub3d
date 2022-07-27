@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:16:27 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 01:14:03 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/27 02:15:29 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,18 @@ int	ft_init_data(t_data *data)
 void	ft_sub_init_direction(t_data *data, t_ray *ray)
 {
 	if (data->player_spawn_dir == 'W')
-    {
-        ray->dir_x = 1;
-        ray->dir_y = 0;
-        ray->plane_x = 0;
-        ray->plane_y = (double)data->fov / 100;
-    }
-    if (data->player_spawn_dir == 'E')
-    {
-        ray->dir_x = -1;
-        ray->dir_y = 0;
-        ray->plane_x = 0;
-        ray->plane_y = -(double)data->fov / 100;
+	{
+		ray->dir_x = 1;
+		ray->dir_y = 0;
+		ray->plane_x = 0;
+		ray->plane_y = (double)data->fov / 100;
+	}
+	if (data->player_spawn_dir == 'E')
+	{
+		ray->dir_x = -1;
+		ray->dir_y = 0;
+		ray->plane_x = 0;
+		ray->plane_y = -(double)data->fov / 100;
 	}
 }
 
@@ -114,7 +114,6 @@ void	ft_init_ray_data(t_data *data, t_ray *ray)
 	ray->resolution_y = data->resolution_y;
 	ft_init_direction(data, ray);
 	ft_init_ray_data2(ray);
-	// bonus
 	ray->door_open = 0;
 	ray->pos_door_x = 0;
 	ray->pos_door_y = 0;

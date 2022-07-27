@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 01:14:46 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:44:37 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,21 @@
 # include "../libft/libft.h"
 
 # if defined(__linux__)
-	#define FORWARD 122
-	#define BACKWARD 115
-	#define MOVE_LEFT 113
-	#define MOVE_RIGHT 100
-	#define ROTATE_LEFT 65361
-	#define ROTATE_RIGHT 65363
-	#define EXIT 65307
+#  define FORWARD 122
+#  define BACKWARD 115
+#  define MOVE_LEFT 113
+#  define MOVE_RIGHT 100
+#  define ROTATE_LEFT 65361
+#  define ROTATE_RIGHT 65363
+#  define EXIT 65307
 # else
-	#define FORWARD 13
-	#define BACKWARD 1
-	#define MOVE_LEFT 0
-	#define MOVE_RIGHT 2
-	#define ROTATE_LEFT 123
-	#define ROTATE_RIGHT 124
-	#define EXIT 53
+#  define FORWARD 13
+#  define BACKWARD 1
+#  define MOVE_LEFT 0
+#  define MOVE_RIGHT 2
+#  define ROTATE_LEFT 123
+#  define ROTATE_RIGHT 124
+#  define EXIT 53
 # endif
 
 typedef struct sprite
@@ -143,23 +143,23 @@ typedef struct s_data
 	int			textures_nb;
 	int			fd;
 	t_map		map;
-	int 		is_map_started;
+	int			is_map_started;
 }	t_data;
 
 typedef struct s_map_data
 {
-	char **map;
-	int x_start;
-	int y_start;
-	int posX;
-	int posY;
-	int width;
-	int height;
-	char dir;
-	int nb_pass;
-	int no_move_possible;
-	int is_againt_wall;
-	int	nb_move;
+	char	**map;
+	int		x_start;
+	int		y_start;
+	int		posX;
+	int		posY;
+	int		width;
+	int		height;
+	char	dir;
+	int		nb_pass;
+	int		no_move_possible;
+	int		is_againt_wall;
+	int		nb_move;
 }	t_map_data;
 
 // render

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:38:35 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/26 19:04:03 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/27 02:15:42 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,11 @@
 
 int	main(int argc, char **argv)
 {
-	t_data data;
+	t_data	data;
 
 	ft_init_data(&data);
 	if (ft_checker(argc, argv, &data) || ft_parsing(&data))
 		return (ft_free_texture(&data));
-
-	ft_printdata(&data);
-
 	ft_replace_space(&data);
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, data.resolution_x, \

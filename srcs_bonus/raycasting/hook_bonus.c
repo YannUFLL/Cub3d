@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 21:55:08 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/26 01:30:42 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/27 03:10:12 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int	ft_mouse(int x, int y, t_data *data)
 	static int	first;
 
 	(void)y;
-	//mlx_mouse_hide(data->mlx, data->mlx_win);
 	if (first == 0)
 	{
 		old_x = x;
