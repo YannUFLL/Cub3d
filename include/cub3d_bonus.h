@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 20:18:29 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/27 20:32:22 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -361,6 +361,7 @@ void	ft_calc_pos_textfloor(t_ray *ray, t_flo *flo, t_data *data, int width);
 
 void	ft_add_texture_anime(t_data *data, int x, int y, int *j);
 void	ft_add_texture(t_data *data, int x, int y, int *j);
+void	ft_sub_cpy_old_texture(t_data *data, t_texture **new_texture, int i);
 int		ft_check_map_border(t_map_data *d, t_data *data);
 int		ft_check_map(t_data *data);
 
