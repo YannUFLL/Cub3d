@@ -2,8 +2,8 @@ NO ./texture/stone_1024.xpm
 SO ./texture/stone_1024.xpm
 WE ./texture/stone_1024.xpm
 EA ./texture/stone_1024.xpm
-F ./texture/floor_512.xpm
-C ./texture/ceiling_wood_512.xpm
+F 150,150,151
+C 150,145,142
 
 111111111111111111111111111111111111111111111111111
 100000000000100000011100000000000011111000000000011

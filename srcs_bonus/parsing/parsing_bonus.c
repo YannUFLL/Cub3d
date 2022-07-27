@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:21:13 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/26 16:32:44 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/27 02:38:23 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ int	ft_check_all_caract(t_data *data)
 	if (data->ceiling == -1 && data->texture[TEXTURE_CEIL].use_color == 1)
 		printf("Missing ceil color\n");
 	if (data->texture[TEXTURE_CEIL].use_color == 0
-			&& !(data->texture[TEXTURE_CEIL].path))
+		&& !(data->texture[TEXTURE_CEIL].path))
 		printf("Missing ceil texture\n");
 	if (data->floor == -1 && data->texture[TEXTURE_FLOOR].use_color == 1)
 		printf("Missing floor color\n");
 	if (data->texture[TEXTURE_FLOOR].use_color == 0
-			&& !(data->texture[TEXTURE_FLOOR].path))
+		&& !(data->texture[TEXTURE_FLOOR].path))
 		printf("Missing floor texture\n");
 	if (ft_check_miss_caract(data))
 		return (1);
@@ -125,7 +125,9 @@ int	ft_parsing(t_data *data)
 	close(data->fd);
 	if (ft_check_all_caract(data))
 		exit(0);
-	ft_sub_fill_caract(&(data->texture[TEXTURE_DOOR].path), "./texture/door_256.xpm");
-	ft_sub_fill_caract(&(data->texture[TEXTURE_SIDE_DOOR].path), "./texture/door_side.xpm");
+	ft_sub_fill_caract(&(data->texture[TEXTURE_DOOR].path),
+		"./texture/door_256.xpm");
+	ft_sub_fill_caract(&(data->texture[TEXTURE_SIDE_DOOR].path),
+		"./texture/door_side.xpm");
 	return (0);
 }
