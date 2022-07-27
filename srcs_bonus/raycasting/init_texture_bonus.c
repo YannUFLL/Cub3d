@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:18:52 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 17:10:44 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/27 20:21:21 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	ft_add_texture(t_data *data, int x, int y, int *j)
 	data->sprite[*j].texture[0] = data->textures_nb - 1;
 	data->sprite[*j].texture[1] = -1;
 	data->sprite[*j].select_sprite = 0;
+	data->sprite[*j].is_anim = 0;
 	*j += 1;
 	data->texture = new_texture;
 }

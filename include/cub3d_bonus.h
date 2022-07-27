@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 19:19:40 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/27 20:18:29 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct sprite
 	double	y;
 	int		texture[6];
 	int		select_sprite;
+	int		is_anim;
 }	t_sprite;
 
 typedef struct s_texture

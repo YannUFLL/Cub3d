@@ -6,13 +6,13 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 17:11:41 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/27 20:13:45 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/27 20:22:18 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d_bonus.h"
 
-void	ft_sprite_left(t_data *data, int i)
+void	ft_random_move(t_data *data, int i)
 {
 	static char	last_move = 'L';
 	char		**map;
@@ -24,11 +24,8 @@ void	ft_sprite_left(t_data *data, int i)
 	x = data->sprite[i].x;
 	y = data->sprite[i].y;
 	delta = 0.01;
-	if (x - delta > 1 
-		&& map[(int)y][(int)(x - 0.25 - delta)] != '1'
-		&& map[(int)y][(int)(x - 0.25 - delta)] != 'D'
-		&& last_move == 'L'
-	)
+	if (x - delta > 1 && map[(int)y][(int)(x - 0.25 - delta)] != '1'
+		&& map[(int)y][(int)(x - 0.25 - delta)] != 'D' && last_move == 'L')
 	{
 		last_move = 'L';
 		data->sprite[i].x -= delta;
@@ -43,12 +40,6 @@ void	ft_sprite_left(t_data *data, int i)
 		last_move = 'L';
 }
 
-void	ft_random_move(t_data *data, int i)
-{
-	ft_sprite_left(data, i);
-}
-
-
 float	ft_calc_dist_player_monster(t_data *data, int i)
 {
 	double	x_monster;
@@ -61,7 +52,6 @@ float	ft_calc_dist_player_monster(t_data *data, int i)
 	y_monster = data->sprite[i].y;
 	x_player = data->ray_data.pos_x;
 	y_player = data->ray_data.pos_y;
-
 	if (fabs(x_monster - x_player) == (float)0)
 		x_monster += 0.000001;
 	if (fabs(y_monster - y_player) == (float)0)
@@ -86,7 +76,6 @@ void	ft_follow_player(t_data *data, int i)
 	x_player = data->ray_data.pos_x;
 	y_player = data->ray_data.pos_y;
 	delta = 0.02;
-
 	if (x_player > x_monster + 0.8)
 		data->sprite[i].x += delta;
 	else if (x_player < x_monster - 0.8)
@@ -119,13 +108,16 @@ void	ft_move_enemi(t_data *data)
 	i = 0;
 	while (i < data->sprites_nb)
 	{
-		if (is_remove_case == 0)
-			ft_remove_case(data, i);
-		dist = ft_calc_dist_player_monster(data, i);
-		if (dist < (float)3.5)
-			ft_follow_player(data, i);
-		else
-			ft_random_move(data, i);
+		if (data->sprite[i].is_anim)
+		{
+			if (is_remove_case == 0)
+				ft_remove_case(data, i);
+			dist = ft_calc_dist_player_monster(data, i);
+			if (dist < (float)3.5)
+				ft_follow_player(data, i);
+			else
+				ft_random_move(data, i);
+		}
 		i++;
 	}
 	is_remove_case ++;
