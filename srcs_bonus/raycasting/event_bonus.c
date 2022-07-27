@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 16:33:42 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 01:44:25 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/27 03:04:23 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	ft_use(t_data *data, t_ray *ray)
 
 void	ft_event(t_ray *ray, t_data *data)
 {
-	static int count; 
-	static int	count_sprite; 
-	int i;
-	static int sprite_texture_select; 
+	static int	count;
+	static int	count_sprite;
+	int			i;
+	static int	sprite_texture_select;
 
 	i = 0;
 	if (count_sprite == 10)
@@ -36,7 +36,7 @@ void	ft_event(t_ray *ray, t_data *data)
 		count_sprite = 0;
 		while (i <= data->sprites_nb)
 		{
-			data->sprite[i].select_sprite =  data->sprite[i].texture[0]; 
+			data->sprite[i].select_sprite = data->sprite[i].texture[0];
 			if (data->sprite[i].texture[1] != -1)
 			{
 				data->sprite[i].select_sprite = data->sprite[i].texture[sprite_texture_select];
@@ -47,8 +47,8 @@ void	ft_event(t_ray *ray, t_data *data)
 		if (sprite_texture_select == 6)
 			sprite_texture_select = 0;
 	}
-	else 
-		count_sprite++; 
+	else
+		count_sprite++;
 	if (ray->map[(int)ray->pos_door_y][(int)ray->pos_door_x] != '/' && ray->door_open == 1 && count != 30)
 	{
 		if (ray->size_door <= 0)
@@ -66,14 +66,13 @@ void	ft_event(t_ray *ray, t_data *data)
 	}
 	else if (ray->map[(int)ray->pos_door_y][(int)ray->pos_door_x] == '2' && ray->door_open == 1 && count == 30)
 	{
-			ray->size_door += 0.020;
-			if (ray->size_door >= 1)
-			{
-				count = 0;
-				ray->door_open = 0;
-			}
+		ray->size_door += 0.020;
+		if (ray->size_door >= 1)
+		{
+			count = 0;
+			ray->door_open = 0;
+		}
 	}
-
 	else if (count != 30)
 		count = 0;
 }

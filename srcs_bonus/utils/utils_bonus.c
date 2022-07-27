@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 18:02:29 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/26 19:35:20 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/27 02:59:32 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,11 @@ void	ft_printmap(t_data *data, char **map)
 		j = -1;
 		while (map && map[i] && map[i][++j])
 		{
-			if (data->player_spawn_pos[0] == j && data->player_spawn_pos[1] == i)
+			if (data->player_spawn_pos[0] == j
+				&& data->player_spawn_pos[1] == i)
 			{
 				temp_i = i;
 				temp_j = j;
-				printf("(%d, %d)fdsf\n", temp_j, temp_i);
 				temp = map[i][j];
 				map[i][j] = '.';
 			}
@@ -105,9 +105,7 @@ void	ft_printmap(t_data *data, char **map)
 		}
 		printf("\n");
 	}
-	printf("(%d, %d)\n", temp_j, temp_i);
 	map[temp_i][temp_j] = temp;
-	printf("\n\n");
 }
 
 void	ft_printdata(t_data *data)
@@ -127,23 +125,12 @@ void	ft_printdata(t_data *data)
 	printf("direction spawn player : %c \n", data->player_spawn_dir);
 	printf("pos x player : %d \n", data->player_spawn_pos[0]);
 	printf("pos y player : %d \n", data->player_spawn_pos[1]);
-
-
-
 	printf("\nSPRITE\n");
 	i = 0;
 	while (i < data->sprites_nb)
 	{
 		printf("pox X : %f, pos Y : %f\n", data->sprite[i].x, data->sprite[i].y);
-		//for(int k = 0; k < 6; k++)
-		//{
-			printf("texture[0] : %d\n", data->sprite[i].texture[0]);
-		//}
+		printf("texture[0] : %d\n", data->sprite[i].texture[0]);
 		i++;
 	}
-
-
-
-	//printf("\n\nMAP\n");
-	//ft_printmap(data, data->map.tab);
 }

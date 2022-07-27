@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 20:08:02 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/26 19:41:14 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/27 03:11:10 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,25 @@ void	ft_print_square_map(t_data *data, t_minimap *m, int color)
 	}
 }
 
-
-
 void	ft_print_grind(t_data *data, t_ray *ray, t_minimap *m)
 {
-	while (m->j <= (int)ray->pos_y + 5  && m->j >= (int)ray->pos_y - 5)
+	while (m->j <= (int)ray->pos_y + 5 && m->j >= (int)ray->pos_y - 5)
 	{
 		m->x = data->resolution_y / 25;
-		m->i = (int)ray->pos_x - 5; 
+		m->i = (int)ray->pos_x - 5;
 		while (m->i <= (int)ray->pos_x + 5 && m->i >= (int)ray->pos_x - 5)
 		{
-			if (m->j < 0 || m->i < 0 || m->j >= m->height || m->i > m->width || ray->map[m->j][m->i] == '1')
-				m->color =  0xD3D3D3;
+			if (m->j < 0 || m->i < 0 || m->j >= m->height || m->i > m->width
+				|| ray->map[m->j][m->i] == '1')
+				m->color = 0xD3D3D3;
 			else if (ray->map[m->j][m->i] == '2')
-				m->color =  0x582900;
-			else if (ray->map[m->j][m->i] <= '0'|| ray->map[m->j][m->i] == 'N'
-				|| ray->map[m->j][m->i] == 'S'|| ray->map[m->j][m->i] == 'W'
+				m->color = 0x582900;
+			else if (ray->map[m->j][m->i] <= '0' || ray->map[m->j][m->i] == 'N'
+				|| ray->map[m->j][m->i] == 'S' || ray->map[m->j][m->i] == 'W'
 				|| ray->map[m->j][m->i] == 'E')
-				m->color =  0xF0F0F2;
-			ft_print_square_map(data,m,m->color);
-			m->x += m->step; 
+				m->color = 0xF0F0F2;
+			ft_print_square_map(data, m, m->color);
+			m->x += m->step;
 			m->i++;
 		}
 	m->y += m->step;
@@ -67,7 +66,7 @@ void	ft_print_pos(t_data *data, t_minimap *m)
 	while (y <= m->middle + 3)
 	{
 		x = m->middle - 3;
-		while (x <= (m->middle  + 3))
+		while (x <= (m->middle + 3))
 		{
 			my_mlx_pixel_put(data, x, y, 65280);
 			x++;
@@ -78,7 +77,7 @@ void	ft_print_pos(t_data *data, t_minimap *m)
 
 void	ft_print_minimap_render(t_data *data, t_ray *ray, t_minimap *m)
 {
-	ft_init_minimap(data,m,ray);
+	ft_init_minimap(data, m, ray);
 	ft_print_grind(data, ray, m);
 	ft_print_pos(data, m);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->display, 0, 0);

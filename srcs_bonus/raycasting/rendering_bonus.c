@@ -3,48 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   rendering_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:31:47 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 00:58:28 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/27 03:13:35 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d_bonus.h"
 
-/*
-void	ft_printf_ray(t_ray *ray)
-{
-	printf("\n\n");
-	printf("camera x : %f \n", ray->camera_x);
-	printf("plane x : %f \n", ray->plane_x);
-	printf("plane y : %f \n", ray->plane_y);
-	printf("dir x  : %f \n ", ray->dir_x);
-	printf("dir y : %f \n", ray->dir_y);
-	printf("raydir x : %f \n", ray->raydir_x);
-	printf("raydir y : %f \n", ray->raydir_y);
-	printf("pos x : %f \n", ray->pos_x);
-	printf("pos y : %f \n", ray->pos_y);
-	printf("map x : %d \n", ray->map_x);
-	printf("map y : %d \n", ray->map_y);
-	printf("ray_side_x : %f \n", ray->ray_side_x);
-	printf("ray_side_y : %f \n", ray->ray_side_y);
-	printf("ray_delta_x : %f \n", ray->ray_delta_x);
-	printf("ray_delta_y : %f \n", ray->ray_delta_y);
-	printf("step x : %d \n", ray->step_x);
-	printf("step y : %d \n", ray->step_y);
-	printf("ray_wall_distance : %f \n", ray->walldistance);
-}
-*/
-
 #if FOG == 1
+
 void	ft_put_ceiling_and_roof(t_data *data)
 {
-	int	x;
-	int	y;
-	int color;
-	float shade;
-	float ratio;
+	int		x;
+	int		y;
+	int		color;
+	float	shade;
+	float	ratio;
 
 	ratio = 1 / ((float)data->resolution_y / 2);
 	shade = 0.40;
@@ -55,12 +31,12 @@ void	ft_put_ceiling_and_roof(t_data *data)
 		if (y > data->resolution_y / 2)
 		{
 			shade -= ratio;
-			color = ft_mix_color(data->floor,data->fog_color, shade);
+			color = ft_mix_color(data->floor, data->fog_color, shade);
 		}
 		else
 		{
-			shade += ratio; 
-			color = ft_mix_color(data->ceiling,data->fog_color, shade);
+			shade += ratio;
+			color = ft_mix_color(data->ceiling, data->fog_color, shade);
 		}
 		while (x < data->resolution_x)
 		{
@@ -76,7 +52,7 @@ void	ft_put_ceiling_and_roof(t_data *data)
 {
 	int	x;
 	int	y;
-	int color;
+	int	color;
 
 	y = 0;
 	while (y < data->resolution_y)
@@ -85,7 +61,7 @@ void	ft_put_ceiling_and_roof(t_data *data)
 		if (y > data->resolution_y / 2)
 			color = data->floor;
 		else
-			color = data->ceiling; 
+			color = data->ceiling;
 		while (x < data->resolution_x)
 		{
 			my_mlx_pixel_put(data, x, y, color);
@@ -119,9 +95,15 @@ void	ft_movements(t_data *data)
 	ft_mouse_rotate_right(&data->ray_data, key);
 	return ;
 }
+
+
+
 #include <sys/time.h>
 int	time_diff(struct timeval *start, struct timeval *end);
 void	ft_wall_casting(t_data *data, t_ray *ray)
+
+
+
 {
 	int	x;
 
@@ -141,7 +123,6 @@ void	ft_wall_casting(t_data *data, t_ray *ray)
 		ft_calc_y_texture(data);
 		data->zbuffer[x] = ray->walldistance;
 		ft_print_texture(data, ray, x);
-		//ft_printf_ray(ray);
 		ft_floor_casting(data, ray, x);
 		x++;
 	}

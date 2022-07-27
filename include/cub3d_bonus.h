@@ -3,21 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 01:14:51 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/27 02:46:15 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
-//FONCTION ET HEADER DE TEST DE FLUIDITE, A SUPPRIMER AVANT RENDRE
-#include <sys/time.h>
-	struct timeval debut;
-	struct timeval fin;
-	int	time_diff(struct timeval *start, struct timeval *end);
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
+# if defined(__linux__)
+	# define FORWARD 122
+	# define BACKWARD 115
+	# define MOVE_LEFT 113
+	# define MOVE_RIGHT 100
+	# define ROTATE_LEFT 65361
+	# define ROTATE_RIGHT 65363
+	# define ACTION 101
+	# define EXIT 65307
+# else
+	# define FORWARD 13
+	# define BACKWARD 1
+	# define MOVE_LEFT 0
+	# define MOVE_RIGHT 2
+	# define ROTATE_LEFT 123
+	# define ROTATE_RIGHT 124
+	# define ACTION 3
+	# define EXIT 53
+# endif
 
+//FONCTION ET HEADER DE TEST DE FLUIDITE, A SUPPRIMER AVANT RENDRE
+# include <sys/time.h>
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -29,33 +45,11 @@
 # include <fcntl.h>
 # include "../libft/libft.h"
 
-#define TEXTURE_FLOOR 4
-#define TEXTURE_CEIL 5
-#define TEXTURE_DOOR 6
-#define TEXTURE_SIDE_DOOR 7
-#define FOG 0
-
-# if defined(__linux__)
-	#define FORWARD 122
-	#define BACKWARD 115
-	#define MOVE_LEFT 113
-	#define MOVE_RIGHT 100
-	#define ROTATE_LEFT 65361
-	#define ROTATE_RIGHT 65363
-	#define ACTION 101
-
-	#define EXIT 65307
-# else
-	#define FORWARD 13
-	#define BACKWARD 1
-	#define MOVE_LEFT 0
-	#define MOVE_RIGHT 2
-	#define ROTATE_LEFT 123
-	#define ROTATE_RIGHT 124
-	#define ACTION 3
-	#define EXIT 53
-# endif
-
+# define TEXTURE_FLOOR 4
+# define TEXTURE_CEIL 5
+# define TEXTURE_DOOR 6
+# define TEXTURE_SIDE_DOOR 7
+# define FOG 0
 
 typedef struct s_minimap
 {
@@ -67,8 +61,8 @@ typedef struct s_minimap
 	int	y;
 	int	color;
 	int	step;
-	int middle;
-}		t_minimap;
+	int	middle;
+}	t_minimap;
 
 typedef struct floor_casting
 {
@@ -147,7 +141,7 @@ typedef struct s_ray_data
 	double		step;
 	double		texpos;
 	char		**map;
-	int			ray_touch_door; 
+	int			ray_touch_door;
 	double		size_door;
 	int			door_before;
 }	t_ray;
@@ -196,8 +190,6 @@ typedef struct s_data
 	t_key		key;
 	int			keycode;
 	int			textures_nb;
-	
-	//bonus
 	int			shadding;
 	t_sprite	sprite[20];
 	int			sprite_order[20];
@@ -205,29 +197,26 @@ typedef struct s_data
 	double		*zbuffer;
 	int			sprites_nb;
 	t_minimap	minimap;
-
 	int			fd;
 	t_map		map;
-	int 		is_map_started;
+	int			is_map_started;
 }	t_data;
-
-
 
 // map parsing
 typedef struct s_map_data
 {
-	char **map;
-	int x_start;
-	int y_start;
-	int posX;
-	int posY;
-	int width;
-	int height;
-	char dir;
-	int nb_pass;
-	int no_move_possible;
-	int is_againt_wall;
-	int	nb_move;
+	char	**map;
+	int		x_start;
+	int		y_start;
+	int		posX;
+	int		posY;
+	int		width;
+	int		height;
+	char	dir;
+	int		nb_pass;
+	int		no_move_possible;
+	int		is_againt_wall;
+	int		nb_move;
 }	t_map_data;
 
 // render
@@ -281,9 +270,6 @@ void	ft_init_direction(t_data *data, t_ray *ray);
 void	ft_init_ray_data(t_data *data, t_ray *ray);
 void	ft_init_texture(t_data *data);
 int		ft_init_text(t_data *data);
-
-
-
 
 /* PARSING */
 int		ft_parsing(t_data *data);
@@ -346,7 +332,6 @@ void	ft_printdata(t_data *data);
 void	ft_print_map(t_map_data *data);
 void	ft_printmap(t_data *data, char **map);
 
-
 /* *********************************** */
 /* ************* BONUS *************** */
 /* *********************************** */
@@ -370,12 +355,12 @@ void	ft_draw_line_both(t_data *data, t_ray *ray, t_flo *flo, int x);
 void	ft_draw_line_floor(t_data *data, t_ray *ray, t_flo *flo, int x);
 void	ft_calc_pos_textfloor(t_ray *ray, t_flo *flo, t_data *data, int width);
 
-
 void	ft_add_texture_anime(t_data *data, int x, int y, int *j);
 void	ft_add_texture(t_data *data, int x, int y, int *j);
+int		ft_check_map_border(t_map_data *d, t_data *data);
+int		ft_check_map(t_data *data);
 
-
-
-
+void	ft_init_map_data(t_map_data *map_data, t_data *data);
+int		ft_check_player_spawn(t_map_data *d, t_data *data, int check_all);
 
 #endif
