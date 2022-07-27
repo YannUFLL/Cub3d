@@ -6,16 +6,16 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 16:29:02 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/27 19:19:40 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_BONUS_H
 # define CUB3D_BONUS_H
 # if defined(__linux__)
-	# define FORWARD 122
+	# define FORWARD 119
 	# define BACKWARD 115
-	# define MOVE_LEFT 113
+	# define MOVE_LEFT 97
 	# define MOVE_RIGHT 100
 	# define ROTATE_LEFT 65361
 	# define ROTATE_RIGHT 65363
@@ -365,5 +365,6 @@ int		ft_check_map(t_data *data);
 
 void	ft_init_map_data(t_map_data *map_data, t_data *data);
 int		ft_check_player_spawn(t_map_data *d, t_data *data, int check_all);
+void	ft_move_enemi(t_data *data);
 
 #endif
