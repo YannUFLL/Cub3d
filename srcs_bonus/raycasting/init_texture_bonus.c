@@ -24,17 +24,10 @@ void	ft_cpy_texture(t_data *data, t_texture **new_texture)
 		* (ft_strlen(data->texture[i].path) + 1));
 		ft_strlcpy((*new_texture)[i].path, data->texture[i].path,
 			ft_strlen(data->texture[i].path) + 1);
-		if (data->texture[i].path && ft_is_not_sprite(data, i))
+		data->texture[i].is_copy += 1;
+		if (data->texture[i].path && (data->texture[i].is_copy > 1 || ft_is_not_sprite(data, i)))
 			free(data->texture[i].path);
-		(*new_texture)[i].mlx_img = data->texture[i].mlx_img;
-		(*new_texture)[i].addr = data->texture[i].addr;
-		(*new_texture)[i].img_width = data->texture[i].img_width;
-		(*new_texture)[i].img_height = data->texture[i].img_height;
-		(*new_texture)[i].lenght = data->texture[i].lenght;
-		(*new_texture)[i].bit_per_pixel = data->texture[i].bit_per_pixel;
-		(*new_texture)[i].endian = data->texture[i].endian;
-		(*new_texture)[i].use_color = data->texture[i].use_color;
-		(*new_texture)[i].type = data->texture[i].type;
+		ft_sub_cpy_old_texture(data, new_texture, i);
 		i++;
 	}
 	free(data->texture);
@@ -53,6 +46,7 @@ void	ft_fill_new_texture(t_data *data, t_texture **new_texture, char c)
 	(*new_texture)[data->textures_nb - 1].endian = 0;
 	(*new_texture)[data->textures_nb - 1].use_color = 0;
 	(*new_texture)[data->textures_nb - 1].type = c;
+	(*new_texture)[data->textures_nb - 1].is_copy = 0;
 }
 
 void	ft_add_texture(t_data *data, int x, int y, int *j)

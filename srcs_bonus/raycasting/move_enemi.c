@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 17:11:41 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/27 20:22:18 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/27 20:34:05 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,13 @@ float	ft_calc_dist_player_monster(t_data *data, int i)
 		x_monster += 0.000001;
 	if (fabs(y_monster - y_player) == (float)0)
 		y_monster += 0.000001;
-	dist = sqrtf(
-		powf(x_monster - x_player, 2) +
-		powf(y_monster - y_player, 2)
-	);
+	dist = sqrtf(powf(x_monster - x_player, 2) + powf(y_monster - y_player, 2));
 	return (dist);
 }
 
 void	ft_follow_player(t_data *data, int i)
 {
-	double		delta;
+	double	delta;
 	double	x_monster;
 	double	y_monster;
 	double	x_player;
