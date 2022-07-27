@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 20:12:02 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/20 15:22:09 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/27 19:41:01 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	ft_move_right(t_ray *ray, t_data *data, t_key *key)
 	if (key->move_right == 1)
 	{
 		if (ray->dir_y > 0)
-			alpha = acos(ray->dir_x);
+			alpha = acos(ft_check_double_overflow(ray->dir_x));
 		else
-			alpha = -acos(ray->dir_x);
+			alpha = -acos(ft_check_double_overflow(ray->dir_x));
 		if (ray->map[(int)((sin(alpha + M_PI / 2) * data->move_speed)
 				+ ray->pos_y)][(int)(ray->pos_x)] <= '0')
 			ray->pos_y = (sin(alpha + M_PI / 2) * data->move_speed)
@@ -62,9 +62,9 @@ void	ft_move_left(t_ray *ray, t_data *data, t_key *key)
 	if (key->move_left == 1)
 	{
 		if (ray->dir_y > 0)
-		alpha = acos(ray->dir_x);
+		alpha = acos(ft_check_double_overflow(ray->dir_x));
 		else
-		alpha = -acos(ray->dir_x);
+		alpha = -acos(ft_check_double_overflow(ray->dir_x));
 		if (ray->map[(int)((-sin(alpha + M_PI / 2) * data->move_speed)
 				+ray->pos_y)][(int)(ray->pos_x)] <= '0')
 			ray->pos_y = (-sin(alpha + M_PI / 2) * data->move_speed)

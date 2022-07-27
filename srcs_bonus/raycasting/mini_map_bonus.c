@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 20:08:02 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 03:11:10 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/27 19:45:24 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,18 @@ void	ft_print_square_map(t_data *data, t_minimap *m, int color)
 	}
 }
 
+int	ft_check_overflow(t_ray *ray, int value, t_minimap *m)
+{
+	int	i;
+
+	i = 0;
+	while (ray->map[m->j][i])
+		i++;
+	if (i < value)
+		return (1);
+	return (0);
+}
+
 void	ft_print_grind(t_data *data, t_ray *ray, t_minimap *m)
 {
 	while (m->j <= (int)ray->pos_y + 5 && m->j >= (int)ray->pos_y - 5)
@@ -38,7 +50,8 @@ void	ft_print_grind(t_data *data, t_ray *ray, t_minimap *m)
 		m->i = (int)ray->pos_x - 5;
 		while (m->i <= (int)ray->pos_x + 5 && m->i >= (int)ray->pos_x - 5)
 		{
-			if (m->j < 0 || m->i < 0 || m->j >= m->height || m->i > m->width
+			if (m->j < 0 || m->i < 0 || m->j >= m->height || m->i >= m->width
+				|| ft_check_overflow(ray, m->i, m)
 				|| ray->map[m->j][m->i] == '1')
 				m->color = 0xD3D3D3;
 			else if (ray->map[m->j][m->i] == '2')

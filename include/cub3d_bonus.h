@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 17:45:21 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/27 19:44:47 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,6 +257,7 @@ void	ft_move_left(t_ray *ray, t_data *data, t_key *key);
 void	ft_rotate_right(t_ray *ray, t_data *data, t_key *key);
 void	ft_rotate_left(t_ray *ray, t_data *data, t_key *key);
 void	ft_movements(t_data *data);
+double	ft_check_double_overflow(double value);
 
 // hook
 int		ft_key_press(int keycode, t_data *data);

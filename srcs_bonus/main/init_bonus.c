@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:16:27 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 02:15:29 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/27 17:58:21 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ void	ft_sub_init_direction(t_data *data, t_ray *ray)
 {
 	if (data->player_spawn_dir == 'W')
 	{
-		ray->dir_x = 1;
-		ray->dir_y = 0;
-		ray->plane_x = 0;
-		ray->plane_y = (double)data->fov / 100;
-	}
-	if (data->player_spawn_dir == 'E')
-	{
 		ray->dir_x = -1;
 		ray->dir_y = 0;
 		ray->plane_x = 0;
 		ray->plane_y = -(double)data->fov / 100;
+	}
+	if (data->player_spawn_dir == 'E')
+	{
+		ray->dir_x = 1;
+		ray->dir_y = 0;
+		ray->plane_x = 0;
+		ray->plane_y = (double)data->fov / 100;
 	}
 }
 

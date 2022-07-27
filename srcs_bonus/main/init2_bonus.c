@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init2_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 02:08:45 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/27 02:14:52 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/27 18:30:52 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_init_minimap(t_data *data, t_minimap *m, t_ray *ray)
 	while (ray->map[m->height] != 0)
 		m->height++;
 	m->width = 0;
-	while (ray->map[m->height - 1][m->width])
+	while (ray->map[(int)ray->pos_y][m->width])
 		m->width++;
 	m->i = (int)ray->pos_x - 5;
 	m->j = (int)ray->pos_y - 5;
