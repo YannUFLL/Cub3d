@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 02:46:15 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/27 15:00:15 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 	# define ROTATE_LEFT 65361
 	# define ROTATE_RIGHT 65363
 	# define ACTION 101
+	# define SPEED 65505
 	# define EXIT 65307
 # else
 	# define FORWARD 13
@@ -29,6 +30,7 @@
 	# define ROTATE_LEFT 123
 	# define ROTATE_RIGHT 124
 	# define ACTION 3
+	# define SPEED 110
 	# define EXIT 53
 # endif
 
