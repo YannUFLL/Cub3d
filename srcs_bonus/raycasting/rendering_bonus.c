@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:31:47 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 03:13:35 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/27 17:10:34 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,10 @@ void	ft_movements(t_data *data)
 	return ;
 }
 
-
-
 #include <sys/time.h>
 int	time_diff(struct timeval *start, struct timeval *end);
+
 void	ft_wall_casting(t_data *data, t_ray *ray)
-
-
-
 {
 	int	x;
 
@@ -137,6 +133,7 @@ int	ft_render_next_frame(t_data *data)
 	ft_fps();
 	ft_movements(data);
 	ft_wall_casting(data, ray);
+	ft_move_enemi(data);
 	ft_sprite_casting(data, ray, data->sprite);
 	ft_print_minimap_render(data, ray, &data->minimap);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->display, 0, 0);
