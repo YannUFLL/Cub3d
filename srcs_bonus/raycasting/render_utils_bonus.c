@@ -6,7 +6,7 @@
 /*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 21:15:20 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 15:41:38 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/27 19:45:04 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,15 @@ int	time_diff(struct timeval *start, struct timeval *end)
 {
 	return ((end->tv_sec - start->tv_sec)
 		* 1000 + ((end->tv_usec - start->tv_usec) / 1000));
+}
+
+double	ft_check_double_overflow(double value)
+{
+	if (value > 1)
+		return (1);
+	else if (value < -1)
+		return (-1);
+	return (value);
 }
 
 void	ft_fps(void)
