@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:18:52 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 01:43:41 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/27 16:29:34 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ void	ft_add_texture(t_data *data, int x, int y, int *j)
 	t_texture	*new_texture;
 	char		c;
 
-
-	printf("add texture : x : %d, y : %d", x, y);
 	data->textures_nb += 1;
 	new_texture = NULL;
 	ft_cpy_texture(data, &new_texture);
@@ -96,6 +94,7 @@ void	ft_init_texture(t_data *data)
 		data->texture[x].bit_per_pixel = 0;
 		data->texture[x].endian = 0;
 		data->texture[x].type = 0;
+		data->texture[x].is_copy = 0;
 		if (x == TEXTURE_FLOOR || x == TEXTURE_CEIL)
 			data->texture[x].use_color = 1;
 		else

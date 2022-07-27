@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 15:00:15 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/27 16:29:02 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_texture
 	int		endian;
 	int		use_color;
 	char	type;
+	int		is_copy;
 }	t_texture;
 
 typedef struct s_ray_data
