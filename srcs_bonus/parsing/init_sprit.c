@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 14:36:35 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/27 01:43:49 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/27 02:37:27 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	ft_cpy_old_texture(t_data *data, t_texture **new_texture)
 	free(data->texture);
 }
 
-void	ft_fill_new_texture2(t_data *data, t_texture **new_texture, char c, int i)
+void	ft_fill_new_texture2(t_data *data, t_texture **new_texture,
+char c, int i)
 {
 	if (c == 'M' && i == 0)
 		(*new_texture)[data->textures_nb - 1].path = "./sprites/champ_1.xpm";
@@ -69,9 +70,7 @@ void	ft_add_texture_anime(t_data *data, int x, int y, int *j)
 {
 	t_texture	*new_texture;
 	char		c;
-	int 		i;
-
-	printf("add sprite anime: x : %d, y : %d", x, y);
+	int			i;
 
 	i = 0;
 	data->sprites_nb += 1;

@@ -30,7 +30,6 @@ int	ft_checker_char(t_map_data *d, t_data *data, int i, int j)
 	char		**map;
 	static int	n = 0;
 
-
 	map = data->map.tab;
 	if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' \
 	|| map[i][j] == 'E')
@@ -46,15 +45,9 @@ int	ft_checker_char(t_map_data *d, t_data *data, int i, int j)
 		exit(0);
 	}
 	else if (map[i][j] == 'B')
-	{
-		printf("ajoue de texture barrel %c\n", map[i][j]);
 		ft_add_texture(data, j, i, &n);
-	}
 	else if (map[i][j] == 'M')
-	{
-		printf("ajoue de sprite anim\n");
 		ft_add_texture_anime(data, j, i, &n);
-	}
 	return (0);
 }
 
@@ -116,61 +109,4 @@ void	ft_init_map_data(t_map_data *map_data, t_data *data)
 	map_data->nb_move = 0;
 	map_data->no_move_possible = 0;
 	map_data->is_againt_wall = 0;
-}
-
-int	ft_check_map_border(t_map_data *d, t_data *data)
-{
-	int	i;
-	int	ret;
-
-	i = 0;
-	while (i < 4)
-	{
-		ret = ft_follow_wall_left(d, i);
-		if (ret)
-			return (1);
-		ft_init_map_data(d, data);
-		ft_check_player_spawn(d, data, 0);
-		i++;
-	}
-	i = 0;
-	while (i < 4)
-	{
-		ret = ft_follow_wall_right(d, i);
-		if (ret)
-			return (1);
-		ft_init_map_data(d, data);
-		ft_check_player_spawn(d, data, 0);
-		i++;
-	}
-	return (0);
-}
-
-int	ft_check_map(t_data *data)
-{
-	t_map_data	map_data;
-	int			ret;
-
-	ft_init_map_data(&map_data, data);
-	if (ft_check_player_spawn(&map_data, data, 1))
-	{
-		printf("Error\nNo spawner\n");
-		exit(0);
-	}
-	ret = ft_check_map_border(&map_data, data);
-	if (ret)
-	{
-		printf("Error\nMap is open in (%d, %d)\n\n", map_data.posX, map_data.posY);
-		ft_print_map(&map_data);
-		return (1);
-	}
-	if (ft_check_ext_wall(&map_data))
-	{
-		printf("Error\nMap is not close in (%d, %d)\n\n", \
-		map_data.posX, map_data.posY);
-		ft_print_map(&map_data);
-		exit (0);
-	}
-	ft_print_map(&map_data);
-	return (0);
 }

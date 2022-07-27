@@ -69,7 +69,8 @@ char	**ft_trim_tab(char **tab)
 	return (new_tab);
 }
 
-void	ft_sub_sub_fill_color(t_data *data, char *str1, char *str2, char *line)
+void	ft_sub_sub_fill_color(t_data *data, char *str1, char *str2,
+char *line)
 {
 	char	**tab_color;
 	char	*line_data;
@@ -80,7 +81,6 @@ void	ft_sub_sub_fill_color(t_data *data, char *str1, char *str2, char *line)
 		line_data = str2;
 	if (ft_check_comma(line_data))
 	{
-		printf("Use color on %c\n", str1[0]);
 		tab_color = ft_split(line_data, ',');
 		tab_color = ft_trim_tab(tab_color);
 		if (str1[0] == 'F')
@@ -91,7 +91,6 @@ void	ft_sub_sub_fill_color(t_data *data, char *str1, char *str2, char *line)
 	}
 	else
 	{
-		printf("Use texture on %c\n", str1[0]);
 		if (str1[0] == 'F')
 			data->texture[TEXTURE_FLOOR].use_color = 0;
 		else if (str1[0] == 'C')
@@ -115,8 +114,8 @@ void	ft_sub_fill_color(t_data *data, char *str1, char *str2, char *line)
 		data->is_map_started = 1;
 		ft_copy_map(line, data);
 	}
-	else if (str1[0] != 'N' && str1[0] != 'S' && str1[0] != 'E' \
-	&& str1[0] != 'W') // ajouter char bonus
+	else if (str1[0] != 'N' && str1[0] != 'S' && str1[0] != 'E'
+		&& str1[0] != 'W')
 	{
 		printf("Error\nInvalid line '%s'\n", line);
 		exit (0);

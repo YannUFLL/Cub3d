@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:16:27 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/25 18:30:20 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/27 02:08:44 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_init_ray_data2(t_ray *ray)
 {
 	ray->camera_x = 0;
 	ray->raydir_x = 0;
-	ray->raydir_y =
+	ray->raydir_y = 0;
 	ray->ray_side_x = 0;
 	ray->ray_side_y = 0;
 	ray->ray_delta_x = 0;
