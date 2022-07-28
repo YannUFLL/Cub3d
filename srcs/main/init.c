@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:16:27 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/28 15:06:25 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/28 17:58:58 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_init_data(t_data *data)
 	data->resolution_x = 1280;
 	data->resolution_y = 720;
 	data->move_speed = 0.05;
-	data->rotate_speed = 0.05;
+	data->rotate_speed = 0.03;
 	data->keycode = -1;
 	data->textures_nb = 4;
 	data->line_length = 0;

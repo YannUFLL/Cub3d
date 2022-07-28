@@ -1,7 +1,7 @@
 NO ./texture/stone_1024.xpm
 SO ./texture/rock_256.xpm
-WE ./texture/mur_mouse_512.xpm
-EA ./texture/big.xpm
+WE ./texture/big.xpm
+EA ./texture/mur_mouse_512.xpm
 C ./texture/ceiling_512.xpm
 F ./texture/ceiling_wood_512.xpm
 
