@@ -28,8 +28,8 @@ int	ft_check_player_spawn(t_map_data *d, t_data *data)
 			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' \
 			|| map[i][j] == 'E')
 			{
-				d->posY = i;
-				d->posX = j;
+				d->pos_y = i;
+				d->pos_x = j;
 				return (0);
 			}
 			j++;
@@ -42,8 +42,8 @@ int	ft_check_player_spawn(t_map_data *d, t_data *data)
 void	ft_init_map_data(t_map_data *map_data, t_data *data)
 {
 	map_data->map = data->map.tab;
-	map_data->posX = -1;
-	map_data->posY = -1;
+	map_data->pos_x = -1;
+	map_data->pos_y = -1;
 	map_data->x_start = -1;
 	map_data->y_start = -1;
 	map_data->dir = 'E';
@@ -97,7 +97,7 @@ int	ft_check_sub_map(t_map_data *map_data, t_data *data)
 	if (ret)
 	{
 		printf("Error\nMap is open in (%d, %d)\n\n", \
-		map_data->posX, map_data->posY);
+		map_data->pos_x, map_data->pos_y);
 		ft_print_map(map_data);
 		return (1);
 	}
@@ -113,7 +113,7 @@ int	ft_check_map(t_data *data)
 	if (ft_check_ext_wall(&map_data))
 	{
 		printf("Error\nMap is not close in (%d, %d)\n\n", \
-		map_data.posX, map_data.posY);
+		map_data.pos_x, map_data.pos_y);
 		ft_print_map(&map_data);
 		exit (0);
 	}

@@ -6,32 +6,32 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/28 15:00:49 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/28 15:06:25 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_BONUS_H
 # define CUB3D_BONUS_H
 # if defined(__linux__)
-	# define FORWARD 119
-	# define BACKWARD 115
-	# define MOVE_LEFT 97
-	# define MOVE_RIGHT 100
-	# define ROTATE_LEFT 65361
-	# define ROTATE_RIGHT 65363
-	# define ACTION 101
-	# define SPEED 65505
-	# define EXIT 65307
+#  define FORWARD 119
+#  define BACKWARD 115
+#  define MOVE_LEFT 97
+#  define MOVE_RIGHT 100
+#  define ROTATE_LEFT 65361
+#  define ROTATE_RIGHT 65363
+#  define ACTION 101
+#  define SPEED 65505
+#  define EXIT 65307
 # else
-	# define FORWARD 13
-	# define BACKWARD 1
-	# define MOVE_LEFT 0
-	# define MOVE_RIGHT 2
-	# define ROTATE_LEFT 123
-	# define ROTATE_RIGHT 124
-	# define ACTION 3
-	# define SPEED 257
-	# define EXIT 53
+#  define FORWARD 13
+#  define BACKWARD 1
+#  define MOVE_LEFT 0
+#  define MOVE_RIGHT 2
+#  define ROTATE_LEFT 123
+#  define ROTATE_RIGHT 124
+#  define ACTION 3
+#  define SPEED 257
+#  define EXIT 53
 # endif
 
 # include <stdlib.h>
@@ -209,8 +209,8 @@ typedef struct s_map_data
 	char	**map;
 	int		x_start;
 	int		y_start;
-	int		posX;
-	int		posY;
+	int		pos_x;
+	int		pos_y;
 	int		width;
 	int		height;
 	char	dir;

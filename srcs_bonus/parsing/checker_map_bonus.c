@@ -34,8 +34,8 @@ int	ft_checker_char(t_map_data *d, t_data *data, int i, int j)
 	if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' \
 	|| map[i][j] == 'E')
 	{
-		d->posY = i;
-		d->posX = j;
+		d->pos_y = i;
+		d->pos_x = j;
 		return (1);
 	}
 	else if (map[i][j] == 'D' && !(ft_check_door(map, i, j)))
@@ -59,8 +59,8 @@ int	ft_checker_pos(t_map_data *d, t_data *data, int i, int j)
 	if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' \
 	|| map[i][j] == 'E')
 	{
-		d->posY = i;
-		d->posX = j;
+		d->pos_y = i;
+		d->pos_x = j;
 		return (1);
 	}
 	return (0);
@@ -98,8 +98,8 @@ int	ft_check_player_spawn(t_map_data *d, t_data *data, int check_all)
 void	ft_init_map_data(t_map_data *map_data, t_data *data)
 {
 	map_data->map = data->map.tab;
-	map_data->posX = -1;
-	map_data->posY = -1;
+	map_data->pos_x = -1;
+	map_data->pos_y = -1;
 	map_data->x_start = -1;
 	map_data->y_start = -1;
 	map_data->dir = 'E';

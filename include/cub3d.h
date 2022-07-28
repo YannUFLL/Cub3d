@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/28 15:00:18 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/28 15:06:38 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,8 +151,8 @@ typedef struct s_map_data
 	char	**map;
 	int		x_start;
 	int		y_start;
-	int		posX;
-	int		posY;
+	int		pos_x;
+	int		pos_y;
 	int		width;
 	int		height;
 	char	dir;
@@ -220,9 +220,6 @@ int		ft_init_display(t_data *data);
 
 // sprite
 void	ft_sprite_casting(t_data *data, t_ray *ray, t_sprite *sprite);
-
-
-
 
 /* PARSING */
 int		ft_parsing(t_data *data);

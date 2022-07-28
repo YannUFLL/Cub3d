@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 18:02:29 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/27 02:59:32 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/28 15:06:25 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_print_map(t_map_data *data)
 		j = -1;
 		while (data->map && data->map[i] && data->map[i][++j])
 		{
-			if (data->posX == j && data->posY == i)
+			if (data->pos_x == j && data->pos_y == i)
 			{
 				temp_i = i;
 				temp_j = j;

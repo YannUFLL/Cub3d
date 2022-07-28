@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:31:47 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/28 15:01:22 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/28 15:10:16 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ void	ft_movements(t_data *data)
 	return ;
 }
 
+/*
 #include <sys/time.h>
 int	time_diff(struct timeval *start, struct timeval *end);
+*/
 
 void	ft_wall_casting(t_data *data, t_ray *ray)
 {
