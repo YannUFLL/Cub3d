@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   floorcasting_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 16:38:32 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 17:21:35 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/28 15:00:18 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	ft_draw_line_floor(t_data *data, t_ray *ray, t_flo *flo, int x)
 		else if (color < 0)
 			color = 0;
 		ft_calc_pos_textfloor(ray, flo, data, width);
-		my_mlx_pixel_put(data, x, ray->drawend, text1[color]);
+		ft_my_mlx_pixel_put(data, x, ray->drawend, text1[color]);
 		ray->drawend++;
 	}
 }

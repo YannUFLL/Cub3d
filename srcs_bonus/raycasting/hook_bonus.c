@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 21:55:08 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 03:10:12 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/28 14:58:57 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	ft_key_press(int keycode, t_data *data)
 		key->rotate_right = 1;
 	if (keycode == ACTION)
 		key->use = 1;
+	if (keycode == SPEED)
+		data->move_speed *= 2;
 	if (keycode == EXIT)
 		ft_exit_game(data);
 	data->keycode = keycode;
@@ -55,6 +57,8 @@ int	ft_key_release(int keycode, t_data *data)
 		key->rotate_left = 0;
 	if (keycode == ROTATE_RIGHT)
 		key->rotate_right = 0;
+	if (keycode == SPEED)
+		data->move_speed /= 2;
 	if (keycode == ACTION)
 		key->use = 0;
 	return (0);

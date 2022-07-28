@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   render_utils_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 21:15:20 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 19:45:04 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/28 15:00:18 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d_bonus.h"
+/*
 #include <sys/time.h>
+*/
 
 typedef struct s_color
 {
@@ -20,7 +22,7 @@ typedef struct s_color
 	unsigned char	blue;
 }	t_color;
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	ft_my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	static int	octet;
 
@@ -42,11 +44,13 @@ int	ft_check_color(int width, t_data *data, t_flo *flo, t_ray *ray)
 	return (color);
 }
 
+/*
 int	time_diff(struct timeval *start, struct timeval *end)
 {
 	return ((end->tv_sec - start->tv_sec)
 		* 1000 + ((end->tv_usec - start->tv_usec) / 1000));
 }
+*/
 
 double	ft_check_double_overflow(double value)
 {
@@ -57,6 +61,7 @@ double	ft_check_double_overflow(double value)
 	return (value);
 }
 
+/*
 void	ft_fps(void)
 {
 	static struct timeval	time;
@@ -76,6 +81,7 @@ void	ft_fps(void)
 	}
 	return ;
 }
+*/
 
 int	ft_mix_color(int color1, int color2, float power)
 {

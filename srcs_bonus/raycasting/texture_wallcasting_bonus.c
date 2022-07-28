@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_wallcasting_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 19:59:45 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 17:35:27 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/28 15:00:18 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_print_texture(t_data *data, t_ray *ray, int x)
 		ray->texpos += ray->step;
 		color = ft_mix_color(img_add[img_width * ray->texy + ray->texx],
 				data->fog_color, shade);
-		my_mlx_pixel_put(data, x, ray->drawstart, color);
+		ft_my_mlx_pixel_put(data, x, ray->drawstart, color);
 		ray->drawstart++;
 	}
 }
@@ -109,7 +109,7 @@ void	ft_print_texture(t_data *data, t_ray *ray, int x)
 		ray->texy = (int)ray->texpos \
 		& (data->texture[text_select].img_height - 1);
 		ray->texpos += ray->step;
-		my_mlx_pixel_put(data, x, ray->drawstart,
+		ft_my_mlx_pixel_put(data, x, ray->drawstart,
 			img_add[img_width * ray->texy + ray->texx]);
 		ray->drawstart++;
 	}

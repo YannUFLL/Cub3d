@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   floorcasting_utils_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 19:15:52 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/27 17:22:02 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/28 15:00:18 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_draw_line_ceil(t_data *data, t_ray *ray, t_flo *flo, int x)
 			color = 0;
 		shade = flo->distplayer * 0.50;
 		ft_calc_pos_textfloor(ray, flo, data, width);
-		my_mlx_pixel_put(data, x, data->resolution_y - ray->drawend,
+		ft_my_mlx_pixel_put(data, x, data->resolution_y - ray->drawend,
 			ft_mix_color(text2[color], data->fog_color, shade));
 		ray->drawend++;
 	}
@@ -56,9 +56,9 @@ void	ft_draw_line_both(t_data *data, t_ray *ray, t_flo *flo, int x)
 		ft_calc_pos_textfloor(ray, flo, data, width);
 		shade = (data->resolution_y - ray->drawend)
 			/ (float)(data->resolution_y) + 0.60;
-		my_mlx_pixel_put(data, x, ray->drawend,
+		ft_my_mlx_pixel_put(data, x, ray->drawend,
 			ft_mix_color(text1[color], data->fog_color, shade));
-		my_mlx_pixel_put(data, x, data->resolution_y - ray->drawend,
+		ft_my_mlx_pixel_put(data, x, data->resolution_y - ray->drawend,
 			ft_mix_color(text2[color], data->fog_color, shade));
 		ray->drawend++;
 	}
@@ -84,7 +84,7 @@ void	ft_draw_line_floor(t_data *data, t_ray *ray, t_flo *flo, int x)
 		shade = (data->resolution_y - ray->drawend)
 			/ (float)(data->resolution_y) + 0.60;
 		ft_calc_pos_textfloor(ray, flo, data, width);
-		my_mlx_pixel_put(data, x, ray->drawend,
+		ft_my_mlx_pixel_put(data, x, ray->drawend,
 			ft_mix_color(text1[color], data->fog_color, shade));
 		ray->drawend++;
 	}
@@ -108,7 +108,7 @@ void	ft_draw_line_ceil(t_data *data, t_ray *ray, t_flo *flo, int x)
 		if (color < 0)
 			color = 0;
 		ft_calc_pos_textfloor(ray, flo, data, width);
-		my_mlx_pixel_put(data, x, data->resolution_y - ray->drawend,
+		ft_my_mlx_pixel_put(data, x, data->resolution_y - ray->drawend,
 			text2[width * flo->floortexty + flo->floortextx]);
 		ray->drawend++;
 	}
@@ -133,9 +133,9 @@ void	ft_draw_line_both(t_data *data, t_ray *ray, t_flo *flo, int x)
 		else if (color < 0)
 			color = 0;
 		ft_calc_pos_textfloor(ray, flo, data, width);
-		my_mlx_pixel_put(data, x, ray->drawend,
+		ft_my_mlx_pixel_put(data, x, ray->drawend,
 			text1[color]);
-		my_mlx_pixel_put(data, x, data->resolution_y - ray->drawend,
+		ft_my_mlx_pixel_put(data, x, data->resolution_y - ray->drawend,
 			text2[color]);
 		ray->drawend++;
 	}
