@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 17:44:17 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/27 02:31:18 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/28 15:09:33 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,14 @@ int	ft_check_map(t_data *data)
 	ret = ft_check_map_border(&map_data, data);
 	if (ret)
 	{
-		printf("Error\nMap is open in (%d, %d)\n\n", map_data.posX, map_data.posY);
+		printf("Error\nMap open in (%d, %d)\n\n", map_data.pos_x, map_data.pos_y);
 		ft_print_map(&map_data);
 		return (1);
 	}
 	if (ft_check_ext_wall(&map_data))
 	{
 		printf("Error\nMap is not close in (%d, %d)\n\n", \
-		map_data.posX, map_data.posY);
+		map_data.pos_x, map_data.pos_y);
 		ft_print_map(&map_data);
 		exit (0);
 	}

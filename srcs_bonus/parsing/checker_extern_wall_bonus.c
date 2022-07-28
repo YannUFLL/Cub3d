@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker_extern_wall.c                              :+:      :+:    :+:   */
+/*   checker_extern_wall_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 03:10:38 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/21 14:59:28 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/28 15:06:25 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ int	ft_check_up_down(t_map_data *d, char **map, int i, int j)
 	i_max = k - 1;
 	if (i == 0 && map[i][j] == '0')
 	{
-		d->posX = j;
-		d->posY = i;
+		d->pos_x = j;
+		d->pos_y = i;
 		return (1);
 	}
 	else if (i == i_max && map[i][j] == '0')
 	{
-		d->posX = j;
-		d->posY = i;
+		d->pos_x = j;
+		d->pos_y = i;
 		return (1);
 	}
 	return (0);
@@ -49,10 +49,10 @@ int	ft_check_sub_ext_wall(t_map_data *d, char **map, int i)
 	if (map[i][0] == '0' || map[i][ft_strlen(map[i]) - 1] == '0')
 	{
 		if (map[i][0] == '0')
-			d->posX = 0;
+			d->pos_x = 0;
 		else
-			d->posX = ft_strlen(map[i]) - 1;
-		d->posY = i;
+			d->pos_x = ft_strlen(map[i]) - 1;
+		d->pos_y = i;
 		return (1);
 	}
 	return (0);

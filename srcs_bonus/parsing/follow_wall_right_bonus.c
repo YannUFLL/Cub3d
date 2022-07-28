@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   follow_wall_right.c                                :+:      :+:    :+:   */
+/*   follow_wall_right_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 14:40:04 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/21 14:59:28 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/28 15:06:25 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ void	ft_sub_checker_chang_dir_r_e(t_map_data *d)
 	int	a;
 
 	a = d->is_againt_wall;
-	if (a && ft_move_is_valid(d, &(d->map[d->posY + 1][d->posX])))
+	if (a && ft_move_is_valid(d, &(d->map[d->pos_y + 1][d->pos_x])))
 		d->dir = 'S';
-	else if (a && ft_move_is_valid(d, &(d->map[d->posY][d->posX + 1])))
+	else if (a && ft_move_is_valid(d, &(d->map[d->pos_y][d->pos_x + 1])))
 		;
-	else if (a && ft_move_is_valid(d, &(d->map[d->posY - 1][d->posX])))
+	else if (a && ft_move_is_valid(d, &(d->map[d->pos_y - 1][d->pos_x])))
 		d->dir = 'N';
-	else if (a && ft_move_is_valid(d, &(d->map[d->posY][d->posX - 1])))
+	else if (a && ft_move_is_valid(d, &(d->map[d->pos_y][d->pos_x - 1])))
 		d->dir = 'W';
 	else if (a)
 		d->no_move_possible = 1;
-	else if (ft_move_is_valid(d, &(d->map[d->posY][d->posX + 1])))
+	else if (ft_move_is_valid(d, &(d->map[d->pos_y][d->pos_x + 1])))
 		;
 	else
 		d->no_move_possible = 1;
@@ -35,13 +35,13 @@ void	ft_sub_checker_chang_dir_r_e(t_map_data *d)
 
 void	ft_sub_checker_chang_dir_r_s(t_map_data *d)
 {
-	if (ft_move_is_valid(d, &(d->map[d->posY][d->posX - 1])))
+	if (ft_move_is_valid(d, &(d->map[d->pos_y][d->pos_x - 1])))
 		d->dir = 'W';
-	else if (ft_move_is_valid(d, &(d->map[d->posY + 1][d->posX])))
+	else if (ft_move_is_valid(d, &(d->map[d->pos_y + 1][d->pos_x])))
 		;
-	else if (ft_move_is_valid(d, &(d->map[d->posY][d->posX + 1])))
+	else if (ft_move_is_valid(d, &(d->map[d->pos_y][d->pos_x + 1])))
 		d->dir = 'E';
-	else if (ft_move_is_valid(d, &(d->map[d->posY - 1][d->posX])))
+	else if (ft_move_is_valid(d, &(d->map[d->pos_y - 1][d->pos_x])))
 		d->dir = 'N';
 	else
 		d->no_move_possible = 1;
@@ -49,13 +49,13 @@ void	ft_sub_checker_chang_dir_r_s(t_map_data *d)
 
 void	ft_sub_checker_chang_dir_r_w(t_map_data *d)
 {
-	if (ft_move_is_valid(d, &(d->map[d->posY - 1][d->posX])))
+	if (ft_move_is_valid(d, &(d->map[d->pos_y - 1][d->pos_x])))
 		d->dir = 'N';
-	else if (ft_move_is_valid(d, &(d->map[d->posY][d->posX - 1])))
+	else if (ft_move_is_valid(d, &(d->map[d->pos_y][d->pos_x - 1])))
 		;
-	else if (ft_move_is_valid(d, &(d->map[d->posY + 1][d->posX])))
+	else if (ft_move_is_valid(d, &(d->map[d->pos_y + 1][d->pos_x])))
 		d->dir = 'S';
-	else if (ft_move_is_valid(d, &(d->map[d->posY][d->posX + 1])))
+	else if (ft_move_is_valid(d, &(d->map[d->pos_y][d->pos_x + 1])))
 		d->dir = 'E';
 	else
 		d->no_move_possible = 1;
@@ -63,13 +63,13 @@ void	ft_sub_checker_chang_dir_r_w(t_map_data *d)
 
 void	ft_sub_checker_chang_dir_r_n(t_map_data *d)
 {
-	if (ft_move_is_valid(d, &(d->map[d->posY][d->posX + 1])))
+	if (ft_move_is_valid(d, &(d->map[d->pos_y][d->pos_x + 1])))
 		d->dir = 'E';
-	else if (ft_move_is_valid(d, &(d->map[d->posY - 1][d->posX])))
+	else if (ft_move_is_valid(d, &(d->map[d->pos_y - 1][d->pos_x])))
 		;
-	else if (ft_move_is_valid(d, &(d->map[d->posY][d->posX - 1])))
+	else if (ft_move_is_valid(d, &(d->map[d->pos_y][d->pos_x - 1])))
 		d->dir = 'W';
-	else if (ft_move_is_valid(d, &(d->map[d->posY + 1][d->posX])))
+	else if (ft_move_is_valid(d, &(d->map[d->pos_y + 1][d->pos_x])))
 		d->dir = 'S';
 	else
 		d->no_move_possible = 1;
@@ -93,7 +93,7 @@ int	ft_follow_wall_right(t_map_data *d, int nb)
 		if (d->no_move_possible)
 			return (0);
 		ft_move(d, 1);
-		if (d->posX == d->x_start && d->posY == d->y_start)
+		if (d->pos_x == d->x_start && d->pos_y == d->y_start)
 			d->nb_pass += 1;
 		i++;
 	}

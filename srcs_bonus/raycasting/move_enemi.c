@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 17:11:41 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/27 20:34:05 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/28 15:10:01 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ void	ft_follow_player(t_data *data, int i)
 	else if (y_player < y_monster - 0.8)
 		data->sprite[i].y -= delta;
 }
-
 
 void	ft_remove_case(t_data *data, int i)
 {

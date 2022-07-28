@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:18:52 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/28 14:54:05 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/28 15:09:46 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	ft_cpy_texture(t_data *data, t_texture **new_texture)
 		ft_strlcpy((*new_texture)[i].path, data->texture[i].path,
 			ft_strlen(data->texture[i].path) + 1);
 		data->texture[i].is_copy += 1;
-		if (data->texture[i].path && (data->texture[i].is_copy > 1 || ft_is_not_sprite(data, i)))
+		if (data->texture[i].path && (data->texture[i].is_copy > 1 \
+		|| ft_is_not_sprite(data, i)))
 			free(data->texture[i].path);
 		ft_sub_cpy_old_texture(data, new_texture, i);
 		i++;
