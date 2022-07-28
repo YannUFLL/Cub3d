@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_casting_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 22:15:25 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 17:47:30 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/28 15:00:18 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	ft_print_sprite(t_sprite_calc *sp, t_data *data)
 				sp->texy = ((sp->d * sp->img_height) / sp->spriteheight) / 256;
 				sp->color = sp->addr[sp->img_width * sp->texy + sp->texx];
 				if (sp->color > 0x0 && sp->color < 2147483647)
-					my_mlx_pixel_put(data, sp->stripe, y, sp->color);
+					ft_my_mlx_pixel_put(data, sp->stripe, y, sp->color);
 				++y;
 			}
 		}

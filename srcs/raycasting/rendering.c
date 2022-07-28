@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:31:47 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 16:29:06 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/28 15:00:18 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_put_ceiling_and_roof(t_data *data)
 			color = data->ceiling;
 		while (x < data->resolution_x)
 		{
-			my_mlx_pixel_put(data, x, y, color);
+			ft_my_mlx_pixel_put(data, x, y, color);
 			x++;
 		}
 	y++;

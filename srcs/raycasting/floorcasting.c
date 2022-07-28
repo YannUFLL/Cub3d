@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 16:38:32 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/21 14:26:54 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/28 15:00:18 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	ft_draw_line(t_data *data, t_ray *ray, t_flo *flo, int x)
 	while (ray->drawend < ray->resolution_y + 1)
 	{
 		ft_calc_pos_textfloor(ray, flo, data, width);
-		my_mlx_pixel_put(data, x, ray->drawend,
+		ft_my_mlx_pixel_put(data, x, ray->drawend,
 			text1[width * flo->floortexty + flo->floortextx]);
 		ray->drawend++;
 	}

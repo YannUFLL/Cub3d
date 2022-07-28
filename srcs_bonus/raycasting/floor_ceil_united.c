@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   floor_ceil_united.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:44:02 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 17:21:20 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/28 15:00:18 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_put_ceiling_and_roof(t_data *data)
 		x = 0;
 		while (x < data->resolution_x)
 		{
-			my_mlx_pixel_put(data, x, y, color);
+			ft_my_mlx_pixel_put(data, x, y, color);
 			x++;
 		}
 	y++;
@@ -67,7 +67,7 @@ void	ft_put_ceiling_and_roof(t_data *data)
 			color = data->ceiling;
 		while (x < data->resolution_x)
 		{
-			my_mlx_pixel_put(data, x, y, color);
+			ft_my_mlx_pixel_put(data, x, y, color);
 			x++;
 		}
 	y++;

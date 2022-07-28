@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 20:08:02 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 19:45:24 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/28 15:00:18 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_print_square_map(t_data *data, t_minimap *m, int color)
 		old_x = m->x;
 		while (old_x <= (m->x + m->step))
 		{
-			my_mlx_pixel_put(data, old_x, old_y, color);
+			ft_my_mlx_pixel_put(data, old_x, old_y, color);
 			old_x++;
 		}
 		old_y++;
@@ -81,7 +81,7 @@ void	ft_print_pos(t_data *data, t_minimap *m)
 		x = m->middle - 3;
 		while (x <= (m->middle + 3))
 		{
-			my_mlx_pixel_put(data, x, y, 65280);
+			ft_my_mlx_pixel_put(data, x, y, 65280);
 			x++;
 		}
 		y++;

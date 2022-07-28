@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:31:47 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 19:13:39 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/28 15:01:22 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ void	ft_movements(t_data *data)
 	ft_mouse_rotate_right(&data->ray_data, key);
 	return ;
 }
+
+#include <sys/time.h>
+int	time_diff(struct timeval *start, struct timeval *end);
 
 void	ft_wall_casting(t_data *data, t_ray *ray)
 {
@@ -67,9 +70,9 @@ int	ft_render_next_frame(t_data *data)
 
 	ray = &data->ray_data;
 	ft_put_ceiling_and_roof(data);
-	ft_fps();
 	ft_movements(data);
 	ft_wall_casting(data, ray);
+	ft_move_enemi(data);
 	ft_sprite_casting(data, ray, data->sprite);
 	ft_print_minimap_render(data, ray, &data->minimap);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->display, 0, 0);

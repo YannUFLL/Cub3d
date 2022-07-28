@@ -3,37 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/27 19:44:47 by ydumaine         ###   ########.fr       */
+/*   Updated: 2022/07/28 15:00:49 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_BONUS_H
 # define CUB3D_BONUS_H
 # if defined(__linux__)
-#  define FORWARD 122
-#  define BACKWARD 115
-#  define MOVE_LEFT 113
-#  define MOVE_RIGHT 100
-#  define ROTATE_LEFT 65361
-#  define ROTATE_RIGHT 65363
-#  define ACTION 101
-#  define EXIT 65307
+	# define FORWARD 119
+	# define BACKWARD 115
+	# define MOVE_LEFT 97
+	# define MOVE_RIGHT 100
+	# define ROTATE_LEFT 65361
+	# define ROTATE_RIGHT 65363
+	# define ACTION 101
+	# define SPEED 65505
+	# define EXIT 65307
 # else
-#  define FORWARD 13
-#  define BACKWARD 1
-#  define MOVE_LEFT 0
-#  define MOVE_RIGHT 2
-#  define ROTATE_LEFT 123
-#  define ROTATE_RIGHT 124
-#  define ACTION 3
-#  define EXIT 53
+	# define FORWARD 13
+	# define BACKWARD 1
+	# define MOVE_LEFT 0
+	# define MOVE_RIGHT 2
+	# define ROTATE_LEFT 123
+	# define ROTATE_RIGHT 124
+	# define ACTION 3
+	# define SPEED 257
+	# define EXIT 53
 # endif
-
-//FONCTION ET HEADER DE TEST DE FLUIDITE, A SUPPRIMER AVANT RENDRE
-# include <sys/time.h>
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -84,6 +83,7 @@ typedef struct sprite
 	double	y;
 	int		texture[6];
 	int		select_sprite;
+	int		is_anim;
 }	t_sprite;
 
 typedef struct s_texture
@@ -98,6 +98,7 @@ typedef struct s_texture
 	int		endian;
 	int		use_color;
 	char	type;
+	int		is_copy;
 }	t_texture;
 
 typedef struct s_ray_data
@@ -223,7 +224,7 @@ typedef struct s_map_data
 int		ft_render_next_frame(t_data *data);
 int		ft_key_press(int keycode, t_data *data);
 int		ft_key_release(int keycode, t_data *data);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	ft_my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		ft_mix_color(int color1, int color2, float power);
 
 // texture
@@ -343,13 +344,16 @@ void	ft_printmap(t_data *data, char **map);
 /* ************* BONUS *************** */
 /* *********************************** */
 
+/*
+void	ft_fps(void);
+*/
+
 /* FEATURE */
 void	ft_init_key(t_key *key);
 void	ft_mouse_rotate_left(t_ray *ray, t_key *key);
 void	ft_mouse_rotate_right(t_ray *ray, t_key *key);
 void	ft_use(t_data *data, t_ray *ray);
 void	ft_print_minimap(t_data *data, t_ray *ray);
-void	ft_fps(void);
 
 /* SPRITE */
 void	ft_sprite_casting(t_data *data, t_ray *ray, t_sprite *sprite);
@@ -364,10 +368,12 @@ void	ft_calc_pos_textfloor(t_ray *ray, t_flo *flo, t_data *data, int width);
 
 void	ft_add_texture_anime(t_data *data, int x, int y, int *j);
 void	ft_add_texture(t_data *data, int x, int y, int *j);
+void	ft_sub_cpy_old_texture(t_data *data, t_texture **new_texture, int i);
 int		ft_check_map_border(t_map_data *d, t_data *data);
 int		ft_check_map(t_data *data);
 
 void	ft_init_map_data(t_map_data *map_data, t_data *data);
 int		ft_check_player_spawn(t_map_data *d, t_data *data, int check_all);
+void	ft_move_enemi(t_data *data);
 
 #endif
