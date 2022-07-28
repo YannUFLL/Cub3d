@@ -5,11 +5,9 @@ WE ./texture/brick_256.xpm
 EA ./texture/rock_256.xpm
 
 EA ./texture/rock_256.xpm
+C ./texture/rock_256.xpm
+F ./texture/one_pixel.xpm
 
-
-
-F 220,100,0
-C 225,30,0
 
            1111 1111
 111111111111  111 1111111111111

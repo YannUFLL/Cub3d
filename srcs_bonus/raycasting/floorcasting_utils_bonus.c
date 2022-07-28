@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   floorcasting_utils_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 19:15:52 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/28 15:00:18 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/28 15:47:47 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,15 @@ void	ft_draw_line_both(t_data *data, t_ray *ray, t_flo *flo, int x)
 	width = data->texture[ray->text_select].img_width;
 	while (ray->drawend < ray->resolution_y)
 	{
-		color = ft_check_color(width, data, flo, ray);
+		color = width * flo->floortexty + flo->floortextx;
+		color = ft_color_overflow(color, width, data, ray->text_select);
 		ft_calc_pos_textfloor(ray, flo, data, width);
 		shade = (data->resolution_y - ray->drawend)
 			/ (float)(data->resolution_y) + 0.60;
 		ft_my_mlx_pixel_put(data, x, ray->drawend,
 			ft_mix_color(text1[color], data->fog_color, shade));
+		color = ft_color_overflow(color, data->texture[ray->text_select
+				+ 1].img_width, data, ray->text_select + 1);
 		ft_my_mlx_pixel_put(data, x, data->resolution_y - ray->drawend,
 			ft_mix_color(text2[color], data->fog_color, shade));
 		ray->drawend++;
@@ -128,13 +131,13 @@ void	ft_draw_line_both(t_data *data, t_ray *ray, t_flo *flo, int x)
 	while (ray->drawend < ray->resolution_y)
 	{
 		color = width * flo->floortexty + flo->floortextx;
-		if (color >= width * data->texture[ray->text_select].img_height)
-			color = width * data->texture[ray->text_select].img_height - 1;
-		else if (color < 0)
-			color = 0;
+		color = ft_color_overflow(color, width, data, ray->text_select);
 		ft_calc_pos_textfloor(ray, flo, data, width);
 		ft_my_mlx_pixel_put(data, x, ray->drawend,
 			text1[color]);
+		color = ft_color_overflow(color,
+				data->texture[ray->text_select + 1].img_width,
+				data, ray->text_select + 1);
 		ft_my_mlx_pixel_put(data, x, data->resolution_y - ray->drawend,
 			text2[color]);
 		ray->drawend++;

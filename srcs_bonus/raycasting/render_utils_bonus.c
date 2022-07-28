@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_utils_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 21:15:20 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/28 15:00:18 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/28 15:41:02 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,12 @@ void	ft_my_mlx_pixel_put(t_data *data, int x, int y, int color)
 			+ (y * data->line_length + x * 4)) = color;
 }
 
-int	ft_check_color(int width, t_data *data, t_flo *flo, t_ray *ray)
+double	ft_color_overflow(double color, int width, t_data *data, int texture_id)
 {
-	int	color;
-
-	color = width * flo->floortexty + flo->floortextx;
-	if (color >= width * data->texture[ray->text_select].img_height)
-		color = width * data->texture[ray->text_select].img_height - 1;
+	if (color >= width * data->texture[texture_id].img_height)
+			color = width * data->texture[texture_id].img_height - 1;
 	else if (color < 0)
-		color = 0;
+			color = 0;
 	return (color);
 }
 

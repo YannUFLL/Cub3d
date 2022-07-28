@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
+/*   By: ydumaine <ydumaine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:29:54 by ydumaine          #+#    #+#             */
-/*   Updated: 2022/07/28 15:06:25 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/28 15:42:21 by ydumaine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,6 +246,8 @@ int		ft_check_color(int width, t_data *data, t_flo *flo, t_ray *ray);
 
 //floo and ceiling 
 void	ft_put_ceiling_and_roof(t_data *data);
+double	ft_color_overflow(double color, int width,
+			t_data *data, int texture_id);
 
 // mini_map
 void	ft_init_minimap(t_data *data, t_minimap *m, t_ray *ray);
