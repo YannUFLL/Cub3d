@@ -6,7 +6,7 @@
 /*   By: jrasser <jrasser@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 03:10:38 by jrasser           #+#    #+#             */
-/*   Updated: 2022/07/28 15:06:25 by jrasser          ###   ########.fr       */
+/*   Updated: 2022/07/29 00:13:10 by jrasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	ft_check_ext_wall(t_map_data *d)
 	i = 0;
 	while (map && map[i])
 	{
+		//ft_print_map(d);
 		if (ft_check_sub_ext_wall(d, map, i))
 			return (1);
 		i++;

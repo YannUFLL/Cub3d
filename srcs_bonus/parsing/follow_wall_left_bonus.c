@@ -84,6 +84,7 @@ int	ft_follow_wall_left(t_map_data *d, int nb)
 		ft_set_dir_against_wall(d, 0);
 	while (i == 0 || d->nb_pass != 3)
 	{
+		ft_print_map(d);
 		if (i == nb && i != 0)
 			ft_rotate_dir_left(d);
 		if (d->dir == 'E' || d->dir == 'S' || d->dir == 'W' || d->dir == 'N')

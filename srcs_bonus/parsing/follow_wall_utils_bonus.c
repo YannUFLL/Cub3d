@@ -51,7 +51,8 @@ int	ft_move_is_valid(t_map_data *map_data, char *c)
 	}
 	if (*c == ' ')
 		*c = '0';
-	if (*c == 'N' || *c == 'S' || *c == 'E' || *c == 'W' || *c == '0')
+	if (*c == 'N' || *c == 'S' || *c == 'E' || *c == 'W' || *c == '0'
+		|| *c == '2' || *c == 'M')
 		return (1);
 	return (0);
 }
